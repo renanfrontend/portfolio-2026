@@ -3,7 +3,7 @@
 **Responsável:** Renan Augusto dos Santos  
 **Uso:** especificação de implementação para Claude Code  
 **Data:** 06/10/2026  
-**Status:** MVP implementado e validado localmente em 06/10/2026 (ver Registro de progresso). Integração de e-mail e publicação pendentes de credenciais e destino.
+**Status:** MVP publicado em https://renan-augusto-dev.vercel.app (06/10/2026). Pendentes: credenciais de e-mail do formulário e domínio próprio.
 
 ## 1. Missão para o Claude Code
 
@@ -418,9 +418,9 @@ Não usar prefixo `NEXT_PUBLIC_` para credenciais. Proteger módulos sensíveis 
 - [x] Documentar variáveis, domínio e verificação do remetente em `docs/deployment.md`.
 - [x] Conferir que não há segredos no Git nem placeholders expostos como conteúdo real.
 - [x] Definir canal de contato operacional ou registrar bloqueio de lançamento. E-mail público renan.gabba@gmail.com; formulário depende do provedor.
-- [ ] Publicar somente com destino e autorização disponíveis no contexto.
-- [ ] Após publicação, verificar páginas, recursos e formulário no ambiente real com teste autorizado.
-- [ ] Registrar URL e commit publicado, quando houver publicação.
+- [x] Publicar somente com destino e autorização disponíveis no contexto. Vercel, autorizado pelo Renan.
+- [x] Após publicação, verificar páginas, recursos e formulário no ambiente real com teste autorizado. Páginas, 404, idiomas, robots, sitemap e canonical verificados; formulário responde 503 (e-mail ainda não configurado), sem sucesso fictício.
+- [x] Registrar URL e commit publicado, quando houver publicação. https://renan-augusto-dev.vercel.app (repositório renanfrontend/portfolio-2026, commit 023a00d).
 
 **Aceite:** preparação reproduzível; se o deploy ocorrer, registrar evidência da URL ativa. Sem deploy executado, relatar “pronto para publicar” apenas se não houver bloqueios funcionais para isso.
 
@@ -542,4 +542,19 @@ Pendências ou bloqueios: credenciais do Resend e domínio verificado; hospedage
   domínio; Upstash opcional; métricas Lighthouse; revisão editorial (docs/content-checklist.md)
 Próxima ação: definir hospedagem/domínio, configurar variáveis e publicar
 Commit, se houver: nenhum (repositório git iniciado, sem commits)
+```
+
+### Registro de publicação (06/10/2026)
+
+```text
+Etapa: 8
+Status: concluída (publicação); integração de e-mail pendente
+Entregas: repositório público https://github.com/renanfrontend/portfolio-2026,
+  deploy na Vercel em https://renan-augusto-dev.vercel.app com deploy automático a cada push
+Validações no ambiente real: / -> 307 /pt-BR; páginas pt-BR/en 200; /fr e slug inválido 404;
+  robots e sitemap com o domínio oficial; canonical correto; API 400 para dados inválidos;
+  formulário mostra indisponibilidade (503) com e-mail alternativo
+Pendências: RESEND_API_KEY/EMAIL_PROVIDER/CONTACT_FROM_EMAIL na Vercel; domínio próprio
+  (renanaugusto.com.br, renanaugusto.dev.br e renanaugusto.dev estavam livres em 06/10/2026)
+Commit publicado: 023a00d
 ```

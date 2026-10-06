@@ -38,4 +38,8 @@ Em deploys de prévia (`VERCEL_ENV=preview`), o `robots.txt` bloqueia a indexaç
 
 ## Estado atual
 
-**Pronto para publicar, com integração de e-mail pendente.** O código está completo e testado com o adaptador de teste; faltam definir hospedagem, domínio e credenciais do provedor de e-mail. Nenhum deploy foi feito. Enquanto o e-mail não estiver configurado, o canal de contato operacional é o e-mail público exibido no site (o formulário mostra essa alternativa).
+**Publicado** em https://renan-augusto-dev.vercel.app (Vercel, importado do repositório `renanfrontend/portfolio-2026`; cada push na `main` gera um novo deploy). O endereço oficial está em `src/config/site.ts` (`PRODUCTION_URL`).
+
+Pendências:
+- **E-mail do formulário**: configurar `EMAIL_PROVIDER`, `RESEND_API_KEY` e `CONTACT_FROM_EMAIL`. Até lá, o formulário informa a indisponibilidade e oferece o e-mail.
+- **Domínio próprio** (opcional): ao conectar, atualize `PRODUCTION_URL` ou defina `NEXT_PUBLIC_SITE_URL` na Vercel.
