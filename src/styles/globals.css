@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+/*
+ * Tokens de design. O tema efetivo é aplicado em <html data-theme="dark|light">
+ * por um script inline antes da pintura (ver src/providers/theme-script.ts).
+ */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  /* Grafite com leve tom esverdeado, destaque ciano neon, azul e violeta. */
+  --bg: #0a0d0d;
+  --bg-elevated: #0f1413;
+  --surface: #131a19;
+  --surface-strong: #1a2322;
+  --border: #212c2b;
+  --border-strong: #2e3c3a;
+  --fg: #ecf3f1;
+  --fg-muted: #a2b2ae;
+  --fg-subtle: #7c8e8a;
+  --accent: #22d3ee;
+  --accent-strong: #67e8f9;
+  --accent-fg: #03141a;
+  --accent-soft: rgb(34 211 238 / 0.12);
+  --blue: #3b82f6;
+  --violet: #a855f7;
+  --cyan: #67e8f9;
+  --success: #4ade80;
+  --danger: #ff6b7a;
+  --ring: #67e8f9;
+  --grid-line: rgb(255 255 255 / 0.035);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f7f6;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-strong: #eaf0ee;
+  --border: #d8e1de;
+  --border-strong: #bfccc8;
+  --fg: #0c1615;
+  --fg-muted: #3f514d;
+  --fg-subtle: #586a66;
+  --accent: #0e7490;
+  --accent-strong: #155e75;
+  --accent-fg: #ffffff;
+  --accent-soft: rgb(14 116 144 / 0.1);
+  --blue: #1d4ed8;
+  --violet: #7e22ce;
+  --cyan: #0e7490;
+  --success: #12804f;
+  --danger: #c22a3b;
+  --ring: #0e7490;
+  --grid-line: rgb(12 22 21 / 0.08);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-cyan: var(--cyan);
+  --color-violet: var(--violet);
+  --color-blue: var(--blue);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-face), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Consolas, monospace;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@layer components {
+  /* Matriz de pontos, no mesmo idioma visual do retrato em meio-tom. */
+  .bg-grid {
+    background-image: radial-gradient(var(--grid-line) 1.2px, transparent 1.6px);
+    background-size: 22px 22px;
+    mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
+  }
+
+  /* Brilho "aurora": ciano à esquerda, violeta à direita. */
+  .glow {
+    background:
+      radial-gradient(ellipse 45% 55% at 15% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+      radial-gradient(ellipse 40% 50% at 85% 30%, color-mix(in srgb, var(--violet) 14%, transparent), transparent 70%);
+  }
+
+  /* Gradiente neon do nome: ciano, azul e roxo, com brilho suave no tema escuro. */
+  .text-gradient {
+    background: linear-gradient(100deg, var(--accent) 0%, var(--blue) 55%, var(--violet) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 22px color-mix(in srgb, var(--accent) 35%, transparent));
+  }
+
+  :root[data-theme="light"] .text-gradient {
+    filter: none;
+  }
+
+  /* Revelação suave ao rolar; sem movimento quando o usuário prefere reduzir. */
+  .reveal {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .js .reveal:not([data-visible="true"]) {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    .js .reveal {
+      transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+    }
+  }
+}
+
+/* Abertura: só aparece com JavaScript e quando não foi desligada pelo script inicial. */
+.intro {
+  display: none;
+}
+
+.js:not([data-intro="off"]) .intro {
+  display: flex;
+}
+
+.intro[data-state="leaving"] {
+  animation: intro-iris 0.75s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+@keyframes intro-iris {
+  from {
+    clip-path: circle(150% at 50% 50%);
+  }
+  to {
+    clip-path: circle(0% at 50% 50%);
+  }
+}
+
+/* Garantia: se o JavaScript falhar, a abertura some sozinha e nunca bloqueia o site. */
+.js:not([data-intro="off"]) .intro:not([data-state="leaving"]) {
+  animation: intro-failsafe 0.3s ease 6s forwards;
+}
+
+@keyframes intro-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* Cartões com borda em degradê neon (ciano → azul → violeta), mais intensa ao passar o mouse. */
+@layer components {
+  .card-neon {
+    --card-bg: var(--surface);
+    --card-edge: 42%;
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+      linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--accent) var(--card-edge), var(--border)),
+          color-mix(in srgb, var(--blue) calc(var(--card-edge) * 0.8), var(--border)) 50%,
+          color-mix(in srgb, var(--violet) var(--card-edge), var(--border))
+        )
+        border-box;
+    transition: --card-edge 0.3s ease;
+  }
+
+  .card-neon:hover,
+  .card-neon:focus-within {
+    --card-edge: 85%;
+  }
+
+  .card-neon-strong {
+    --card-edge: 70%;
+    box-shadow: 0 0 40px -18px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+}
+
+@property --card-edge {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 42%;
+}

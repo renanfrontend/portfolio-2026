@@ -1,0 +1,331 @@
+{
+  "meta": {
+    "siteTitle": "Renan Augusto | Desenvolvedor Frontend Sênior e Consultoria",
+    "siteDescription": "Desenvolvedor Frontend Sênior com React, Next.js e TypeScript. Sites, aplicações web, dashboards, integrações e automação com IA.",
+    "home": {
+      "title": "Desenvolvedor Frontend Sênior e Consultoria",
+      "description": "Portfólio e consultoria de Renan Augusto: React, Next.js e TypeScript para sites, dashboards, integrações e automação com IA."
+    },
+    "about": {
+      "title": "Sobre",
+      "description": "Trajetória, experiência profissional, competências e formação de Renan Augusto, desenvolvedor frontend sênior."
+    },
+    "projects": {
+      "title": "Projetos",
+      "description": "Estudos de caso com React, Next.js, TypeScript, dashboards, experiências 3D e produtos com IA."
+    },
+    "services": {
+      "title": "Serviços",
+      "description": "Desenvolvimento web, consultoria frontend, integrações e automação com IA para empresas."
+    },
+    "contact": {
+      "title": "Contato",
+      "description": "Solicite um orçamento ou fale sobre uma vaga com Renan Augusto."
+    },
+    "privacy": {
+      "title": "Privacidade",
+      "description": "Como este site trata os dados enviados pelo formulário de contato e as preferências salvas no navegador."
+    }
+  },
+  "common": {
+    "skipToContent": "Pular para o conteúdo",
+    "home": "Início",
+    "backToTop": "Voltar ao topo",
+    "learnMore": "Saiba mais",
+    "viewAll": "Ver todos",
+    "opensInNewTab": "(abre em nova aba)",
+    "breadcrumb": "Trilha de navegação"
+  },
+  "nav": {
+    "label": "Navegação principal",
+    "about": "Sobre",
+    "projects": "Projetos",
+    "services": "Serviços",
+    "contact": "Contato",
+    "cta": "Fale comigo",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu"
+  },
+  "theme": {
+    "label": "Tema",
+    "dark": "Escuro",
+    "light": "Claro",
+    "system": "Sistema",
+    "change": "Alterar tema. Atual: {theme}"
+  },
+  "language": {
+    "label": "Idioma",
+    "switchTo": "Ler em inglês",
+    "short": "EN"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Disponível para vagas e projetos",
+      "firstName": "Renan",
+      "lastName": "Augusto",
+      "role": "Desenvolvedor Frontend Sênior",
+      "location": "São Paulo, Brasil · Remoto ou híbrido",
+      "lead": "Construo interfaces e sistemas web com React, Next.js e TypeScript: de dashboards corporativos a produtos com IA, do componente ao deploy.",
+      "primaryCta": "Explorar projetos",
+      "secondaryCta": "Conversar sobre um projeto",
+      "portraitLabel": "Retrato de Renan Augusto formado por caracteres em chuva, no estilo Matrix",
+      "particlesCount": "Retrato com {count} caracteres",
+      "portraitHint": "Passe o cursor para decodificar."
+    },
+    "facts": {
+      "label": "Resumo profissional",
+      "roleLabel": "Atuação",
+      "roleValue": "Frontend Sênior",
+      "roleDetail": "React · Next.js · TypeScript",
+      "experienceLabel": "Experiência",
+      "experienceValue": "6+ anos",
+      "experienceDetail": "desde fevereiro de 2020",
+      "domainsLabel": "Setores",
+      "domainsValue": "5 empresas",
+      "domainsDetail": "saúde, telecom, indústria e logística",
+      "educationLabel": "Formação",
+      "educationValue": "Pós em IA",
+      "educationDetail": "Ciência de Dados, em andamento"
+    },
+    "expertise": {
+      "index": "01",
+      "eyebrow": "Competências",
+      "title": "Da interface à infraestrutura que a coloca no ar.",
+      "description": "Trabalho onde o produto encontra o usuário, com atenção ao que acontece antes e depois da tela."
+    },
+    "featured": {
+      "index": "02",
+      "eyebrow": "Projetos em destaque",
+      "title": "Trabalho que dá para abrir e conferir.",
+      "description": "Sistemas, demonstrações e produtos com links para o código ou a versão publicada.",
+      "cta": "Ver todos os projetos"
+    },
+    "ai": {
+      "index": "03",
+      "eyebrow": "IA e ciência de dados",
+      "title": "Pós-graduação em Inteligência Artificial e Ciência de Dados",
+      "description": "Estou cursando a pós-graduação na Universidade São Judas Tadeu. O estudo se soma ao que já faço no dia a dia: uso IA no fluxo de engenharia e construo interfaces para produtos que dependem de modelos.",
+      "points": [
+        {
+          "text": "Interfaces para produtos com IA, tratando a resposta do modelo como dado a validar.",
+          "project": {
+            "slug": "visionstock-ai",
+            "label": "Ver o VisionStock"
+          }
+        },
+        {
+          "text": "Busca semântica e RAG para consultar documentos em linguagem natural.",
+          "project": {
+            "slug": "gemini-beyond-prompts",
+            "label": "Ver o Gemini Beyond Prompts"
+          }
+        },
+        {
+          "text": "Claude Code, Gemini e Copilot no fluxo de desenvolvimento, com revisão humana."
+        }
+      ],
+      "projectsCta": "Ver projetos de IA",
+      "serviceCta": "Automação com IA",
+      "artLabel": "Ilustração de uma rede neural formada por caracteres em chuva, com dados fluindo entre as camadas",
+      "artCount": "Rede neural com {count} caracteres",
+      "layers": [
+        {
+          "title": "Dados",
+          "description": "coleta, preparo e análise"
+        },
+        {
+          "title": "Modelos",
+          "description": "aprendizado e inferência"
+        },
+        {
+          "title": "Produto",
+          "description": "interfaces que usam IA"
+        }
+      ]
+    },
+    "services": {
+      "index": "04",
+      "eyebrow": "Para empresas",
+      "title": "Tem um problema para resolver com software?",
+      "description": "Quatro frentes de trabalho, com escopo combinado antes de começar.",
+      "cta": "Ver serviços"
+    },
+    "process": {
+      "index": "05",
+      "eyebrow": "Como trabalho",
+      "title": "Um processo simples e transparente."
+    },
+    "cta": {
+      "index": "06",
+      "eyebrow": "Contato",
+      "title": "Vamos conversar?",
+      "recruitersTitle": "Recrutadores",
+      "recruitersText": "Vagas de frontend sênior com React, Next.js e TypeScript. Veja a trajetória completa e o currículo.",
+      "recruitersCta": "Ver trajetória",
+      "clientsTitle": "Empresas e parceiros",
+      "clientsText": "Conte o que precisa ser construído ou melhorado. Respondo com perguntas e próximos passos.",
+      "clientsCta": "Solicitar orçamento"
+    }
+  },
+  "about": {
+    "eyebrow": "Sobre",
+    "title": "Frontend sênior com visão de produto e de processo.",
+    "experienceTitle": "Experiência profissional",
+    "skillsTitle": "Competências",
+    "educationTitle": "Formação",
+    "resumeTitle": "Currículo",
+    "resumeText": "Versão em PDF com a trajetória completa.",
+    "resumeCta": "Baixar currículo (PDF)",
+    "current": "atual"
+  },
+  "projects": {
+    "eyebrow": "Portfólio",
+    "title": "Projetos",
+    "description": "Estudos de caso com o desafio, a solução e a minha contribuição em cada trabalho. Projetos pessoais e de estudo estão identificados.",
+    "searchLabel": "Buscar projetos",
+    "searchPlaceholder": "Busque por nome, tecnologia ou assunto",
+    "categoryLabel": "Categoria",
+    "technologyLabel": "Tecnologia",
+    "allCategories": "Todas as categorias",
+    "allTechnologies": "Todas as tecnologias",
+    "clearFilters": "Limpar filtros",
+    "resultsCount": "{count} projeto(s) encontrado(s)",
+    "emptyTitle": "Nenhum projeto encontrado",
+    "emptyText": "Tente outro termo ou limpe os filtros para ver todos os projetos.",
+    "viewCaseStudy": "Ver estudo de caso",
+    "categories": {
+      "web": "Web",
+      "dashboard": "Dashboard",
+      "automation": "Automação",
+      "ai": "IA"
+    },
+    "kinds": {
+      "personal": "Projeto pessoal",
+      "professional": "Profissional",
+      "demo": "Demonstração"
+    },
+    "statuses": {
+      "live": "No ar",
+      "in-progress": "Em andamento",
+      "archived": "Arquivado"
+    },
+    "caseStudy": {
+      "back": "Voltar para projetos",
+      "challenge": "Desafio",
+      "solution": "Solução",
+      "contribution": "Minha contribuição",
+      "outcomes": "Resultados",
+      "technologies": "Tecnologias",
+      "links": "Links",
+      "repository": "Código no GitHub",
+      "live": "Ver projeto publicado",
+      "noLinks": "Código e ambiente proprietários: não há links públicos para este trabalho.",
+      "gallery": "Imagens",
+      "ctaTitle": "Precisa de algo parecido?",
+      "ctaButton": "Conversar sobre um projeto"
+    }
+  },
+  "services": {
+    "eyebrow": "Serviços",
+    "title": "Como posso ajudar a sua empresa",
+    "description": "Desenvolvimento, consultoria e automação. Cada trabalho começa por entender o problema e combinar um escopo claro.",
+    "problemsTitle": "Problemas que resolvo",
+    "deliverablesTitle": "Entregáveis",
+    "processTitle": "Processo",
+    "faqTitle": "Perguntas frequentes",
+    "back": "Voltar para serviços",
+    "otherServices": "Outros serviços",
+    "details": "Ver detalhes"
+  },
+  "contact": {
+    "eyebrow": "Contato",
+    "title": "Conte o que você precisa",
+    "description": "Use o formulário para orçamentos e projetos ou fale diretamente pelos canais abaixo. Para vagas, o e-mail e o LinkedIn são os caminhos mais rápidos.",
+    "channelsTitle": "Canais diretos",
+    "email": "E-mail",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "whatsapp": "WhatsApp",
+    "whatsappMessage": "Olá, Renan! Vim pelo seu site e gostaria de conversar sobre um projeto.",
+    "form": {
+      "title": "Formulário de contato",
+      "requiredHint": "Campos marcados com * são obrigatórios.",
+      "name": "Nome",
+      "email": "E-mail",
+      "company": "Empresa",
+      "phone": "Telefone",
+      "service": "Serviço de interesse",
+      "servicePlaceholder": "Selecione uma opção",
+      "serviceOther": "Outro assunto ou vaga",
+      "budget": "Faixa de orçamento",
+      "budgetPlaceholder": "Prefiro não informar",
+      "budgets": {
+        "ate-5k": "Até R$ 5 mil",
+        "5k-15k": "De R$ 5 mil a R$ 15 mil",
+        "15k-50k": "De R$ 15 mil a R$ 50 mil",
+        "acima-50k": "Acima de R$ 50 mil",
+        "a-definir": "Ainda não sei"
+      },
+      "timeline": "Prazo desejado",
+      "timelinePlaceholder": "Ex.: próximo trimestre",
+      "message": "Descreva a sua necessidade",
+      "messageHint": "Contexto, objetivo e o que já existe hoje. Entre 20 e 4.000 caracteres.",
+      "honeypot": "Não preencha este campo",
+      "privacyNotice": "Os dados enviados são usados apenas para responder a este contato. Veja a",
+      "privacyLink": "política de privacidade",
+      "submit": "Enviar mensagem",
+      "submitting": "Enviando…",
+      "successTitle": "Mensagem enviada",
+      "successText": "Recebi a sua solicitação e vou responder pelo e-mail informado.",
+      "sendAnother": "Enviar outra mensagem",
+      "errorSummary": "Revise os campos destacados.",
+      "errors": {
+        "required": "Campo obrigatório.",
+        "name": "Informe o seu nome (de 2 a 100 caracteres).",
+        "email": "Informe um e-mail válido.",
+        "service": "Selecione um serviço.",
+        "message": "Descreva a necessidade com 20 a 4.000 caracteres.",
+        "tooLong": "Texto muito longo.",
+        "validation": "Alguns dados estão inválidos. Revise os campos destacados.",
+        "rateLimited": "Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente novamente.",
+        "unavailable": "O envio pelo formulário está indisponível no momento. Seu texto foi preservado: use o e-mail abaixo para falar comigo.",
+        "network": "Não foi possível conectar. Verifique a sua internet e tente novamente; seu texto foi preservado.",
+        "server": "Ocorreu um erro inesperado. Seu texto foi preservado; tente novamente ou use o e-mail."
+      },
+      "fallbackEmail": "Enviar por e-mail"
+    }
+  },
+  "privacy": {
+    "eyebrow": "Privacidade",
+    "title": "Política de privacidade",
+    "updated": "Última atualização: 6 de outubro de 2026"
+  },
+  "footer": {
+    "tagline": "Desenvolvimento frontend, consultoria e automação com IA.",
+    "navigation": "Navegação",
+    "contact": "Contato",
+    "privacy": "Privacidade",
+    "builtWith": "Feito com Next.js, TypeScript e Tailwind CSS.",
+    "rights": "Todos os direitos reservados."
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "text": "O endereço acessado não existe ou foi movido.",
+    "cta": "Voltar para o início"
+  },
+  "error": {
+    "title": "Algo deu errado",
+    "text": "Não foi possível carregar esta página. Tente novamente.",
+    "retry": "Tentar novamente"
+  },
+  "intro": {
+    "label": "Carregando o site",
+    "skip": "Pular abertura",
+    "command": "renan --init",
+    "steps": [
+      "tipografia carregada",
+      "retrato em código pronto",
+      "interface montada"
+    ]
+  }
+}

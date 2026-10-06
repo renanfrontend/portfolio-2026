@@ -1,0 +1,331 @@
+{
+  "meta": {
+    "siteTitle": "Renan Augusto | Senior Frontend Developer and Consulting",
+    "siteDescription": "Senior Frontend Developer working with React, Next.js and TypeScript. Websites, web applications, dashboards, integrations and AI automation.",
+    "home": {
+      "title": "Senior Frontend Developer and Consulting",
+      "description": "Portfolio and consulting by Renan Augusto: React, Next.js and TypeScript for websites, dashboards, integrations and AI automation."
+    },
+    "about": {
+      "title": "About",
+      "description": "Career, professional experience, skills and education of Renan Augusto, senior frontend developer."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Case studies with React, Next.js, TypeScript, dashboards, 3D experiences and AI products."
+    },
+    "services": {
+      "title": "Services",
+      "description": "Web development, frontend consulting, integrations and AI automation for companies."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Request a quote or talk about a job opening with Renan Augusto."
+    },
+    "privacy": {
+      "title": "Privacy",
+      "description": "How this website handles data sent through the contact form and preferences stored in the browser."
+    }
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "home": "Home",
+    "backToTop": "Back to top",
+    "learnMore": "Learn more",
+    "viewAll": "View all",
+    "opensInNewTab": "(opens in a new tab)",
+    "breadcrumb": "Breadcrumb"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "about": "About",
+    "projects": "Projects",
+    "services": "Services",
+    "contact": "Contact",
+    "cta": "Get in touch",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "theme": {
+    "label": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System",
+    "change": "Change theme. Current: {theme}"
+  },
+  "language": {
+    "label": "Language",
+    "switchTo": "Read in Portuguese",
+    "short": "PT"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Open to roles and projects",
+      "firstName": "Renan",
+      "lastName": "Augusto",
+      "role": "Senior Frontend Developer",
+      "location": "São Paulo, Brazil · Remote or hybrid",
+      "lead": "I build interfaces and web systems with React, Next.js and TypeScript: from corporate dashboards to AI products, from component to deployment.",
+      "primaryCta": "Explore projects",
+      "secondaryCta": "Talk about a project",
+      "portraitLabel": "Portrait of Renan Augusto made of falling characters, Matrix style",
+      "particlesCount": "Portrait with {count} characters",
+      "portraitHint": "Hover to decode."
+    },
+    "facts": {
+      "label": "Professional summary",
+      "roleLabel": "Role",
+      "roleValue": "Senior Frontend",
+      "roleDetail": "React · Next.js · TypeScript",
+      "experienceLabel": "Experience",
+      "experienceValue": "6+ years",
+      "experienceDetail": "since February 2020",
+      "domainsLabel": "Industries",
+      "domainsValue": "5 companies",
+      "domainsDetail": "health, telecom, industry and logistics",
+      "educationLabel": "Education",
+      "educationValue": "AI postgrad",
+      "educationDetail": "Data Science, in progress"
+    },
+    "expertise": {
+      "index": "01",
+      "eyebrow": "Expertise",
+      "title": "From the interface to the infrastructure that ships it.",
+      "description": "I work where the product meets the user, paying attention to what happens before and after the screen."
+    },
+    "featured": {
+      "index": "02",
+      "eyebrow": "Featured projects",
+      "title": "Work you can open and check.",
+      "description": "Systems, demos and products with links to the source code or the live version.",
+      "cta": "View all projects"
+    },
+    "ai": {
+      "index": "03",
+      "eyebrow": "AI and data science",
+      "title": "Postgraduate degree in Artificial Intelligence and Data Science",
+      "description": "I am pursuing this postgraduate degree at Universidade São Judas Tadeu. It adds to what I already do every day: using AI in my engineering workflow and building interfaces for products that rely on models.",
+      "points": [
+        {
+          "text": "Interfaces for AI products, treating model output as data to be validated.",
+          "project": {
+            "slug": "visionstock-ai",
+            "label": "See VisionStock"
+          }
+        },
+        {
+          "text": "Semantic search and RAG to query documents in natural language.",
+          "project": {
+            "slug": "gemini-beyond-prompts",
+            "label": "See Gemini Beyond Prompts"
+          }
+        },
+        {
+          "text": "Claude Code, Gemini and Copilot in the development workflow, with human review."
+        }
+      ],
+      "projectsCta": "See AI projects",
+      "serviceCta": "AI automation",
+      "artLabel": "Illustration of a neural network made of falling characters, with data flowing between layers",
+      "artCount": "Neural network with {count} characters",
+      "layers": [
+        {
+          "title": "Data",
+          "description": "collection, preparation and analysis"
+        },
+        {
+          "title": "Models",
+          "description": "learning and inference"
+        },
+        {
+          "title": "Product",
+          "description": "interfaces that use AI"
+        }
+      ]
+    },
+    "services": {
+      "index": "04",
+      "eyebrow": "For companies",
+      "title": "Have a problem to solve with software?",
+      "description": "Four lines of work, with scope agreed before we start.",
+      "cta": "View services"
+    },
+    "process": {
+      "index": "05",
+      "eyebrow": "How I work",
+      "title": "A simple, transparent process."
+    },
+    "cta": {
+      "index": "06",
+      "eyebrow": "Contact",
+      "title": "Let's talk?",
+      "recruitersTitle": "Recruiters",
+      "recruitersText": "Senior frontend roles with React, Next.js and TypeScript. See the full career history and résumé.",
+      "recruitersCta": "View career",
+      "clientsTitle": "Companies and partners",
+      "clientsText": "Tell me what needs to be built or improved. I'll reply with questions and next steps.",
+      "clientsCta": "Request a quote"
+    }
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "Senior frontend with a product and process mindset.",
+    "experienceTitle": "Professional experience",
+    "skillsTitle": "Skills",
+    "educationTitle": "Education",
+    "resumeTitle": "Résumé",
+    "resumeText": "PDF version with the full career history.",
+    "resumeCta": "Download résumé (PDF)",
+    "current": "present"
+  },
+  "projects": {
+    "eyebrow": "Portfolio",
+    "title": "Projects",
+    "description": "Case studies covering the challenge, the solution and my contribution to each piece of work. Personal and study projects are labeled as such.",
+    "searchLabel": "Search projects",
+    "searchPlaceholder": "Search by name, technology or topic",
+    "categoryLabel": "Category",
+    "technologyLabel": "Technology",
+    "allCategories": "All categories",
+    "allTechnologies": "All technologies",
+    "clearFilters": "Clear filters",
+    "resultsCount": "{count} project(s) found",
+    "emptyTitle": "No projects found",
+    "emptyText": "Try another term or clear the filters to see every project.",
+    "viewCaseStudy": "View case study",
+    "categories": {
+      "web": "Web",
+      "dashboard": "Dashboard",
+      "automation": "Automation",
+      "ai": "AI"
+    },
+    "kinds": {
+      "personal": "Personal project",
+      "professional": "Professional",
+      "demo": "Demo"
+    },
+    "statuses": {
+      "live": "Live",
+      "in-progress": "In progress",
+      "archived": "Archived"
+    },
+    "caseStudy": {
+      "back": "Back to projects",
+      "challenge": "Challenge",
+      "solution": "Solution",
+      "contribution": "My contribution",
+      "outcomes": "Outcomes",
+      "technologies": "Technologies",
+      "links": "Links",
+      "repository": "Source code on GitHub",
+      "live": "View live project",
+      "noLinks": "Proprietary code and environment: there are no public links for this work.",
+      "gallery": "Images",
+      "ctaTitle": "Need something similar?",
+      "ctaButton": "Talk about a project"
+    }
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "How I can help your company",
+    "description": "Development, consulting and automation. Every engagement starts by understanding the problem and agreeing on a clear scope.",
+    "problemsTitle": "Problems I solve",
+    "deliverablesTitle": "Deliverables",
+    "processTitle": "Process",
+    "faqTitle": "Frequently asked questions",
+    "back": "Back to services",
+    "otherServices": "Other services",
+    "details": "View details"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Tell me what you need",
+    "description": "Use the form for quotes and projects or reach out directly through the channels below. For job openings, email and LinkedIn are the fastest routes.",
+    "channelsTitle": "Direct channels",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "whatsapp": "WhatsApp",
+    "whatsappMessage": "Hi Renan! I found your website and would like to talk about a project.",
+    "form": {
+      "title": "Contact form",
+      "requiredHint": "Fields marked with * are required.",
+      "name": "Name",
+      "email": "Email",
+      "company": "Company",
+      "phone": "Phone",
+      "service": "Service of interest",
+      "servicePlaceholder": "Select an option",
+      "serviceOther": "Other subject or job opening",
+      "budget": "Budget range",
+      "budgetPlaceholder": "Prefer not to say",
+      "budgets": {
+        "ate-5k": "Up to R$ 5k",
+        "5k-15k": "R$ 5k to R$ 15k",
+        "15k-50k": "R$ 15k to R$ 50k",
+        "acima-50k": "Above R$ 50k",
+        "a-definir": "Not sure yet"
+      },
+      "timeline": "Desired timeline",
+      "timelinePlaceholder": "E.g. next quarter",
+      "message": "Describe what you need",
+      "messageHint": "Context, goal and what already exists today. Between 20 and 4,000 characters.",
+      "honeypot": "Do not fill in this field",
+      "privacyNotice": "The data you send is used only to reply to this message. See the",
+      "privacyLink": "privacy policy",
+      "submit": "Send message",
+      "submitting": "Sending…",
+      "successTitle": "Message sent",
+      "successText": "I received your request and will reply to the email you provided.",
+      "sendAnother": "Send another message",
+      "errorSummary": "Please review the highlighted fields.",
+      "errors": {
+        "required": "Required field.",
+        "name": "Enter your name (2 to 100 characters).",
+        "email": "Enter a valid email address.",
+        "service": "Select a service.",
+        "message": "Describe your need in 20 to 4,000 characters.",
+        "tooLong": "Text is too long.",
+        "validation": "Some data is invalid. Please review the highlighted fields.",
+        "rateLimited": "Too many attempts in a short time. Wait a few minutes and try again.",
+        "unavailable": "The contact form is unavailable right now. Your text was kept: please use the email below to reach me.",
+        "network": "Could not connect. Check your internet connection and try again; your text was kept.",
+        "server": "An unexpected error occurred. Your text was kept; try again or use email."
+      },
+      "fallbackEmail": "Send by email"
+    }
+  },
+  "privacy": {
+    "eyebrow": "Privacy",
+    "title": "Privacy policy",
+    "updated": "Last updated: October 6, 2026"
+  },
+  "footer": {
+    "tagline": "Frontend development, consulting and AI automation.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "builtWith": "Built with Next.js, TypeScript and Tailwind CSS.",
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The address you tried does not exist or has moved.",
+    "cta": "Back to home"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "text": "This page could not be loaded. Please try again.",
+    "retry": "Try again"
+  },
+  "intro": {
+    "label": "Loading the website",
+    "skip": "Skip intro",
+    "command": "renan --init",
+    "steps": [
+      "typography loaded",
+      "code portrait ready",
+      "interface mounted"
+    ]
+  }
+}
