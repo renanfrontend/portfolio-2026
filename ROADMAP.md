@@ -3,7 +3,7 @@
 **Responsável:** Renan Augusto dos Santos  
 **Uso:** especificação de implementação para Claude Code  
 **Data:** 06/10/2026  
-**Status:** MVP publicado em https://renan-augusto-dev.vercel.app (06/10/2026). Pendentes: credenciais de e-mail do formulário e domínio próprio.
+**Status:** MVP publicado em https://www.renanaugusto.com.br (06/10/2026). Pendente: credenciais de e-mail do formulário.
 
 ## 1. Missão para o Claude Code
 
@@ -557,4 +557,13 @@ Validações no ambiente real: / -> 307 /pt-BR; páginas pt-BR/en 200; /fr e slu
 Pendências: RESEND_API_KEY/EMAIL_PROVIDER/CONTACT_FROM_EMAIL na Vercel; domínio próprio
   (renanaugusto.com.br, renanaugusto.dev.br e renanaugusto.dev estavam livres em 06/10/2026)
 Commit publicado: 023a00d
+```
+
+### Registro do domínio próprio (06/10/2026)
+
+```text
+Domínio: www.renanaugusto.com.br (Registro.br, registro A 216.198.79.1; o domínio sem www redireciona para o www)
+Validações: HTTPS ativo; /pt-BR, /en, /pt-BR/projetos e /pt-BR/sobre 200; /fr 404;
+  canonical, robots e sitemap usando https://www.renanaugusto.com.br
+Commit publicado: 4d9464b
 ```
