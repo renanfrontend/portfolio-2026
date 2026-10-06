@@ -2,11 +2,15 @@
  * Dados públicos e estáveis do site. Canais só aparecem quando definidos aqui
  * (confirmados pelo responsável) ou nas variáveis de ambiente públicas.
  */
+/** Endereço público oficial. Ao usar um domínio próprio, troque aqui ou defina NEXT_PUBLIC_SITE_URL. */
+const PRODUCTION_URL = "https://renan-augusto-dev.vercel.app";
+
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (explicit) return explicit.replace(/\/+$/, "");
-  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
-  if (vercel) return `https://${vercel}`;
+  // Na Vercel (produção e prévias) o canonical aponta sempre para o endereço oficial,
+  // e não para o domínio automático do projeto.
+  if (process.env.VERCEL_ENV) return PRODUCTION_URL;
   return "http://localhost:3000";
 }
 
