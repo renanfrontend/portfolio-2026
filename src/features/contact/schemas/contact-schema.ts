@@ -56,6 +56,8 @@ export function createContactSchema(serviceSlugs: readonly string[]) {
     website: z.string().max(0).optional(),
     /** Idioma da página de onde a mensagem saiu (informativo). */
     locale: z.enum(["pt-BR", "en"]).optional().catch(undefined),
+    /** Pacote de /contratar escolhido (informativo; valores desconhecidos são ignorados no e-mail). */
+    package: z.string().max(60).optional().catch(undefined),
   });
 }
 

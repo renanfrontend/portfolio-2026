@@ -1,5 +1,6 @@
 import { OTHER_SERVICE } from "@/config/contact";
 import { submitContact } from "@/features/contact/server/submit-contact";
+import { getPackages } from "@/features/packages/packages";
 import { getServices, getServiceSlugs } from "@/features/services/server/queries";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getEmailAdapter } from "@/lib/server/email";
@@ -41,5 +42,6 @@ export async function POST(request: Request) {
 function contactLabels() {
   const form = getDictionary("pt-BR").contact.form;
   const services = Object.fromEntries(getServices("pt-BR").map((service) => [service.slug, service.title]));
-  return { services: { ...services, [OTHER_SERVICE]: form.serviceOther }, budgets: form.budgets };
+  const packages = Object.fromEntries(getPackages("pt-BR").map((item) => [item.id, item.name]));
+  return { services: { ...services, [OTHER_SERVICE]: form.serviceOther }, budgets: form.budgets, packages };
 }
