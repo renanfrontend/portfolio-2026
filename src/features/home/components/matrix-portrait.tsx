@@ -60,7 +60,7 @@ export function MatrixPortrait({ src, label, countLabel, hint, locale }: MatrixP
       load={photoSource(src)}
       lensSource={SOURCE}
       // Grade densa: mais caracteres deixam o rosto mais legível.
-      columnsFor={(width) => (width < 420 ? 64 : 100)}
+      columnsFor={(width) => (width < 420 ? 54 : 100)}
     />
   );
 }

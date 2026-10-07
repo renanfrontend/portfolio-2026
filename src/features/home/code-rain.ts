@@ -106,6 +106,8 @@ export function startCodeRain({ canvas, overlay, load, columnsFor, lensSource, o
   const randomRainGlyph = () => Math.floor(Math.random() * rainCount);
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Em celulares e aparelhos modestos, o brilho (shadowBlur) do atlas é o passo mais caro: fica desligado.
+  const lowPower = window.matchMedia("(max-width: 640px)").matches || (navigator.hardwareConcurrency ?? 8) <= 4;
   const isLight = () => document.documentElement.getAttribute("data-theme") === "light";
   const pointer = { x: 0, y: 0, strength: 0, target: 0 };
   let source: FieldSource | null = null;
@@ -150,7 +152,7 @@ export function startCodeRain({ canvas, overlay, load, columnsFor, lensSource, o
         const style = levelStyle(hue, level, light);
         a.fillStyle = style.color;
         a.shadowColor = style.glowColor;
-        a.shadowBlur = style.glow * atlasCell * 0.5;
+        a.shadowBlur = lowPower ? 0 : style.glow * atlasCell * 0.5;
         const cy = (hue * ROWS_PER_HUE + level) * atlasCell + atlasCell / 2;
         atlasChars.forEach((char, index) => a.fillText(char, index * atlasCell + atlasCell / 2, cy));
       }
@@ -359,17 +361,33 @@ export function startCodeRain({ canvas, overlay, load, columnsFor, lensSource, o
     cancelAnimationFrame(frame);
   }
 
-  load()
-    .then((loaded) => {
-      if (disposed) return;
-      source = loaded;
-      build();
-      if (reducedMotion) draw();
-      else start();
-    })
-    .catch(() => {
-      // Sem o campo a ilustração simplesmente não aparece; o restante da página segue normal.
-    });
+  /**
+   * Só prepara a ilustração quando ela aparece na tela e o navegador está ocioso,
+   * para não disputar processamento com o carregamento da página (importante no celular).
+   */
+  let loadRequested = false;
+  function ensureLoaded() {
+    if (loadRequested) return;
+    loadRequested = true;
+    const run = () =>
+      load()
+        .then((loaded) => {
+          if (disposed) return;
+          source = loaded;
+          build();
+          if (reducedMotion) draw();
+          else start();
+        })
+        .catch(() => {
+          // Sem o campo a ilustração simplesmente não aparece; o restante da página segue normal.
+        });
+    const whenIdle = () => {
+      if (typeof window.requestIdleCallback === "function") window.requestIdleCallback(run, { timeout: 1500 });
+      else setTimeout(run, 300);
+    };
+    if (document.readyState === "complete") whenIdle();
+    else window.addEventListener("load", whenIdle, { once: true });
+  }
 
   const onMove = (event: PointerEvent) => {
     const rect = overlay.getBoundingClientRect();
@@ -398,11 +416,17 @@ export function startCodeRain({ canvas, overlay, load, columnsFor, lensSource, o
   });
   resizeObserver.observe(canvas);
 
-  const intersectionObserver = new IntersectionObserver(([entry]) => {
-    visible = entry.isIntersecting;
-    if (visible) start();
-    else stop();
-  });
+  const intersectionObserver = new IntersectionObserver(
+    ([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible) {
+        ensureLoaded();
+        start();
+      } else stop();
+    },
+    // Começa a preparar um pouco antes de entrar na tela.
+    { rootMargin: "200px 0px" },
+  );
   intersectionObserver.observe(canvas);
 
   const onVisibility = () => (document.hidden ? stop() : start());

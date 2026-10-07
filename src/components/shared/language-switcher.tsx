@@ -22,7 +22,7 @@ function LinkWithQuery({ target, short, label }: LanguageSwitcherProps) {
   const href = `${switchLocalePath(pathname, target)}${query ? `?${query}` : ""}`;
 
   return (
-    <Link href={href} hrefLang={target} lang={target} aria-label={label} title={label} className={className}>
+    <Link href={href} hrefLang={target} lang={target} aria-label={`${short}, ${label}`} title={label} className={className}>
       {short}
     </Link>
   );
@@ -31,7 +31,7 @@ function LinkWithQuery({ target, short, label }: LanguageSwitcherProps) {
 /** Enquanto o caminho não é conhecido (shell estático), aponta para a home do outro idioma. */
 function LinkWithoutQuery({ target, short, label }: LanguageSwitcherProps) {
   return (
-    <Link href={`/${target}`} hrefLang={target} lang={target} aria-label={label} title={label} className={className}>
+    <Link href={`/${target}`} hrefLang={target} lang={target} aria-label={`${short}, ${label}`} title={label} className={className}>
       {short}
     </Link>
   );

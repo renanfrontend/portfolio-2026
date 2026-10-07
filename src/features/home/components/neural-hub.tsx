@@ -170,7 +170,7 @@ export function NeuralHub({ label, countLabel, hint, locale, layers }: NeuralHub
         locale={locale}
         load={networkSource()}
         lensSource={SOURCE}
-        columnsFor={(width) => (width < 420 ? 70 : 110)}
+        columnsFor={(width) => (width < 420 ? 58 : 110)}
         aspect="4 / 3"
       />
       <ol className="mt-4 grid grid-cols-3 gap-3 text-center">
