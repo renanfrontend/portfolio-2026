@@ -577,3 +577,13 @@ Teste real: formulário em produção respondeu "Mensagem enviada" (provedor ace
 Também publicado: FNaF Web e HELIOS Lab, destaques só com projetos no ar e importação
   automática de repositórios com o tópico portfolio-site (commit 1166ad8)
 ```
+
+### Registro do e-mail público (07/10/2026)
+
+```text
+E-mail público: contato@renanaugusto.com.br, encaminhado para a caixa pessoal pelo ImprovMX (plano gratuito)
+DNS no Registro.br: MX mx1/mx2.improvmx.com (10/20) e TXT "v=spf1 include:spf.improvmx.com ~all"
+Formulário: continua entregando direto na caixa pessoal (CONTACT_TO padrão)
+E-mail do formulário: assunto e corpo com nome do serviço, orçamento e idioma da página
+Testes: e-mail externo para contato@ recebido no Gmail; site atualizado (commits db73d27, b7bce00)
+```

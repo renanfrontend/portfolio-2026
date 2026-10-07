@@ -42,4 +42,5 @@ Em deploys de prévia (`VERCEL_ENV=preview`), o `robots.txt` bloqueia a indexaç
 
 Pendências:
 - E-mail do formulário: Resend com domínio verificado e variáveis configuradas na Vercel (funcionando desde 07/10/2026).
+- E-mail público contato@renanaugusto.com.br: recebido pelo ImprovMX (MX mx1/mx2.improvmx.com e SPF no Registro.br) e encaminhado para a caixa pessoal. Não remover essas entradas do DNS.
 - Domínio próprio: renanaugusto.com.br no Registro.br (registro A 216.198.79.1, modo simplificado), conectado à Vercel com redirecionamento para www.
