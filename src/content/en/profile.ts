@@ -5,7 +5,7 @@ export const profile: Profile = {
   bio: [
     "I'm a senior frontend developer who has worked in web development since October 2018, when I switched careers. I've worked at eight companies on e-commerce, education, health, telecom, industrial and logistics products, building everything from responsive interfaces to corporate dashboards.",
     "I've been the only frontend developer on a product, owning the stack and architecture, and I've worked in larger teams modernizing legacy systems and automating cloud build and deployment.",
-    "My earlier background in logistics and business processes helps me understand the operation before designing the screen. I also use AI in my day-to-day engineering work and I'm pursuing a postgraduate degree in Artificial Intelligence and Data Science.",
+    "Before tech, I earned a technologist degree in Logistics and a postgraduate degree in Business Administration. That background helps me understand the operation and the business before designing the screen. I also use AI in my day-to-day engineering work and I'm pursuing a postgraduate degree in Artificial Intelligence and Data Science.",
   ],
   expertise: [
     {
@@ -153,14 +153,22 @@ export const profile: Profile = {
   ],
   education: [
     {
+      kind: "degree",
       title: "Postgraduate degree in Artificial Intelligence and Data Science",
       institution: "Universidade São Judas Tadeu",
       period: "2026 · in progress",
     },
-    { title: "Systems Analysis and Development", institution: "Universidade São Judas Tadeu", period: "Undergraduate degree" },
-    { title: "ONE (Oracle Next Education): Frontend and Backend", institution: "Oracle + Alura", period: "2022 · 2023" },
-    { title: "Human-Computer Interaction and UX", institution: "Universidade São Judas Tadeu", period: "Certificate · 2026" },
-    { title: "Accessibility with React", institution: "Rocketseat", period: "Certificate · 2025" },
+    { kind: "degree", title: "Postgraduate degree in Business Administration", period: "Specialization" },
+    { kind: "degree", title: "Technologist degree in Logistics", period: "Completed" },
+    {
+      kind: "degree",
+      title: "Systems Analysis and Development",
+      institution: "Universidade São Judas Tadeu",
+      period: "1 year completed · not finished",
+    },
+    { kind: "course", title: "ONE (Oracle Next Education): Frontend and Backend", institution: "Oracle + Alura", period: "2022 · 2023" },
+    { kind: "course", title: "Human-Computer Interaction and UX", institution: "Universidade São Judas Tadeu", period: "Certificate · 2026" },
+    { kind: "course", title: "Accessibility with React", institution: "Rocketseat", period: "Certificate · 2025" },
   ],
   workProcess: [
     { title: "Discovery", description: "I learn about the goal, the audience and what success looks like." },

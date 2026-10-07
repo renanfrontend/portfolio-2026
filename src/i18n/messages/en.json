@@ -179,7 +179,9 @@
     "resumeTitle": "Résumé",
     "resumeText": "PDF version with the full career history.",
     "resumeCta": "Download résumé (PDF)",
-    "current": "present"
+    "current": "present",
+    "educationDegrees": "Academic background",
+    "educationCourses": "Courses and certificates"
   },
   "projects": {
     "eyebrow": "Portfolio",

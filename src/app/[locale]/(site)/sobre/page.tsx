@@ -88,15 +88,27 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/sobre">
         <h2 id="education-title" className="text-3xl font-bold text-fg sm:text-4xl">
           {t.educationTitle}
         </h2>
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-          {profile.education.map((item) => (
-            <li key={item.title} className="rounded-2xl card-neon p-6">
-              <p className="font-mono text-xs uppercase tracking-[0.15em] text-accent-strong">{item.period}</p>
-              <h3 className="mt-3 text-lg font-bold text-fg">{item.title}</h3>
-              <p className="mt-1 text-fg-muted">{item.institution}</p>
-            </li>
-          ))}
-        </ul>
+        {(
+          [
+            ["degree", t.educationDegrees],
+            ["course", t.educationCourses],
+          ] as const
+        ).map(([kind, heading]) => (
+          <div key={kind} className="mt-10">
+            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-fg-subtle">{heading}</h3>
+            <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+              {profile.education
+                .filter((item) => item.kind === kind)
+                .map((item) => (
+                  <li key={item.title} className="rounded-2xl card-neon p-6">
+                    <p className="font-mono text-xs uppercase tracking-[0.15em] text-accent-strong">{item.period}</p>
+                    <h4 className="mt-3 text-lg font-bold text-fg">{item.title}</h4>
+                    {item.institution && <p className="mt-1 text-fg-muted">{item.institution}</p>}
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ))}
       </Section>
     </>
   );

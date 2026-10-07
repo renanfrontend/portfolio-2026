@@ -17,8 +17,11 @@ export type SkillGroup = {
 };
 
 export type EducationItem = {
+  /** "degree" = formação acadêmica; "course" = cursos e certificações. */
+  kind: "degree" | "course";
   title: string;
-  institution: string;
+  /** Omitida quando não informada. */
+  institution?: string;
   period: string;
 };
 

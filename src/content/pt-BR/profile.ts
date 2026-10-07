@@ -5,7 +5,7 @@ export const profile: Profile = {
   bio: [
     "Sou desenvolvedor frontend sênior e trabalho com desenvolvimento web desde outubro de 2018, quando migrei de área. Passei por oito empresas, em produtos de e-commerce, educação, saúde, telecom, indústria e logística, construindo de interfaces responsivas a dashboards corporativos.",
     "Já fui o único desenvolvedor frontend de um produto, responsável pela stack e pela arquitetura, e atuei em times maiores modernizando sistemas legados e automatizando build e deploy em nuvem.",
-    "A experiência anterior com logística e processos de negócio me ajuda a entender a operação antes de desenhar a tela. Hoje também uso IA no dia a dia de engenharia e curso pós-graduação em Inteligência Artificial e Ciência de Dados.",
+    "Antes da tecnologia, me formei tecnólogo em Logística e fiz pós-graduação em Administração Empresarial. Essa base me ajuda a entender a operação e o negócio antes de desenhar a tela. Hoje também uso IA no dia a dia de engenharia e curso pós-graduação em Inteligência Artificial e Ciência de Dados.",
   ],
   expertise: [
     {
@@ -153,14 +153,22 @@ export const profile: Profile = {
   ],
   education: [
     {
+      kind: "degree",
       title: "Pós-graduação em Inteligência Artificial e Ciência de Dados",
       institution: "Universidade São Judas Tadeu",
       period: "2026 · em andamento",
     },
-    { title: "Análise e Desenvolvimento de Sistemas", institution: "Universidade São Judas Tadeu", period: "Graduação" },
-    { title: "ONE (Oracle Next Education): Frontend e Backend", institution: "Oracle + Alura", period: "2022 · 2023" },
-    { title: "Interação Humano-Computador e UX", institution: "Universidade São Judas Tadeu", period: "Certificação · 2026" },
-    { title: "Acessibilidade com React", institution: "Rocketseat", period: "Certificação · 2025" },
+    { kind: "degree", title: "Pós-graduação em Administração Empresarial", period: "Especialização" },
+    { kind: "degree", title: "Tecnólogo em Logística", period: "Concluída" },
+    {
+      kind: "degree",
+      title: "Análise e Desenvolvimento de Sistemas",
+      institution: "Universidade São Judas Tadeu",
+      period: "1 ano cursado · não concluído",
+    },
+    { kind: "course", title: "ONE (Oracle Next Education): Frontend e Backend", institution: "Oracle + Alura", period: "2022 · 2023" },
+    { kind: "course", title: "Interação Humano-Computador e UX", institution: "Universidade São Judas Tadeu", period: "Certificação · 2026" },
+    { kind: "course", title: "Acessibilidade com React", institution: "Rocketseat", period: "Certificação · 2025" },
   ],
   workProcess: [
     { title: "Descoberta", description: "Entendo o objetivo, o público e o que define sucesso." },

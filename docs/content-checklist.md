@@ -22,8 +22,8 @@ Estado dos materiais em 06/10/2026.
 - [ ] **Foto profissional** com fundo neutro melhoraria o retrato em meio-tom (hoje uma máscara aproximada remove o fundo do avatar).
 - [ ] **WhatsApp profissional**: definir `NEXT_PUBLIC_WHATSAPP_NUMBER` se quiser o canal.
 - [ ] **Galeria**: os estudos de caso têm só a imagem de capa; o campo `gallery` aceita mais telas.
-- [ ] Revisar as datas/certificações em "Formação" (vieram do portfólio anterior).
-- [ ] Atualizar o currículo em PDF quando houver nova versão (mesmo caminho em `public/documents/`).
+- [x] Formação revisada com o Renan (07/10/2026): Tecnólogo em Logística (concluído), pós em Administração Empresarial, ADS na São Judas (1 ano, não concluído) e pós em IA em andamento. Instituição e ano da Logística e da pós em Administração não informados (omitidos).
+- [ ] **Currículo em PDF desatualizado:** começa em 2020 e lista ADS sem indicar que não foi concluído. Substituir por versão atualizada (mesmo caminho em `public/documents/`).
 
 ## Adicionar um projeto novo (automático)
 

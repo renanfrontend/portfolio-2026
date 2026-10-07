@@ -179,7 +179,9 @@
     "resumeTitle": "Currículo",
     "resumeText": "Versão em PDF com a trajetória completa.",
     "resumeCta": "Baixar currículo (PDF)",
-    "current": "atual"
+    "current": "atual",
+    "educationDegrees": "Formação acadêmica",
+    "educationCourses": "Cursos e certificações"
   },
   "projects": {
     "eyebrow": "Portfólio",
