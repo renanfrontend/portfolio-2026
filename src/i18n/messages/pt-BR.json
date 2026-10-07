@@ -255,7 +255,7 @@
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "whatsapp": "WhatsApp",
-    "whatsappMessage": "Olá, Renan! Vim pelo seu site e gostaria de conversar sobre um projeto.",
+    "whatsappMessage": "Olá, Renan! Vim pelo seu site (renanaugusto.com.br) e gostaria de conversar.",
     "form": {
       "title": "Formulário de contato",
       "requiredHint": "Campos marcados com * são obrigatórios.",
@@ -302,7 +302,8 @@
         "server": "Ocorreu um erro inesperado. Seu texto foi preservado; tente novamente ou use o e-mail."
       },
       "fallbackEmail": "Enviar por e-mail"
-    }
+    },
+    "whatsappCta": "Conversar no WhatsApp"
   },
   "privacy": {
     "eyebrow": "Privacidade",

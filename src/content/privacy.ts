@@ -36,6 +36,12 @@ export const privacyPolicy: Record<Locale, PrivacySection[]> = {
       ],
     },
     {
+      title: "Contato pelo WhatsApp",
+      paragraphs: [
+        "O botão de WhatsApp apenas abre uma conversa com uma mensagem pronta, que você pode editar antes de enviar. O site não envia nem guarda nenhum dado nesse caso; a conversa acontece no WhatsApp e segue a política de privacidade do próprio aplicativo.",
+      ],
+    },
+    {
       title: "Seus direitos",
       paragraphs: [
         "Nos termos da Lei Geral de Proteção de Dados (LGPD), você pode pedir acesso, correção ou exclusão dos dados enviados, entre outros direitos. Basta escrever para contato@renanaugusto.com.br.",
@@ -67,6 +73,12 @@ export const privacyPolicy: Record<Locale, PrivacySection[]> = {
       title: "Browser storage",
       paragraphs: [
         "The website only stores your theme preference (dark, light or system) in the browser's local storage. We do not use tracking cookies, analytics or advertising tools.",
+      ],
+    },
+    {
+      title: "Contact via WhatsApp",
+      paragraphs: [
+        "The WhatsApp button only opens a chat with a prefilled message, which you can edit before sending. The website does not send or store any data in this case; the conversation happens on WhatsApp and follows the app's own privacy policy.",
       ],
     },
     {

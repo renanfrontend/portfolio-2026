@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  // Navegadores e robôs ainda pedem /favicon.ico; o ícone oficial é o SVG.
+  async redirects() {
+    return [{ source: "/favicon.ico", destination: "/icon.svg", permanent: true }];
+  },
   images: {
     // Capas dos projetos importados do GitHub (cartão gerado pelo próprio GitHub).
     remotePatterns: [{ protocol: "https", hostname: "opengraph.githubassets.com" }],

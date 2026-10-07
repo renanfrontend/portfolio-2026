@@ -255,7 +255,7 @@
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "whatsapp": "WhatsApp",
-    "whatsappMessage": "Hi Renan! I found your website and would like to talk about a project.",
+    "whatsappMessage": "Hi Renan! I found your website (renanaugusto.com.br) and would like to talk.",
     "form": {
       "title": "Contact form",
       "requiredHint": "Fields marked with * are required.",
@@ -302,7 +302,8 @@
         "server": "An unexpected error occurred. Your text was kept; try again or use email."
       },
       "fallbackEmail": "Send by email"
-    }
+    },
+    "whatsappCta": "Chat on WhatsApp"
   },
   "privacy": {
     "eyebrow": "Privacy",

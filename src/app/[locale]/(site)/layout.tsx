@@ -1,6 +1,7 @@
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { IntroScreen } from "@/components/shared/intro-screen";
+import { WhatsappButton } from "@/components/shared/whatsapp-button";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { notFound } from "next/navigation";
@@ -24,6 +25,7 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[lo
         {children}
       </main>
       <SiteFooter locale={locale} dict={dict} />
+      <WhatsappButton label={dict.contact.whatsappCta} message={dict.contact.whatsappMessage} newTabHint={dict.common.opensInNewTab} />
     </>
   );
 }

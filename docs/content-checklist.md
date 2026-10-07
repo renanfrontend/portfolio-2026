@@ -20,7 +20,7 @@ Estado dos materiais em 06/10/2026.
 - [ ] **MWM Portal**: confirmar se o texto (já publicado no portfólio anterior) pode continuar no site e se há screenshot autorizado.
 - [ ] **Aster Centro Terapêutico**: confirmar se foi trabalho para cliente (está como "Profissional", conforme o portfólio anterior).
 - [ ] **Foto profissional** com fundo neutro melhoraria o retrato em meio-tom (hoje uma máscara aproximada remove o fundo do avatar).
-- [ ] **WhatsApp profissional**: definir `NEXT_PUBLIC_WHATSAPP_NUMBER` se quiser o canal.
+- [x] **WhatsApp profissional**: (11) 96578-1243, confirmado pelo Renan (07/10/2026). Botão flutuante em todas as páginas e canal na página de contato; padrão em `src/config/contact.ts`.
 - [ ] **Galeria**: os estudos de caso têm só a imagem de capa; o campo `gallery` aceita mais telas.
 - [x] Formação revisada com o Renan (07/10/2026): Tecnólogo em Logística (concluído), pós em Administração Empresarial, ADS na São Judas (1 ano, não concluído) e pós em IA em andamento. Instituição e ano da Logística e da pós em Administração não informados (omitidos).
 - [ ] **Currículo em PDF desatualizado:** começa em 2020 e lista ADS sem indicar que não foi concluído. Substituir por versão atualizada (mesmo caminho em `public/documents/`).
