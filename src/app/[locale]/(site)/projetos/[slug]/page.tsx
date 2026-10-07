@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/shared/json-ld";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +14,7 @@ import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localePath } from "@/lib/links";
 import { buildPageMetadata } from "@/lib/seo";
+import { breadcrumbSchema, jsonLd, projectSchema } from "@/lib/structured-data";
 
 export async function generateStaticParams() {
   const slugs = await getProjectSlugs();
@@ -24,7 +26,15 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/projetos
   if (!isLocale(locale)) return {};
   const project = await getProjectBySlug(locale, slug);
   if (!project) return {};
-  return buildPageMetadata({ locale, path: `/projetos/${slug}`, title: project.title, description: project.summary });
+  const dict = getDictionary(locale);
+  return buildPageMetadata({
+    locale,
+    path: `/projetos/${slug}`,
+    title: `${project.title}: ${dict.meta.caseStudySuffix}`,
+    description: project.summary,
+    type: "article",
+    image: project.cover ? { url: project.cover.src, width: project.cover.width, height: project.cover.height, alt: project.cover.alt } : undefined,
+  });
 }
 
 /** Os params ficam dentro do Suspense para o Next gerar o shell estático das rotas dinâmicas. */
@@ -64,6 +74,25 @@ async function ProjectContent({ params }: Pick<PageProps<"/[locale]/projetos/[sl
 
   return (
     <article>
+      <JsonLd
+        data={jsonLd(
+          projectSchema({
+            locale,
+            slug: project.slug,
+            title: project.title,
+            summary: project.summary,
+            image: project.cover?.src,
+            technologies: project.technologies,
+            repositoryUrl: project.repositoryUrl,
+            liveUrl: project.liveUrl,
+          }),
+          breadcrumbSchema([
+            { name: dict.common.home, path: `/${locale}` },
+            { name: dict.nav.projects, path: `/${locale}/projetos` },
+            { name: project.title, path: `/${locale}/projetos/${project.slug}` },
+          ]),
+        )}
+      />
       <header className="relative isolate overflow-hidden border-b border-border">
         <div className="bg-grid absolute inset-0 -z-10" aria-hidden />
         <Container className="pb-12 pt-12 sm:pt-16">

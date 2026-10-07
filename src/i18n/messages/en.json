@@ -1,31 +1,33 @@
 {
   "meta": {
-    "siteTitle": "Renan Augusto | Senior Frontend Developer and Consulting",
-    "siteDescription": "Senior Frontend Developer working with React, Next.js and TypeScript. Websites, web applications, dashboards, integrations and AI automation.",
+    "siteTitle": "Renan Augusto | Senior Frontend Developer, React and Next.js",
+    "siteDescription": "Senior frontend developer based in São Paulo, Brazil, specialized in React, Next.js and TypeScript. Websites, dashboards, integrations and AI automation.",
     "home": {
-      "title": "Senior Frontend Developer and Consulting",
-      "description": "Portfolio and consulting by Renan Augusto: React, Next.js and TypeScript for websites, dashboards, integrations and AI automation."
+      "title": "Renan Augusto | Senior Frontend Developer, React and Next.js",
+      "description": "Senior frontend developer in São Paulo, Brazil: React, Next.js and TypeScript. Websites, dashboards, integrations and AI automation. See projects."
     },
     "about": {
-      "title": "About",
-      "description": "Career, professional experience, skills and education of Renan Augusto, senior frontend developer."
+      "title": "About: senior frontend developer, React and Next.js",
+      "description": "Renan Augusto career: 6+ years in frontend with React, Next.js and TypeScript across health, telecom, industry and logistics. Download the résumé."
     },
     "projects": {
-      "title": "Projects",
-      "description": "Case studies with React, Next.js, TypeScript, dashboards, 3D experiences and AI products."
+      "title": "Projects and case studies in React, Next.js and AI",
+      "description": "Projects by Renan Augusto with React, Next.js and TypeScript: dashboards, 3D experiences, web games and AI products, with links to code and live sites."
     },
     "services": {
-      "title": "Services",
-      "description": "Web development, frontend consulting, integrations and AI automation for companies."
+      "title": "Services: websites, frontend consulting and AI automation",
+      "description": "Website and web app development, React frontend consulting, API integrations and AI automation for companies. Request a quote."
     },
     "contact": {
-      "title": "Contact",
-      "description": "Request a quote or talk about a job opening with Renan Augusto."
+      "title": "Contact and quotes",
+      "description": "Talk to Renan Augusto about frontend roles or website, dashboard and AI automation projects. Quote form and direct contact."
     },
     "privacy": {
-      "title": "Privacy",
-      "description": "How this website handles data sent through the contact form and preferences stored in the browser."
-    }
+      "title": "Privacy policy",
+      "description": "How Renan Augusto website handles data sent through the contact form and preferences stored in the browser, under Brazil LGPD."
+    },
+    "caseStudySuffix": "case study",
+    "serviceSuffix": "service"
   },
   "common": {
     "skipToContent": "Skip to content",

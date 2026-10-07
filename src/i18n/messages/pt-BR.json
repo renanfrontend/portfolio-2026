@@ -1,31 +1,33 @@
 {
   "meta": {
-    "siteTitle": "Renan Augusto | Desenvolvedor Frontend Sênior e Consultoria",
-    "siteDescription": "Desenvolvedor Frontend Sênior com React, Next.js e TypeScript. Sites, aplicações web, dashboards, integrações e automação com IA.",
+    "siteTitle": "Renan Augusto: Desenvolvedor Frontend Sênior React e Next.js",
+    "siteDescription": "Desenvolvedor frontend sênior em São Paulo, especialista em React, Next.js e TypeScript. Sites, dashboards, integrações e automação com IA.",
     "home": {
-      "title": "Desenvolvedor Frontend Sênior e Consultoria",
-      "description": "Portfólio e consultoria de Renan Augusto: React, Next.js e TypeScript para sites, dashboards, integrações e automação com IA."
+      "title": "Renan Augusto: Desenvolvedor Frontend Sênior React e Next.js",
+      "description": "Desenvolvedor frontend sênior em São Paulo: React, Next.js e TypeScript. Sites, dashboards, integrações e automação com IA. Veja projetos e fale comigo."
     },
     "about": {
-      "title": "Sobre",
-      "description": "Trajetória, experiência profissional, competências e formação de Renan Augusto, desenvolvedor frontend sênior."
+      "title": "Sobre: desenvolvedor frontend sênior, React e Next.js",
+      "description": "Conheça a trajetória de Renan Augusto: 6+ anos em frontend com React, Next.js e TypeScript em saúde, telecom, indústria e logística. Baixe o currículo."
     },
     "projects": {
-      "title": "Projetos",
-      "description": "Estudos de caso com React, Next.js, TypeScript, dashboards, experiências 3D e produtos com IA."
+      "title": "Projetos e estudos de caso em React, Next.js e IA",
+      "description": "Projetos de Renan Augusto com React, Next.js e TypeScript: dashboards, experiências 3D, jogos web e produtos com IA, com links para o código e o site."
     },
     "services": {
-      "title": "Serviços",
-      "description": "Desenvolvimento web, consultoria frontend, integrações e automação com IA para empresas."
+      "title": "Serviços: sites, consultoria frontend e automação com IA",
+      "description": "Desenvolvimento de sites e sistemas web, consultoria frontend em React, integrações de APIs e automação com IA para empresas. Solicite um orçamento."
     },
     "contact": {
-      "title": "Contato",
-      "description": "Solicite um orçamento ou fale sobre uma vaga com Renan Augusto."
+      "title": "Contato e orçamento",
+      "description": "Fale com Renan Augusto sobre vagas de frontend ou projetos de sites, dashboards e automação com IA. Formulário de orçamento e contato direto."
     },
     "privacy": {
-      "title": "Privacidade",
-      "description": "Como este site trata os dados enviados pelo formulário de contato e as preferências salvas no navegador."
-    }
+      "title": "Política de privacidade",
+      "description": "Como o site de Renan Augusto trata os dados enviados pelo formulário de contato e as preferências salvas no navegador, conforme a LGPD."
+    },
+    "caseStudySuffix": "estudo de caso",
+    "serviceSuffix": "serviço"
   },
   "common": {
     "skipToContent": "Pular para o conteúdo",

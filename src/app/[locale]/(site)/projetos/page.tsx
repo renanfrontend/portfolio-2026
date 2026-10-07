@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/shared/json-ld";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -12,6 +13,7 @@ import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localePath } from "@/lib/links";
 import { buildPageMetadata } from "@/lib/seo";
+import { breadcrumbSchema, jsonLd } from "@/lib/structured-data";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/projetos">): Promise<Metadata> {
   const { locale } = await params;
@@ -31,6 +33,14 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]/proj
 
   return (
     <>
+      <JsonLd
+        data={jsonLd(
+          breadcrumbSchema([
+            { name: dict.common.home, path: `/${locale}` },
+            { name: dict.nav.projects, path: basePath },
+          ]),
+        )}
+      />
       <PageHeader eyebrow={t.eyebrow} title={t.title} description={t.description} />
       <Container className="py-14 sm:py-20">
         {/* O shell estático mostra todos os projetos; os filtros da URL entram no cliente. */}

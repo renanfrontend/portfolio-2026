@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/shared/json-ld";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/layout/section";
@@ -10,12 +11,13 @@ import { resumeExists } from "@/features/about/resume";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { buildPageMetadata } from "@/lib/seo";
+import { breadcrumbSchema, jsonLd, profilePageSchema } from "@/lib/structured-data";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/sobre">): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const dict = getDictionary(locale);
-  return buildPageMetadata({ locale, path: "/sobre", title: dict.meta.about.title, description: dict.meta.about.description });
+  return buildPageMetadata({ locale, path: "/sobre", title: dict.meta.about.title, description: dict.meta.about.description, type: "profile" });
 }
 
 export default async function AboutPage({ params }: PageProps<"/[locale]/sobre">) {
@@ -28,6 +30,15 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/sobre">
 
   return (
     <>
+      <JsonLd
+        data={jsonLd(
+          profilePageSchema(locale, dict.home.hero.role),
+          breadcrumbSchema([
+            { name: dict.common.home, path: `/${locale}` },
+            { name: dict.nav.about, path: `/${locale}/sobre` },
+          ]),
+        )}
+      />
       <PageHeader eyebrow={t.eyebrow} title={profile.headline}>
         <div className="mt-8 grid max-w-3xl gap-4 text-lg text-fg-muted">
           {profile.bio.map((paragraph) => (

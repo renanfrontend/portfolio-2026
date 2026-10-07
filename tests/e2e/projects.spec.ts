@@ -59,7 +59,7 @@ test.describe("busca e filtros de projetos", () => {
   });
 
   test("estudo de caso abre a partir do card", async ({ page }) => {
-    await page.goto("/pt-BR/projetos");
+    await page.goto("/pt-BR/projetos", { waitUntil: "networkidle" });
     await page.getByRole("link", { name: "VisionStock", exact: true }).click();
     await expect(page).toHaveURL(/\/pt-BR\/projetos\/visionstock-ai$/);
     await expect(page.getByRole("heading", { name: "Minha contribuição" })).toBeVisible();

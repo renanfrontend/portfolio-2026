@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { siteConfig } from "@/config/site";
+import { JsonLd } from "@/components/shared/json-ld";
 import { getProfile } from "@/features/about/profile";
 import { AiSection } from "@/features/home/components/ai-section";
 import { ContactCtaSection } from "@/features/home/components/contact-cta-section";
@@ -14,7 +14,8 @@ import { getFeaturedProjects } from "@/features/projects/server/queries";
 import { getServices } from "@/features/services/server/queries";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { absoluteUrl, buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
+import { jsonLd, personSchema, websiteSchema } from "@/lib/structured-data";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
@@ -35,21 +36,10 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const dict = getDictionary(locale);
   const profile = getProfile(locale);
 
-  const personJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteConfig.fullName,
-    jobTitle: dict.home.hero.role,
-    url: absoluteUrl(`/${locale}`),
-    email: `mailto:${siteConfig.email}`,
-    address: { "@type": "PostalAddress", addressLocality: "São Paulo", addressCountry: "BR" },
-    sameAs: [siteConfig.github, siteConfig.linkedin],
-    knowsAbout: ["React", "Next.js", "TypeScript", "Frontend development", "Dashboards", "AI automation"],
-  };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
+      <JsonLd data={jsonLd(websiteSchema(locale, dict.meta.siteDescription), personSchema(locale, dict.home.hero.role))} />
       <HeroSection locale={locale} dict={dict} />
       <FactsStrip dict={dict} />
       <ExpertiseSection dict={dict} areas={profile.expertise} />

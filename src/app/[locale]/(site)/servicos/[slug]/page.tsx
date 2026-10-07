@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/shared/json-ld";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -13,6 +14,7 @@ import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { localePath } from "@/lib/links";
 import { absoluteUrl, buildPageMetadata } from "@/lib/seo";
+import { breadcrumbSchema, jsonLd } from "@/lib/structured-data";
 import { siteConfig } from "@/config/site";
 
 export function generateStaticParams() {
@@ -57,18 +59,26 @@ async function ServiceContent({ params }: Pick<PageProps<"/[locale]/servicos/[sl
   const others = getServices(locale).filter((item) => item.slug !== service.slug);
 
   const serviceJsonLd = {
-    "@context": "https://schema.org",
     "@type": "Service",
     name: service.title,
     description: service.summary,
     url: absoluteUrl(`/${locale}/servicos/${service.slug}`),
-    provider: { "@type": "Person", name: siteConfig.fullName, url: absoluteUrl(`/${locale}`) },
+    provider: { "@id": absoluteUrl("/#renan"), "@type": "Person", name: siteConfig.fullName },
     areaServed: "BR",
   };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
+      <JsonLd
+        data={jsonLd(
+          serviceJsonLd,
+          breadcrumbSchema([
+            { name: dict.common.home, path: `/${locale}` },
+            { name: dict.nav.services, path: `/${locale}/servicos` },
+            { name: service.title, path: `/${locale}/servicos/${service.slug}` },
+          ]),
+        )}
+      />
       <PageHeader
         eyebrow={t.eyebrow}
         title={service.title}
