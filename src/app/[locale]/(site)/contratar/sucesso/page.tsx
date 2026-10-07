@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
 import { Suspense } from "react";
 import { Container } from "@/components/layout/container";
 import { ArrowLeftIcon, CheckIcon, ClockIcon, WhatsappIcon } from "@/components/shared/icons";
@@ -46,6 +47,8 @@ const param = (value: string | string[] | undefined) => (typeof value === "strin
 
 /** O pedido só aparece quando a sessão existe no Stripe e pertence ao número de pedido da URL. */
 async function findOrder(sessionId: string, orderId: string): Promise<PaidOrder | null> {
+  // Consulta sempre na hora: o resultado depende do pagamento e nunca vai para o cache.
+  await connection();
   const gateway = getPaymentGateway(getServerEnv());
   if (!gateway || !sessionId || !orderId) return null;
   try {
@@ -180,14 +183,14 @@ async function OrderConfirmation({
         {schedulingUrl ? (
           <a href={schedulingUrl} target="_blank" rel="noopener noreferrer" className={buttonClasses("primary", "lg")}>
             {t.schedule}
-            <span className="sr-only"> ({dict.hire.opensInNewTab})</span>
+            <span className="sr-only"> {dict.common.opensInNewTab}</span>
           </a>
         ) : (
           whatsapp && (
             <a href={whatsappHref(whatsapp, whatsappMessage)} target="_blank" rel="noopener noreferrer" className={buttonClasses("primary", "lg")}>
               <WhatsappIcon width={18} height={18} />
               {t.scheduleWhatsapp}
-              <span className="sr-only"> ({dict.hire.opensInNewTab})</span>
+              <span className="sr-only"> {dict.hire.opensInNewTab}</span>
             </a>
           )
         )}
@@ -195,7 +198,7 @@ async function OrderConfirmation({
           <a href={whatsappHref(whatsapp, whatsappMessage)} target="_blank" rel="noopener noreferrer" className={buttonClasses("secondary", "lg")}>
             <WhatsappIcon width={18} height={18} />
             {t.whatsapp}
-            <span className="sr-only"> ({dict.hire.opensInNewTab})</span>
+            <span className="sr-only"> {dict.hire.opensInNewTab}</span>
           </a>
         )}
       </div>
