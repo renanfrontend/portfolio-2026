@@ -1,5 +1,5 @@
 import { CheckIcon, ClockIcon, WhatsappIcon } from "@/components/shared/icons";
-import { ButtonLink, buttonClasses } from "@/components/ui/button";
+import { buttonClasses } from "@/components/ui/button";
 import { getWhatsappNumber } from "@/config/contact";
 import { whatsappHref } from "@/lib/links";
 import type { Locale } from "@/i18n/config";
@@ -7,6 +7,7 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { cn } from "@/lib/cn";
 import { formatPrice, hireHref } from "../packages";
 import type { LocalizedPackage, PackageStatus } from "../types";
+import { HireButton } from "./hire-dialog";
 
 const statusDot: Record<PackageStatus, string> = {
   available: "bg-success",
@@ -103,10 +104,10 @@ export function PackageCard({ item, locale, labels }: PackageCardProps) {
           </span>
         </a>
       ) : (
-        <ButtonLink href={hireHref(item, locale)} variant={highlighted ? "primary" : "secondary"} size="lg" className="mt-6 w-full">
+        <HireButton packageId={item.id} href={hireHref(item, locale)} className={buttonClasses(highlighted ? "primary" : "secondary", "lg", "mt-6 w-full")}>
           {labels.cta}
           <span className="sr-only">: {item.name}</span>
-        </ButtonLink>
+        </HireButton>
       )}
     </article>
   );

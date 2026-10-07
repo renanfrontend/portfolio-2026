@@ -7,7 +7,9 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { PageHeader } from "@/components/shared/page-header";
 import { ButtonLink } from "@/components/ui/button";
 import { PackageCard } from "@/features/packages/components/package-card";
-import { getPackages } from "@/features/packages/packages";
+import { getWhatsappNumber } from "@/config/contact";
+import { HireDialogProvider } from "@/features/packages/components/hire-dialog";
+import { formatPrice, getPackages } from "@/features/packages/packages";
 import { ServiceFaq } from "@/features/services/components/service-faq";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -28,6 +30,11 @@ export default async function HirePage({ params }: PageProps<"/[locale]/contrata
   const dict = getDictionary(locale);
   const t = dict.hire;
   const packages = getPackages(locale);
+  const priceText = (item: (typeof packages)[number]) => {
+    const value = formatPrice(item.price, locale);
+    if (!value) return null;
+    return `${item.priceFrom ? `${t.priceFrom} ` : ""}${value}${item.pricePeriod === "month" ? t.perMonth : ""}`;
+  };
 
   // Ofertas para o Google: preço só aparece quando definido.
   const offers = {
@@ -76,11 +83,27 @@ export default async function HirePage({ params }: PageProps<"/[locale]/contrata
       />
 
       <Container className="py-16 sm:py-20">
-        <div className="grid gap-6 pt-3 md:grid-cols-2 xl:grid-cols-4">
-          {packages.map((item) => (
-            <PackageCard key={item.id} item={item} locale={locale} labels={t} />
-          ))}
-        </div>
+        <HireDialogProvider
+          packages={packages.map((item) => ({
+            id: item.id,
+            name: item.name,
+            description: item.description,
+            priceText: priceText(item),
+            installments: Boolean(item.installments),
+          }))}
+          labels={t.modal}
+          priceOnRequest={t.priceOnRequest}
+          installmentsLabel={t.installments}
+          privacyHref={localePath(locale, "/privacidade")}
+          whatsappNumber={getWhatsappNumber()}
+          locale={locale}
+        >
+          <div className="grid gap-6 pt-3 md:grid-cols-2 xl:grid-cols-4">
+            {packages.map((item) => (
+              <PackageCard key={item.id} item={item} locale={locale} labels={t} />
+            ))}
+          </div>
+        </HireDialogProvider>
         <p className="mt-8 text-center text-sm text-fg-subtle">{t.note}</p>
       </Container>
 

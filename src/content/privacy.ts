@@ -19,6 +19,7 @@ export const privacyPolicy: Record<Locale, PrivacySection[]> = {
       title: "Dados enviados pelo formulário de contato",
       paragraphs: [
         "Quando você usa o formulário, coletamos nome, e-mail, serviço de interesse e a descrição da sua necessidade. Empresa, telefone, faixa de orçamento e prazo desejado são opcionais.",
+        "Na pré-contratação de um pacote (página Contratar), coletamos nome completo, e-mail, WhatsApp e a descrição do projeto, junto com o pacote escolhido, para enviar a proposta ou o link de pagamento.",
         "Esses dados são usados apenas para responder ao seu contato e, se for o caso, preparar uma proposta. Não são usados para marketing nem vendidos ou cedidos a terceiros.",
       ],
     },
@@ -59,6 +60,7 @@ export const privacyPolicy: Record<Locale, PrivacySection[]> = {
       title: "Data sent through the contact form",
       paragraphs: [
         "When you use the form, we collect your name, email, service of interest and a description of your needs. Company, phone, budget range and desired timeline are optional.",
+        "When you request a package (Hire page), we collect your full name, email, WhatsApp number and project description, along with the chosen package, to send you the proposal or payment link.",
         "This data is used only to reply to your message and, when applicable, to prepare a proposal. It is not used for marketing and is not sold or shared with third parties.",
       ],
     },

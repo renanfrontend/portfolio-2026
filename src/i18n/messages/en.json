@@ -405,6 +405,39 @@
     ],
     "installments": "or in card installments",
     "ctaTalk": "Talk about the project",
-    "opensInNewTab": "(opens WhatsApp in a new tab)"
+    "opensInNewTab": "(opens WhatsApp in a new tab)",
+    "modal": {
+      "title": "Hire service",
+      "summary": "Package summary",
+      "price": "Price",
+      "close": "Close",
+      "requiredHint": "All fields are required.",
+      "name": "Full name",
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "whatsappPlaceholder": "(11) 98765-4321",
+      "message": "Briefly tell me about your project or need",
+      "messageHint": "Goal, timeline and what already exists.",
+      "submit": "Continue to payment",
+      "submitting": "Processing…",
+      "privacyNotice": "Your data is used only for this request. See the",
+      "privacyLink": "privacy policy",
+      "errors": {
+        "name": "Enter your first and last name.",
+        "email": "Enter a valid email address.",
+        "whatsapp": "Enter a valid Brazilian WhatsApp number with area code.",
+        "message": "Tell me a bit more (at least 10 characters).",
+        "summary": "Please review the highlighted fields.",
+        "rateLimited": "Too many attempts in a short time. Wait a few minutes.",
+        "unavailable": "Could not register it right now. Your data was kept; try again or reach out on WhatsApp.",
+        "network": "Connection failed. Your data was kept; try again.",
+        "server": "An unexpected error occurred. Your data was kept; try again."
+      },
+      "successTitle": "Order {order} received",
+      "successText": "Your details are confirmed. Online payment is the next step and is still being set up: meanwhile, I will send you the payment link or proposal via the WhatsApp or email you provided.",
+      "successWhatsapp": "Talk about the order on WhatsApp",
+      "successWhatsappMessage": "Hi Renan! I just submitted a hire request for the *{package}* package on your website (order {order}).",
+      "done": "Done"
+    }
   }
 }
