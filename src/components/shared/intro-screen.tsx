@@ -64,6 +64,7 @@ export function IntroScreen({ portraitSrc, labels }: IntroScreenProps) {
 
     const startedAt = performance.now();
     let shown = 0;
+    let lastPercent = -1;
     let frame = 0;
     let finished = false;
 
@@ -94,7 +95,12 @@ export function IntroScreen({ portraitSrc, labels }: IntroScreenProps) {
       const target = elapsed > MAX_DURATION ? 1 : Math.min(realProgress, timeCap);
       shown += (target - shown) * 0.12;
       if (target - shown < 0.004) shown = target;
-      setProgress(shown);
+      // Só atualiza a tela quando o percentual muda (no máximo 100 renderizações).
+      const percent = Math.round(shown * 100);
+      if (percent !== lastPercent) {
+        lastPercent = percent;
+        setProgress(shown);
+      }
       if (shown >= 1) {
         frame = requestAnimationFrame(() => finish());
         return;

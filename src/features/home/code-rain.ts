@@ -135,19 +135,30 @@ export function startCodeRain({ canvas, overlay, load, columnsFor, lensSource, o
   let visible = true;
   let disposed = false;
 
-  /** Pré-desenha cada caractere em cada cor e nível de brilho (com o glow já aplicado). */
+  /** Cores do atlas já desenhadas; as demais usam a primeira cor até ficarem prontas. */
+  let atlasHuesReady = 0;
+  let atlasBuild = 0;
+
+  /**
+   * Pré-desenha cada caractere em cada cor e nível de brilho (com o glow já aplicado).
+   * A primeira cor sai na hora; as outras, uma por vez entre os quadros, para não travar a página.
+   */
   function buildAtlas(dpr: number) {
     const light = isLight();
+    const build = ++atlasBuild;
     atlasCell = Math.ceil(cell * dpr);
-    atlas = document.createElement("canvas");
-    atlas.width = atlasChars.length * atlasCell;
-    atlas.height = HUES_DARK.length * ROWS_PER_HUE * atlasCell;
-    const a = atlas.getContext("2d");
+    const target = document.createElement("canvas");
+    target.width = atlasChars.length * atlasCell;
+    target.height = HUES_DARK.length * ROWS_PER_HUE * atlasCell;
+    const a = target.getContext("2d");
     if (!a) return;
     a.textAlign = "center";
     a.textBaseline = "middle";
     a.font = `700 ${Math.round(atlasCell * 0.95)}px ui-monospace, "Cascadia Code", Consolas, monospace`;
-    for (let hue = 0; hue < HUES_DARK.length; hue += 1) {
+    atlas = target;
+    atlasHuesReady = 0;
+
+    const drawHue = (hue: number) => {
       for (let level = 0; level <= LEVELS; level += 1) {
         const style = levelStyle(hue, level, light);
         a.fillStyle = style.color;
@@ -156,7 +167,18 @@ export function startCodeRain({ canvas, overlay, load, columnsFor, lensSource, o
         const cy = (hue * ROWS_PER_HUE + level) * atlasCell + atlasCell / 2;
         atlasChars.forEach((char, index) => a.fillText(char, index * atlasCell + atlasCell / 2, cy));
       }
-    }
+      atlasHuesReady = hue + 1;
+    };
+
+    drawHue(0);
+    const next = (hue: number) => {
+      if (disposed || build !== atlasBuild || hue >= HUES_DARK.length) return;
+      drawHue(hue);
+      // Redesenha as células que estavam usando a cor provisória.
+      shown.fill(-2);
+      setTimeout(() => next(hue + 1), 16);
+    };
+    setTimeout(() => next(1), 16);
   }
 
   function countVisible() {
@@ -282,7 +304,8 @@ export function startCodeRain({ canvas, overlay, load, columnsFor, lensSource, o
     const h = edgesY[row + 1] - y;
     ctx.clearRect(x, y, w, h);
     if (key >= 0) {
-      const sy = (hue * ROWS_PER_HUE + level) * atlasCell;
+      const usableHue = hue < atlasHuesReady ? hue : 0;
+      const sy = (usableHue * ROWS_PER_HUE + level) * atlasCell;
       ctx.drawImage(atlas, charIndex * atlasCell, sy, atlasCell, atlasCell, x, y, w, h);
     }
   }
