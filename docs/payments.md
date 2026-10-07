@@ -1,5 +1,7 @@
 # Pagamentos, webhook e métricas
 
+> Para ligar em produção, siga o checklist [go-live-pagamentos.md](go-live-pagamentos.md).
+
 Fluxo de contratação em `/[locale]/contratar`:
 
 1. "Contratar Serviço" abre o modal; o formulário é validado no navegador e de novo no servidor.
