@@ -8,7 +8,7 @@
     },
     "about": {
       "title": "Sobre: desenvolvedor frontend sênior, React e Next.js",
-      "description": "Conheça a trajetória de Renan Augusto: 6+ anos em frontend com React, Next.js e TypeScript em saúde, telecom, indústria e logística. Baixe o currículo."
+      "description": "Conheça a trajetória de Renan Augusto: 8 anos em frontend com React, Next.js e TypeScript, em oito empresas de e-commerce a indústria. Baixe o currículo."
     },
     "projects": {
       "title": "Projetos e estudos de caso em React, Next.js e IA",
@@ -80,11 +80,11 @@
       "roleValue": "Frontend Sênior",
       "roleDetail": "React · Next.js · TypeScript",
       "experienceLabel": "Experiência",
-      "experienceValue": "6+ anos",
-      "experienceDetail": "desde fevereiro de 2020",
+      "experienceValue": "8 anos",
+      "experienceDetail": "desde outubro de 2018",
       "domainsLabel": "Setores",
-      "domainsValue": "5 empresas",
-      "domainsDetail": "saúde, telecom, indústria e logística",
+      "domainsValue": "8 empresas",
+      "domainsDetail": "e-commerce, educação, saúde, telecom, indústria e logística",
       "educationLabel": "Formação",
       "educationValue": "Pós em IA",
       "educationDetail": "Ciência de Dados, em andamento"
@@ -167,7 +167,8 @@
       "clientsTitle": "Empresas e parceiros",
       "clientsText": "Conte o que precisa ser construído ou melhorado. Respondo com perguntas e próximos passos.",
       "clientsCta": "Solicitar orçamento"
-    }
+    },
+    "companies": "Empresas em que atuei"
   },
   "about": {
     "eyebrow": "Sobre",

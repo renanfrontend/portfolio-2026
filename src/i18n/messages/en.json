@@ -8,7 +8,7 @@
     },
     "about": {
       "title": "About: senior frontend developer, React and Next.js",
-      "description": "Renan Augusto career: 6+ years in frontend with React, Next.js and TypeScript across health, telecom, industry and logistics. Download the résumé."
+      "description": "Renan Augusto career: 8 years in frontend with React, Next.js and TypeScript at eight companies, from e-commerce to industry. Download the résumé."
     },
     "projects": {
       "title": "Projects and case studies in React, Next.js and AI",
@@ -80,11 +80,11 @@
       "roleValue": "Senior Frontend",
       "roleDetail": "React · Next.js · TypeScript",
       "experienceLabel": "Experience",
-      "experienceValue": "6+ years",
-      "experienceDetail": "since February 2020",
+      "experienceValue": "8 years",
+      "experienceDetail": "since October 2018",
       "domainsLabel": "Industries",
-      "domainsValue": "5 companies",
-      "domainsDetail": "health, telecom, industry and logistics",
+      "domainsValue": "8 companies",
+      "domainsDetail": "e-commerce, education, health, telecom, industry and logistics",
       "educationLabel": "Education",
       "educationValue": "AI postgrad",
       "educationDetail": "Data Science, in progress"
@@ -167,7 +167,8 @@
       "clientsTitle": "Companies and partners",
       "clientsText": "Tell me what needs to be built or improved. I'll reply with questions and next steps.",
       "clientsCta": "Request a quote"
-    }
+    },
+    "companies": "Companies I have worked with"
   },
   "about": {
     "eyebrow": "About",
