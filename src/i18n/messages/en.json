@@ -197,7 +197,8 @@
       "web": "Web",
       "dashboard": "Dashboard",
       "automation": "Automation",
-      "ai": "AI"
+      "ai": "AI",
+      "games": "Games"
     },
     "kinds": {
       "personal": "Personal project",
@@ -222,8 +223,11 @@
       "noLinks": "Proprietary code and environment: there are no public links for this work.",
       "gallery": "Images",
       "ctaTitle": "Need something similar?",
-      "ctaButton": "Talk about a project"
-    }
+      "ctaButton": "Talk about a project",
+      "fromGithub": "Description imported automatically from the GitHub repository."
+    },
+    "liveOnly": "Live only",
+    "viewLive": "View live"
   },
   "services": {
     "eyebrow": "Services",

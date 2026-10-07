@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  images: {
+    // Capas dos projetos importados do GitHub (cartão gerado pelo próprio GitHub).
+    remotePatterns: [{ protocol: "https", hostname: "opengraph.githubassets.com" }],
+  },
   experimental: {
     // O layout raiz fica em app/[locale]; URLs sem rota usam app/global-not-found.tsx.
     globalNotFound: true,

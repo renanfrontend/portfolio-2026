@@ -14,14 +14,15 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { localePath } from "@/lib/links";
 import { buildPageMetadata } from "@/lib/seo";
 
-export function generateStaticParams() {
-  return locales.flatMap((locale) => getProjectSlugs().map((slug) => ({ locale, slug })));
+export async function generateStaticParams() {
+  const slugs = await getProjectSlugs();
+  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
 }
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/projetos/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!isLocale(locale)) return {};
-  const project = getProjectBySlug(locale, slug);
+  const project = await getProjectBySlug(locale, slug);
   if (!project) return {};
   return buildPageMetadata({ locale, path: `/projetos/${slug}`, title: project.title, description: project.summary });
 }
@@ -47,18 +48,19 @@ function CaseFallback() {
 async function ProjectContent({ params }: Pick<PageProps<"/[locale]/projetos/[slug]">, "params">) {
   const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const project = getProjectBySlug(locale, slug);
+  const project = await getProjectBySlug(locale, slug);
   if (!project) notFound();
 
   const dict = getDictionary(locale);
   const t = dict.projects.caseStudy;
   const hasLinks = Boolean(project.repositoryUrl || project.liveUrl);
 
+  // Projetos importados do GitHub não têm estudo de caso escrito: só as seções com texto aparecem.
   const sections = [
     { id: "desafio", title: t.challenge, body: project.challenge },
     { id: "solucao", title: t.solution, body: project.solution },
     { id: "contribuicao", title: t.contribution, body: project.contribution },
-  ];
+  ].filter((section): section is { id: string; title: string; body: string } => Boolean(section.body));
 
   return (
     <article>
@@ -80,6 +82,7 @@ async function ProjectContent({ params }: Pick<PageProps<"/[locale]/projetos/[sl
           </div>
           <h1 className="mt-5 max-w-4xl text-4xl font-bold text-fg sm:text-5xl lg:text-6xl">{project.title}</h1>
           <p className="mt-5 max-w-3xl text-lg text-fg-muted">{project.summary}</p>
+          {project.fromGithub && <p className="mt-3 font-mono text-xs text-fg-subtle">{t.fromGithub}</p>}
 
           {hasLinks && (
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">

@@ -25,6 +25,16 @@ Estado dos materiais em 06/10/2026.
 - [ ] Revisar as datas/certificações em "Formação" (vieram do portfólio anterior).
 - [ ] Atualizar o currículo em PDF quando houver nova versão (mesmo caminho em `public/documents/`).
 
+## Adicionar um projeto novo (automático)
+
+1. No repositório **público** do GitHub, clique na engrenagem ⚙ ao lado de **About**.
+2. Em **Website**, coloque o link do site publicado (se houver). Com link, o projeto ganha o selo "No ar" e o botão "Ver ao vivo".
+3. Em **Topics**, adicione `portfolio-site`. Para ele entrar também nos destaques da home, adicione `portfolio-destaque`.
+4. Escreva uma boa **descrição** no About: ela vira o resumo do projeto.
+5. Em até 1 hora o projeto aparece no site, sem novo deploy. Tópicos como `ai`, `games` ou `dashboard` definem a categoria; a linguagem e os demais tópicos viram as tecnologias.
+
+Para um estudo de caso completo (desafio, solução, contribuição, screenshot), o projeto pode ser "promovido" a curado em `src/content/projects-base.ts` e `src/content/<idioma>/projects.ts`. Opcional: `GITHUB_TOKEN` na Vercel (token de leitura de repositórios públicos) evita o limite de requisições da API do GitHub.
+
 ## Como editar
 
 - Textos de interface: `src/i18n/messages/pt-BR.json` e `en.json` (mesmas chaves).

@@ -1,10 +1,14 @@
 import "server-only";
+import { cacheLife } from "next/cache";
 import { contentByLocale } from "@/content";
-import { projectsBase } from "@/content/projects-base";
+import { highlightOrder, projectsBase } from "@/content/projects-base";
 import type { Locale } from "@/i18n/config";
+import { fetchShowcaseRepos, repoToProject } from "@/lib/github-showcase";
+import { mergeProjects, pickHighlights } from "../ordering";
 import type { Project } from "../types";
 
-export function getProjects(locale: Locale): Project[] {
+/** Projetos escritos à mão, com estudo de caso completo. */
+function getCuratedProjects(locale: Locale): Project[] {
   const copies = contentByLocale[locale].projects;
 
   return projectsBase.map((base) => {
@@ -25,14 +29,28 @@ export function getProjects(locale: Locale): Project[] {
   });
 }
 
-export function getProjectBySlug(locale: Locale, slug: string): Project | undefined {
-  return getProjects(locale).find((project) => project.slug === slug);
+/** Repositórios do GitHub com o tópico de vitrine, revalidados a cada hora. */
+async function getGithubProjects(): Promise<Project[]> {
+  "use cache";
+  cacheLife("hours");
+  const repos = await fetchShowcaseRepos();
+  return repos.map(repoToProject);
 }
 
-export function getFeaturedProjects(locale: Locale): Project[] {
-  return getProjects(locale).filter((project) => project.featured);
+/** Todos os projetos: curados + GitHub, com os que estão no ar primeiro. */
+export async function getProjects(locale: Locale): Promise<Project[]> {
+  return mergeProjects(getCuratedProjects(locale), await getGithubProjects(), highlightOrder);
 }
 
-export function getProjectSlugs(): string[] {
-  return projectsBase.map((project) => project.slug);
+export async function getProjectBySlug(locale: Locale, slug: string): Promise<Project | undefined> {
+  return (await getProjects(locale)).find((project) => project.slug === slug);
+}
+
+/** Os melhores projetos para a home, na ordem definida em highlightOrder. */
+export async function getFeaturedProjects(locale: Locale, limit = 6): Promise<Project[]> {
+  return pickHighlights(await getProjects(locale), highlightOrder, limit);
+}
+
+export async function getProjectSlugs(): Promise<string[]> {
+  return (await getProjects("pt-BR")).map((project) => project.slug);
 }

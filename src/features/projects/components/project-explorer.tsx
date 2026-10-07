@@ -16,6 +16,7 @@ export type ProjectExplorerLabels = {
   allCategories: string;
   allTechnologies: string;
   clearFilters: string;
+  liveOnly: string;
   resultsCount: string;
   emptyTitle: string;
   emptyText: string;
@@ -64,12 +65,12 @@ export function ProjectExplorer({ projects, technologies, categories, explorerLa
     debounce.current = setTimeout(() => navigate({ ...filters, q: value.trim() }, "replace"), 250);
   }
 
-  const hasFilters = Boolean(filters.q || filters.category || filters.tech);
+  const hasFilters = Boolean(filters.q || filters.category || filters.tech || filters.liveOnly);
 
   function clear() {
     clearTimeout(debounce.current);
     setQuery("");
-    navigate({ q: "", category: null, tech: null }, "push");
+    navigate({ q: "", category: null, tech: null, liveOnly: false }, "push");
   }
 
   return (
@@ -137,9 +138,21 @@ export function ProjectExplorer({ projects, technologies, categories, explorerLa
         </Button>
       </form>
 
-      <p id={ids.status} role="status" className="mt-6 text-sm text-fg-subtle">
-        {labels.resultsCount.replace("{count}", String(results.length))}
-      </p>
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+        <label className="inline-flex cursor-pointer items-center gap-2.5 rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium text-fg has-[:checked]:border-success/60 has-[:checked]:text-success">
+          <input
+            type="checkbox"
+            checked={filters.liveOnly}
+            onChange={(event) => navigate({ ...filters, q: query.trim(), liveOnly: event.target.checked }, "push")}
+            className="size-4 accent-[var(--success)]"
+          />
+          <span className="size-2 rounded-full bg-success" aria-hidden />
+          {labels.liveOnly}
+        </label>
+        <p id={ids.status} role="status" className="text-sm text-fg-subtle">
+          {labels.resultsCount.replace("{count}", String(results.length))}
+        </p>
+      </div>
 
       {results.length > 0 ? (
         <ProjectGrid projects={results} {...gridProps} className="mt-6" />

@@ -4,6 +4,8 @@ export type ProjectFilters = {
   q: string;
   category: ProjectCategory | null;
   tech: string | null;
+  /** Mostrar só os projetos com site no ar. */
+  liveOnly: boolean;
 };
 
 type ParamsReader = { get(name: string): string | null };
@@ -19,7 +21,9 @@ export function parseProjectFilters(params: ParamsReader, technologies: readonly
   const category = projectCategories.find((item) => item === rawCategory) ?? null;
   const tech = technologies.find((item) => item.toLowerCase() === rawTech?.toLowerCase()) ?? null;
 
-  return { q, category, tech };
+  const liveOnly = params.get("no-ar") === "1";
+
+  return { q, category, tech, liveOnly };
 }
 
 /** Serializa os filtros na query string, omitindo os vazios. */
@@ -28,6 +32,7 @@ export function serializeProjectFilters(filters: ProjectFilters): string {
   if (filters.q) params.set("q", filters.q);
   if (filters.category) params.set("categoria", filters.category);
   if (filters.tech) params.set("tecnologia", filters.tech);
+  if (filters.liveOnly) params.set("no-ar", "1");
   return params.toString();
 }
 
@@ -44,6 +49,7 @@ export function filterProjects(projects: readonly Project[], filters: ProjectFil
   return projects.filter((project) => {
     if (filters.category && project.category !== filters.category) return false;
     if (filters.tech && !project.technologies.includes(filters.tech)) return false;
+    if (filters.liveOnly && !(project.status === "live" && project.liveUrl)) return false;
     if (terms.length === 0) return true;
 
     const haystack = normalize([project.title, project.summary, ...project.technologies].join(" "));

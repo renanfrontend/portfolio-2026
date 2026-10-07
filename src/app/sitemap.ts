@@ -4,12 +4,12 @@ import { getServiceSlugs } from "@/features/services/server/queries";
 import { locales } from "@/i18n/config";
 import { absoluteUrl } from "@/lib/seo";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const paths = [
     "",
     "/sobre",
     "/projetos",
-    ...getProjectSlugs().map((slug) => `/projetos/${slug}`),
+    ...(await getProjectSlugs()).map((slug) => `/projetos/${slug}`),
     "/servicos",
     ...getServiceSlugs().map((slug) => `/servicos/${slug}`),
     "/contato",

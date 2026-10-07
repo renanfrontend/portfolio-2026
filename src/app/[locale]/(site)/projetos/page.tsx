@@ -25,7 +25,7 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]/proj
   if (!isLocale(locale)) notFound();
   const dict = getDictionary(locale);
   const t = dict.projects;
-  const projects = getProjects(locale);
+  const projects = await getProjects(locale);
   const basePath = localePath(locale, "/projetos");
   const cardLabels = getProjectCardLabels(dict);
 
@@ -49,6 +49,7 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]/proj
               allCategories: t.allCategories,
               allTechnologies: t.allTechnologies,
               clearFilters: t.clearFilters,
+              liveOnly: t.liveOnly,
               resultsCount: t.resultsCount,
               emptyTitle: t.emptyTitle,
               emptyText: t.emptyText,

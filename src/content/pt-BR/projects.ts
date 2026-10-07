@@ -50,6 +50,24 @@ export const projectsCopy: Record<string, ProjectCopy> = {
     contribution: "Projeto individual de estudo: interface, integração com a API do Gemini e organização dos módulos.",
     outcomes: ["Demonstração publicada na Vercel.", "Upload de PDF, Word, Excel e texto para consulta em linguagem natural."],
   },
+  "fnaf-web": {
+    title: "Five Nights at Freddy's Web",
+    summary:
+      "Remaster no navegador de um projeto de fã do clássico de terror, com motor de jogo novo, testes automatizados e deploy contínuo.",
+    coverAlt: "Menu do Five Nights at Freddy's Web com Freddy, Bonnie, Chica e Foxy e o botão Começar.",
+    galleryAlt: [],
+    challenge:
+      "O projeto de fã original (Wendell de Sousa, 2021) não rodava mais com o Node atual e tinha falhas de estado: timers que nunca eram limpos, animatrônicos que ignoravam o que acontecia e telas que não atualizavam.",
+    solution:
+      "Migração para Vite 6 e React 18, reducers do Redux corrigidos e um motor de jogo novo baseado em ticks, sem setTimeout, que pode ser pausado, reiniciado e testado de forma determinística. O comportamento ficou mais fiel ao original: rotas aleatórias, dificuldade crescente, blecaute em três fases.",
+    contribution:
+      "Remaster individual: diagnóstico e correção dos bugs, reescrita do motor, 20 testes automatizados com Vitest, acessibilidade (teclado, aria-label, movimento reduzido) e deploy automático no GitHub Pages. Five Nights at Freddy's © Scott Cawthon; projeto de fã, sem fins lucrativos.",
+    outcomes: [
+      "Jogo publicado no GitHub Pages, com deploy a cada push.",
+      "Motor testável com 20 testes automatizados.",
+      "Pausa automática ao trocar de aba, progresso salvo e atalhos de teclado.",
+    ],
+  },
   "mwm-portal": {
     title: "MWM Portal",
     summary:
@@ -101,6 +119,20 @@ export const projectsCopy: Record<string, ProjectCopy> = {
       "Landing page responsiva com tema claro e escuro, galeria da estrutura, blog com páginas de artigo e compartilhamento, formulário de contato, banner de consentimento de cookies, sitemap e metadados Open Graph.",
     contribution: "Desenvolvimento do site completo, do layout à publicação.",
     outcomes: ["Site publicado no GitHub Pages.", "Sitemap, robots e Open Graph configurados para busca e compartilhamento."],
+  },
+  "helios-lab": {
+    title: "HELIOS Lab",
+    summary:
+      "Protótipo jogável de suspense e terror em câmera fixa, em que os puzzles são sistemas físicos reais simulados no navegador.",
+    coverAlt: "Cartão do repositório HELIOS Lab no GitHub.",
+    galleryAlt: [],
+    challenge:
+      "Criar puzzles que dependem de física de verdade, como um pêndulo duplo caótico e convecção de fluidos, sem engine de jogo e rodando bem no navegador.",
+    solution:
+      "Vite e TypeScript estrito sem dependências de execução: renderer próprio em Canvas 2D pseudo-3D, áudio 100% procedural com Web Audio e integradores numéricos (Runge-Kutta 4) isolados em uma camada de domínio pura, também usada em scripts de calibragem.",
+    contribution:
+      "Projeto individual de estudo: arquitetura em camadas, simulações físicas, renderer, áudio e scripts de playtest automatizados. O build final é um único arquivo HTML.",
+    outcomes: ["Três sistemas físicos jogáveis: pêndulo duplo, centrífuga e placa de Galton.", "Domínio de física testável sem DOM nem Canvas."],
   },
   gascontrol: {
     title: "GasControl",

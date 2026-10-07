@@ -47,6 +47,19 @@ export const projectsBase: ProjectBase[] = [
     liveUrl: "https://gemini-beyond-prompts.vercel.app",
   },
   {
+    id: "fnaf-web",
+    slug: "fnaf-web",
+    category: "games",
+    technologies: ["React", "Vite", "Redux", "JavaScript", "Vitest", "GitHub Actions"],
+    kind: "personal",
+    status: "live",
+    featured: true,
+    cover: { src: "/images/projects/fnaf.png", width: 1440, height: 900 },
+    gallery: [],
+    repositoryUrl: github("fnaf-web"),
+    liveUrl: "https://renanfrontend.github.io/fnaf-web/",
+  },
+  {
     id: "mwm-portal",
     slug: "mwm-portal",
     category: "dashboard",
@@ -58,11 +71,11 @@ export const projectsBase: ProjectBase[] = [
   {
     id: "manor-escape",
     slug: "manor-escape",
-    category: "web",
+    category: "games",
     technologies: ["React", "TypeScript", "Three.js", "React Three Fiber", "XState", "Zustand", "Vitest", "Playwright"],
     kind: "personal",
     status: "live",
-    featured: false,
+    featured: true,
     cover: { src: "/images/projects/manor.png", width: 1440, height: 900 },
     gallery: [],
     repositoryUrl: github("manor-escape"),
@@ -75,7 +88,7 @@ export const projectsBase: ProjectBase[] = [
     technologies: ["React", "TypeScript", "Vite", "Material UI", "Node.js", "Express"],
     kind: "personal",
     status: "live",
-    featured: false,
+    featured: true,
     cover: { src: "/images/projects/escudo.png", width: 1440, height: 900 },
     gallery: [],
     repositoryUrl: github("escudo-cidadao"),
@@ -95,6 +108,18 @@ export const projectsBase: ProjectBase[] = [
     liveUrl: "https://renanfrontend.github.io/aster-ct/",
   },
   {
+    id: "helios-lab",
+    slug: "helios-lab",
+    category: "games",
+    technologies: ["TypeScript", "Vite", "Canvas 2D", "Web Audio API"],
+    kind: "personal",
+    status: "in-progress",
+    featured: false,
+    cover: { src: "https://opengraph.githubassets.com/portfolio/renanfrontend/helios-lab", width: 1200, height: 600 },
+    gallery: [],
+    repositoryUrl: github("helios-lab"),
+  },
+  {
     id: "gascontrol",
     slug: "gascontrol",
     category: "dashboard",
@@ -107,3 +132,9 @@ export const projectsBase: ProjectBase[] = [
     repositoryUrl: github("gascontrol-frontend"),
   },
 ];
+
+/**
+ * Ordem dos destaques na home: os melhores projetos com site no ar.
+ * Projetos do GitHub com o tópico "portfolio-destaque" entram depois destes.
+ */
+export const highlightOrder = ["visionstock-ai", "logiflow-3d", "fnaf-web", "manor-escape", "gemini-beyond-prompts", "escudo-cidadao"];

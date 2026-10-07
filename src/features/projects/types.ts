@@ -1,4 +1,4 @@
-export const projectCategories = ["web", "dashboard", "automation", "ai"] as const;
+export const projectCategories = ["web", "dashboard", "automation", "ai", "games"] as const;
 export type ProjectCategory = (typeof projectCategories)[number];
 
 export type ProjectKind = "personal" | "professional" | "demo";
@@ -23,6 +23,8 @@ export type ProjectBase = {
   featured: boolean;
   cover?: Omit<ProjectImage, "alt">;
   gallery: Omit<ProjectImage, "alt">[];
+  /** Data da última atualização (AAAA-MM-DD), usada para ordenar. */
+  updatedAt?: string;
   repositoryUrl?: string;
   liveUrl?: string;
 };
@@ -44,8 +46,11 @@ export type Project = Omit<ProjectBase, "cover" | "gallery"> & {
   summary: string;
   cover?: ProjectImage;
   gallery: ProjectImage[];
-  challenge: string;
-  solution: string;
-  contribution: string;
+  /** Ausentes nos projetos importados automaticamente do GitHub. */
+  challenge?: string;
+  solution?: string;
+  contribution?: string;
   outcomes: string[];
+  /** Verdadeiro quando o projeto veio do GitHub (tópico portfolio-site), sem texto curado. */
+  fromGithub?: boolean;
 };

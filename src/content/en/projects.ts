@@ -49,6 +49,23 @@ export const projectsCopy: Record<string, ProjectCopy> = {
     contribution: "Solo study project: interface, Gemini API integration and module structure.",
     outcomes: ["Demo published on Vercel.", "Upload PDF, Word, Excel and text files and query them in natural language."],
   },
+  "fnaf-web": {
+    title: "Five Nights at Freddy's Web",
+    summary: "Browser remaster of a fan project of the horror classic, with a new game engine, automated tests and continuous deployment.",
+    coverAlt: "Five Nights at Freddy's Web menu showing Freddy, Bonnie, Chica and Foxy and the Start button.",
+    galleryAlt: [],
+    challenge:
+      "The original fan project (Wendell de Sousa, 2021) no longer ran on current Node and had state bugs: timers that were never cleared, animatronics ignoring what happened and screens that did not update.",
+    solution:
+      "Migration to Vite 6 and React 18, fixed Redux reducers and a new tick-based game engine with no setTimeout that can be paused, restarted and tested deterministically. Behavior is closer to the original: random routes, rising difficulty and a three-phase blackout.",
+    contribution:
+      "Solo remaster: bug diagnosis and fixes, engine rewrite, 20 automated tests with Vitest, accessibility (keyboard, aria-label, reduced motion) and automatic deployment to GitHub Pages. Five Nights at Freddy's © Scott Cawthon; non-profit fan project.",
+    outcomes: [
+      "Game published on GitHub Pages, deployed on every push.",
+      "Testable engine with 20 automated tests.",
+      "Auto-pause when switching tabs, saved progress and keyboard shortcuts.",
+    ],
+  },
   "mwm-portal": {
     title: "MWM Portal",
     summary: "Frontend for corporate and logistics systems: operations dashboards, gate management and cooperative member data.",
@@ -97,6 +114,19 @@ export const projectsCopy: Record<string, ProjectCopy> = {
       "A responsive landing page with light and dark themes, a gallery of the facilities, a blog with article pages and sharing, a contact form, a cookie consent banner, sitemap and Open Graph metadata.",
     contribution: "Built the complete website, from layout to deployment.",
     outcomes: ["Website published on GitHub Pages.", "Sitemap, robots and Open Graph configured for search and sharing."],
+  },
+  "helios-lab": {
+    title: "HELIOS Lab",
+    summary: "Playable fixed-camera suspense and horror prototype where the puzzles are real physical systems simulated in the browser.",
+    coverAlt: "HELIOS Lab repository card on GitHub.",
+    galleryAlt: [],
+    challenge:
+      "Build puzzles that depend on real physics, such as a chaotic double pendulum and fluid convection, with no game engine and running smoothly in the browser.",
+    solution:
+      "Vite and strict TypeScript with no runtime dependencies: a custom pseudo-3D Canvas 2D renderer, fully procedural Web Audio sound and numerical integrators (Runge-Kutta 4) isolated in a pure domain layer, also used by calibration scripts.",
+    contribution:
+      "Solo study project: layered architecture, physics simulations, renderer, audio and automated playtest scripts. The final build is a single HTML file.",
+    outcomes: ["Three playable physical systems: double pendulum, centrifuge and Galton board.", "Physics domain testable without DOM or Canvas."],
   },
   gascontrol: {
     title: "GasControl",

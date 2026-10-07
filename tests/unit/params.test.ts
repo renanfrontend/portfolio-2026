@@ -37,11 +37,12 @@ describe("filtros de projetos", () => {
 
   it("lê filtros válidos e ignora valores desconhecidos", () => {
     const params = new URLSearchParams("q=%20react%20&categoria=ai&tecnologia=three.js");
-    expect(parseProjectFilters(params, techs)).toEqual({ q: "react", category: "ai", tech: "Three.js" });
-    expect(parseProjectFilters(new URLSearchParams("categoria=games&tecnologia=COBOL"), techs)).toEqual({
+    expect(parseProjectFilters(params, techs)).toEqual({ q: "react", category: "ai", tech: "Three.js", liveOnly: false });
+    expect(parseProjectFilters(new URLSearchParams("categoria=musica&tecnologia=COBOL"), techs)).toEqual({
       q: "",
       category: null,
       tech: null,
+      liveOnly: false,
     });
   });
 
@@ -50,15 +51,23 @@ describe("filtros de projetos", () => {
   });
 
   it("filtra por texto sem diferenciar acentos, por categoria e por tecnologia", () => {
-    expect(filterProjects(projects, { q: "catalogo", category: null, tech: null }).map((p) => p.slug)).toEqual(["vision"]);
-    expect(filterProjects(projects, { q: "", category: "dashboard", tech: null }).map((p) => p.slug)).toEqual(["logiflow"]);
-    expect(filterProjects(projects, { q: "", category: null, tech: "Zod" }).map((p) => p.slug)).toEqual(["vision"]);
-    expect(filterProjects(projects, { q: "", category: "ai", tech: "Three.js" })).toEqual([]);
+    expect(filterProjects(projects, { q: "catalogo", category: null, tech: null, liveOnly: false }).map((p) => p.slug)).toEqual(["vision"]);
+    expect(filterProjects(projects, { q: "", category: "dashboard", tech: null, liveOnly: false }).map((p) => p.slug)).toEqual(["logiflow"]);
+    expect(filterProjects(projects, { q: "", category: null, tech: "Zod", liveOnly: false }).map((p) => p.slug)).toEqual(["vision"]);
+    expect(filterProjects(projects, { q: "", category: "ai", tech: "Three.js", liveOnly: false })).toEqual([]);
   });
 
   it("serializa apenas filtros preenchidos", () => {
-    expect(serializeProjectFilters({ q: "", category: null, tech: null })).toBe("");
-    expect(serializeProjectFilters({ q: "3d", category: "web", tech: "Next.js" })).toBe("q=3d&categoria=web&tecnologia=Next.js");
+    expect(serializeProjectFilters({ q: "", category: null, tech: null, liveOnly: false })).toBe("");
+    expect(serializeProjectFilters({ q: "3d", category: "web", tech: "Next.js", liveOnly: false })).toBe("q=3d&categoria=web&tecnologia=Next.js");
+  });
+
+  it("filtra só os projetos no ar e guarda isso na URL", () => {
+    const withLive = [...projects, project({ slug: "live", status: "live", liveUrl: "https://example.com" })];
+    const filters = parseProjectFilters(new URLSearchParams("no-ar=1"), techs);
+    expect(filters.liveOnly).toBe(true);
+    expect(filterProjects(withLive, filters).map((p) => p.slug)).toEqual(["live"]);
+    expect(serializeProjectFilters(filters)).toBe("no-ar=1");
   });
 
   it("lista só as categorias que têm projetos", () => {

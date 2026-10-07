@@ -53,7 +53,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <HeroSection locale={locale} dict={dict} />
       <FactsStrip dict={dict} />
       <ExpertiseSection dict={dict} areas={profile.expertise} />
-      <FeaturedProjectsSection locale={locale} dict={dict} projects={getFeaturedProjects(locale)} />
+      <FeaturedProjectsSection locale={locale} dict={dict} projects={await getFeaturedProjects(locale)} />
       <AiSection locale={locale} dict={dict} />
       <ServicesOverviewSection locale={locale} dict={dict} services={getServices(locale)} />
       <WorkProcessSection dict={dict} steps={profile.workProcess} />

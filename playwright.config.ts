@@ -29,6 +29,6 @@ export default defineConfig({
     url: `http://localhost:${PORT}/pt-BR`,
     reuseExistingServer: false,
     timeout: 120_000,
-    env: { EMAIL_PROVIDER: "test", NEXT_PUBLIC_SITE_URL: "", NEXT_DIST_DIR: ".next-check" },
+    env: { EMAIL_PROVIDER: "test", NEXT_PUBLIC_SITE_URL: "", NEXT_DIST_DIR: ".next-check", GITHUB_SHOWCASE: "off" },
   },
 });
