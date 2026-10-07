@@ -19,3 +19,17 @@ export function formatWhatsapp(number: string): string {
   const match = number.match(/^(\d{2})(\d{2})(\d{4,5})(\d{4})$/);
   return match ? `+${match[1]} (${match[2]}) ${match[3]}-${match[4]}` : `+${number}`;
 }
+
+/**
+ * Link de agendamento do kickoff (Cal.com, Calendly...), definido em NEXT_PUBLIC_SCHEDULING_URL.
+ * Só aceita https; sem ele, o agendamento é combinado pelo WhatsApp.
+ */
+export function getSchedulingUrl(): string | null {
+  const value = process.env.NEXT_PUBLIC_SCHEDULING_URL?.trim();
+  if (!value) return null;
+  try {
+    return new URL(value).protocol === "https:" ? value : null;
+  } catch {
+    return null;
+  }
+}

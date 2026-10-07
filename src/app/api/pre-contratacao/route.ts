@@ -1,3 +1,4 @@
+import { getPaymentGateway } from "@/features/packages/server/payments";
 import { submitPreHire } from "@/features/packages/server/submit-pre-hire";
 import { getEmailAdapter } from "@/lib/server/email";
 import { getServerEnv } from "@/lib/server/env";
@@ -20,6 +21,8 @@ export async function POST(request: Request) {
     email: getEmailAdapter(env),
     limiter: getRateLimiter(env),
     to: env.contactTo,
+    payments: getPaymentGateway(env),
+    appUrl: env.NEXT_PUBLIC_APP_URL ?? new URL(request.url).origin,
   });
   return Response.json(result.body, { status: result.status, headers: { "Cache-Control": "no-store" } });
 }

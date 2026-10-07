@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/layout/container";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
@@ -8,6 +9,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { ButtonLink } from "@/components/ui/button";
 import { PackageCard } from "@/features/packages/components/package-card";
 import { getWhatsappNumber } from "@/config/contact";
+import { CheckoutCanceledNotice } from "@/features/packages/components/checkout-canceled-notice";
 import { HireDialogProvider } from "@/features/packages/components/hire-dialog";
 import { formatPrice, getPackages } from "@/features/packages/packages";
 import { ServiceFaq } from "@/features/services/components/service-faq";
@@ -83,6 +85,9 @@ export default async function HirePage({ params }: PageProps<"/[locale]/contrata
       />
 
       <Container className="py-16 sm:py-20">
+        <Suspense>
+          <CheckoutCanceledNotice title={t.canceled.title} text={t.canceled.text} />
+        </Suspense>
         <HireDialogProvider
           packages={packages.map((item) => ({
             id: item.id,

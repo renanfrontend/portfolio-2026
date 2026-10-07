@@ -15,6 +15,8 @@ export default defineConfig({
   fullyParallel: true,
   retries: process.env.CI ? 1 : 0,
   reporter: [["list"]],
+  // Com a suíte inteira em paralelo, navegações num build de produção local passam de 5 s.
+  expect: { timeout: 15_000 },
   use: {
     baseURL: `http://localhost:${PORT}`,
     channel,

@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { createContext, use, useCallback, useId, useMemo, useRef, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
+import { createContext, use, useCallback, useEffect, useId, useMemo, useRef, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
 import { CheckIcon, CloseIcon, WhatsappIcon } from "@/components/shared/icons";
 import { Button, buttonClasses } from "@/components/ui/button";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { trackEvent, trackEventThen } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 import { whatsappHref } from "@/lib/links";
 import { formatBrazilPhone } from "@/lib/phone";
@@ -37,6 +38,7 @@ type Values = { name: string; email: string; whatsapp: string; message: string; 
 type Status =
   | { kind: "form" }
   | { kind: "submitting" }
+  | { kind: "redirecting" }
   | { kind: "success"; checkout: CheckoutPayload }
   | { kind: "error"; reason: "rateLimited" | "unavailable" | "network" | "server" | "summary" };
 
@@ -67,16 +69,31 @@ export function HireDialogProvider({
   const [status, setStatus] = useState<Status>({ kind: "form" });
   const schema = useMemo(() => createPreHireSchema(packages.map((item) => item.id)), [packages]);
   const selected = packages.find((item) => item.id === packageId) ?? null;
+  const busy = status.kind === "submitting" || status.kind === "redirecting";
   const ids = { title: useId(), base: useId() };
   const id = (field: string) => `${ids.base}-${field}`;
 
-  const open = useCallback((nextId: string) => {
-    setPackageId(nextId);
+  const open = useCallback(
+    (nextId: string) => {
+      setPackageId(nextId);
+      const item = packages.find((candidate) => candidate.id === nextId);
+      trackEvent("open_service_modal", { package_id: nextId, package_name: item?.name });
     setErrors({});
     // Mantém o que já foi digitado se a pessoa reabrir o modal; só não interrompe um envio em andamento.
-    setStatus((current) => (current.kind === "submitting" ? current : { kind: "form" }));
-    dialogRef.current?.showModal();
-    document.documentElement.style.overflow = "hidden";
+      setStatus((current) => (current.kind === "submitting" ? current : { kind: "form" }));
+      dialogRef.current?.showModal();
+      document.documentElement.style.overflow = "hidden";
+    },
+    [packages],
+  );
+
+  // Voltando do Stripe pelo botão "voltar", o navegador pode restaurar a página com o spinner ativo.
+  useEffect(() => {
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) setStatus((current) => (current.kind === "redirecting" ? { kind: "form" } : current));
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
   }, []);
 
   const close = useCallback(() => dialogRef.current?.close(), []);
@@ -88,7 +105,7 @@ export function HireDialogProvider({
 
   // Clique no fundo escurecido fecha o modal.
   function onBackdropClick(event: MouseEvent<HTMLDialogElement>) {
-    if (event.target === dialogRef.current && status.kind !== "submitting") close();
+    if (event.target === dialogRef.current && !busy) close();
   }
 
   function update(field: keyof Values, value: string) {
@@ -98,7 +115,7 @@ export function HireDialogProvider({
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!selected || status.kind === "submitting") return;
+    if (!selected || busy) return;
 
     const payload = { ...values, packageId: selected.id, locale };
     const parsed = schema.safeParse(payload);
@@ -126,18 +143,32 @@ export function HireDialogProvider({
     }
 
     const body = (await response.json().catch(() => null)) as
-      | { ok: true; checkout: CheckoutPayload }
+      | { ok: true; checkout: CheckoutPayload; checkoutUrl: string | null }
       | { ok: false; error: string; fieldErrors?: PreHireFieldErrors }
       | null;
 
     if (response.ok && body?.ok) {
-      // Pedido guardado para a etapa de pagamento (próximo passo do fluxo).
+      const { checkout, checkoutUrl } = body;
+      // Pedido guardado no navegador para a página de confirmação.
       try {
-        sessionStorage.setItem(CHECKOUT_STORAGE_KEY, JSON.stringify(body.checkout));
+        sessionStorage.setItem(CHECKOUT_STORAGE_KEY, JSON.stringify(checkout));
       } catch {
-        // Sem armazenamento: o pedido já foi registrado por e-mail no servidor.
+        // Sem armazenamento: o pedido já está registrado no servidor.
       }
-      setStatus({ kind: "success", checkout: body.checkout });
+      const value = checkout.package.amountInCents === null ? undefined : checkout.package.amountInCents / 100;
+      const item = { item_id: checkout.package.id, item_name: checkout.package.name, price: value, quantity: 1 };
+      trackEvent("submit_lead_form", { package_id: checkout.package.id, value, currency: "BRL" });
+
+      if (checkoutUrl) {
+        // Página segura do Stripe: o spinner continua até o navegador sair do site.
+        setStatus({ kind: "redirecting" });
+        trackEventThen("begin_checkout", { transaction_id: checkout.orderId, value, currency: "BRL", items: [item] }, () =>
+          window.location.assign(checkoutUrl),
+        );
+        return;
+      }
+      // Sem pagamento online agora: pedido registrado e conversa pelo WhatsApp.
+      setStatus({ kind: "success", checkout });
       return;
     }
     if (body && !body.ok && body.error === "validation" && body.fieldErrors) {
@@ -148,7 +179,7 @@ export function HireDialogProvider({
     setStatus({ kind: "error", reason: response.status === 429 ? "rateLimited" : response.status === 503 ? "unavailable" : "server" });
   }
 
-  const submitting = status.kind === "submitting";
+  const submitting = busy;
   const inputClass = (invalid: boolean) =>
     cn(
       "h-11 w-full rounded-xl border bg-bg px-3 text-[0.95rem] text-fg placeholder:text-fg-subtle focus-visible:border-accent",
@@ -317,9 +348,16 @@ export function HireDialogProvider({
                       <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
                     </svg>
                   )}
-                  {submitting ? labels.submitting : labels.submit}
+                  {status.kind === "redirecting" ? labels.redirecting : submitting ? labels.submitting : labels.submit}
                 </Button>
-                <p className="mt-3 text-center text-xs text-fg-subtle">
+                <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-fg-muted">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                    <rect x="5" y="11" width="14" height="10" rx="2" />
+                    <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                  </svg>
+                  {labels.secureNotice}
+                </p>
+                <p className="mt-2 text-center text-xs text-fg-subtle">
                   {labels.privacyNotice}{" "}
                   <Link href={privacyHref} className="underline underline-offset-4 hover:text-fg">
                     {labels.privacyLink}

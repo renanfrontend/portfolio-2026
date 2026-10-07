@@ -434,10 +434,47 @@
         "server": "An unexpected error occurred. Your data was kept; try again."
       },
       "successTitle": "Order {order} received",
-      "successText": "Your details are confirmed. Online payment is the next step and is still being set up: meanwhile, I will send you the payment link or proposal via the WhatsApp or email you provided.",
+      "successText": "Your details were saved, but online payment could not open right now. Message me on WhatsApp to get the payment link, or try again in a few minutes.",
       "successWhatsapp": "Talk about the order on WhatsApp",
       "successWhatsappMessage": "Hi Renan! I just submitted a hire request for the *{package}* package on your website (order {order}).",
-      "done": "Done"
+      "done": "Done",
+      "redirecting": "Opening secure checkout…",
+      "secureNotice": "Secure payment processed by Stripe."
+    },
+    "canceled": {
+      "title": "Payment not completed",
+      "text": "You were not charged. Choose the package again to retry, or message me on WhatsApp."
+    },
+    "success": {
+      "metaTitle": "Order confirmation",
+      "eyebrow": "Hiring",
+      "paidBadge": "Payment confirmed",
+      "pendingBadge": "Awaiting payment",
+      "paidTitle": "All set, {name}!",
+      "pendingTitle": "Order received, {name}",
+      "paidText": "Thank you for your trust. Your package is secured and the next step is our kickoff meeting.",
+      "pendingText": "Your Pix or boleto was generated. Once the payment clears you will get a confirmation email: Pix usually takes seconds and boleto up to 3 business days.",
+      "order": "Order",
+      "package": "Package",
+      "amount": "Amount",
+      "perMonth": "/month",
+      "stepsTitle": "Next steps",
+      "steps": [
+        "Your order was registered successfully.",
+        "We sent the details to your email.",
+        "Schedule our technical alignment meeting (Kickoff)."
+      ],
+      "pendingEmailStep": "You will get a confirmation email once the payment clears.",
+      "schedule": "Schedule kickoff",
+      "scheduleWhatsapp": "Schedule kickoff on WhatsApp",
+      "whatsapp": "Talk on WhatsApp",
+      "whatsappMessage": "Hi Renan! I just hired the *{package}* package on your website (order {order}). Shall we schedule the kickoff?",
+      "home": "Back to home page",
+      "notFoundTitle": "We could not find this order",
+      "notFoundText": "The link may be incomplete or the payment was not completed. If you paid, the confirmation arrives by email; if in doubt, message me.",
+      "backToPackages": "See packages",
+      "loading": "Confirming payment…",
+      "notFoundWhatsappMessage": "Hi Renan! I tried to hire a package on your website and could not find my order confirmation. Can you help?"
     }
   }
 }

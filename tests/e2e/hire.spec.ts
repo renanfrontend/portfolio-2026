@@ -79,6 +79,53 @@ test.describe("contratação de serviços", () => {
     await expect(dialog).toBeHidden();
   });
 
+  test("com o checkout criado, o modal redireciona para o pagamento", async ({ page }) => {
+    await page.route("**/api/pre-contratacao", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          ok: true,
+          // Simula a URL do Stripe com uma página local (o Stripe real não roda nos testes).
+          checkoutUrl: "/pt-BR/contratar/sucesso?session_id=cs_test_simulado123456&order_id=RA-TESTE1-ABC",
+          checkout: {
+            orderId: "RA-TESTE1-ABC",
+            createdAt: "2026-10-07T12:00:00.000Z",
+            locale: "pt-BR",
+            package: { id: "diagnostico-tecnico", name: "Diagnóstico Técnico", amountInCents: 190000, currency: "BRL", priceFrom: true, recurring: null, installments: true },
+            customer: { name: "Cliente de Teste", email: "cliente@example.com", phone: "+5511987654321" },
+            message: "Quero melhorar a performance do meu site.",
+          },
+        }),
+      }),
+    );
+    await page.goto("/pt-BR/contratar", { waitUntil: "networkidle" });
+    await page.getByRole("link", { name: /Contratar Serviço\s*:\s*Diagnóstico Técnico/ }).click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog.getByText("Pagamento seguro processado pelo Stripe.")).toBeVisible();
+    await dialog.getByLabel("Nome completo").fill("Cliente de Teste");
+    await dialog.getByLabel("E-mail").fill("cliente@example.com");
+    await dialog.getByLabel("WhatsApp").fill("11987654321");
+    await dialog.getByLabel(/Conte brevemente/).fill("Quero melhorar a performance do meu site.");
+    await dialog.getByRole("button", { name: "Avançar para pagamento" }).click();
+    await expect(page).toHaveURL(/\/pt-BR\/contratar\/sucesso\?session_id=cs_test_simulado123456/);
+    // Sem Stripe configurado no teste, a sessão não é confirmada: a página não inventa um pagamento.
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Não encontramos este pedido");
+  });
+
+  test("a confirmação fica fora do Google e o retorno cancelado avisa a pessoa", async ({ page, request }) => {
+    await page.goto("/pt-BR/contratar/sucesso");
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+    await expect(page.getByRole("link", { name: "Ver pacotes" })).toBeVisible();
+
+    await page.goto("/pt-BR/contratar?cancelado=1");
+    await expect(page.getByText("Pagamento não concluído")).toBeVisible();
+
+    // Webhook sem segredo configurado não processa nada.
+    const webhook = await request.post("/api/webhooks/stripe", { data: "{}", headers: { "stripe-signature": "t=1,v1=x" } });
+    expect(webhook.status()).toBe(503);
+  });
+
   test("a página de serviços leva aos pacotes e /contratar sem idioma redireciona", async ({ page }) => {
     await page.goto("/pt-BR/servicos", { waitUntil: "networkidle" });
     await page.getByRole("link", { name: "Ver pacotes" }).click();

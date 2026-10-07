@@ -434,10 +434,47 @@
         "server": "Ocorreu um erro inesperado. Seus dados foram mantidos; tente novamente."
       },
       "successTitle": "Pedido {order} recebido",
-      "successText": "Seus dados foram confirmados. O pagamento online é o próximo passo e ainda está sendo preparado: enquanto isso, envio o link de pagamento ou a proposta pelo WhatsApp ou e-mail informado.",
+      "successText": "Seus dados foram registrados, mas o pagamento online não abriu agora. Fale comigo no WhatsApp para receber o link de pagamento, ou tente de novo em alguns minutos.",
       "successWhatsapp": "Falar sobre o pedido no WhatsApp",
       "successWhatsappMessage": "Olá, Renan! Acabei de fazer a pré-contratação do pacote *{package}* no seu site (pedido {order}).",
-      "done": "Concluir"
+      "done": "Concluir",
+      "redirecting": "Abrindo pagamento seguro…",
+      "secureNotice": "Pagamento seguro processado pelo Stripe."
+    },
+    "canceled": {
+      "title": "Pagamento não concluído",
+      "text": "Nenhuma cobrança foi feita. Escolha o pacote de novo para tentar outra vez, ou fale comigo pelo WhatsApp."
+    },
+    "success": {
+      "metaTitle": "Confirmação do pedido",
+      "eyebrow": "Contratação",
+      "paidBadge": "Pagamento confirmado",
+      "pendingBadge": "Aguardando pagamento",
+      "paidTitle": "Tudo certo, {name}!",
+      "pendingTitle": "Pedido registrado, {name}",
+      "paidText": "Obrigado pela confiança. Seu pacote está garantido e o próximo passo é a nossa reunião de kickoff.",
+      "pendingText": "Seu Pix ou boleto foi gerado. Assim que o pagamento compensar, você recebe a confirmação por e-mail: o Pix costuma levar segundos e o boleto, até 3 dias úteis.",
+      "order": "Pedido",
+      "package": "Pacote",
+      "amount": "Valor",
+      "perMonth": "/mês",
+      "stepsTitle": "Próximos passos",
+      "steps": [
+        "Seu pedido foi registrado com sucesso.",
+        "Enviamos os detalhes para o seu e-mail.",
+        "Agende nossa reunião de alinhamento técnico (Kickoff)."
+      ],
+      "pendingEmailStep": "Você recebe a confirmação no seu e-mail quando o pagamento compensar.",
+      "schedule": "Agendar kickoff",
+      "scheduleWhatsapp": "Agendar kickoff pelo WhatsApp",
+      "whatsapp": "Falar via WhatsApp",
+      "whatsappMessage": "Olá, Renan! Acabei de contratar o pacote *{package}* no seu site (pedido {order}). Vamos agendar o kickoff?",
+      "home": "Voltar para a página inicial",
+      "notFoundTitle": "Não encontramos este pedido",
+      "notFoundText": "O link pode estar incompleto ou o pagamento não foi concluído. Se você pagou, a confirmação chega por e-mail; em caso de dúvida, fale comigo.",
+      "backToPackages": "Ver pacotes",
+      "loading": "Confirmando o pagamento…",
+      "notFoundWhatsappMessage": "Olá, Renan! Tentei contratar um pacote pelo seu site e não encontrei a confirmação do pedido. Pode me ajudar?"
     }
   }
 }

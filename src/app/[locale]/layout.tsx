@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { notFound } from "next/navigation";
+import { GoogleAnalytics } from "@/components/shared/google-analytics";
 import { siteConfig } from "@/config/site";
 import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -55,6 +56,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
       </head>
       <body>
         <AppProviders>{children}</AppProviders>
+        <GoogleAnalytics />
       </body>
     </html>
   );

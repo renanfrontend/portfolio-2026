@@ -4,8 +4,8 @@ export type PrivacySection = { title: string; paragraphs: string[] };
 
 /**
  * Política alinhada ao comportamento real do site: formulário enviado por e-mail,
- * limitação de requisições por hash de IP e preferência de tema no navegador.
- * Atualize este texto se o site passar a usar analytics, cookies ou banco de dados.
+ * limitação de requisições por hash de IP, pagamentos pelo Stripe, Google Analytics 4
+ * e preferência de tema no navegador. Atualize este texto quando esse comportamento mudar.
  */
 export const privacyPolicy: Record<Locale, PrivacySection[]> = {
   "pt-BR": [
@@ -27,13 +27,15 @@ export const privacyPolicy: Record<Locale, PrivacySection[]> = {
       title: "Como os dados são processados",
       paragraphs: [
         "O site não guarda as mensagens em banco de dados. O conteúdo do formulário é repassado a um provedor de envio de e-mail contratado para essa finalidade e entregue na caixa de entrada do responsável, onde fica pelo tempo necessário para a conversa.",
+        "Os pagamentos são feitos na página segura do Stripe (cartão, Pix ou boleto). Os dados do cartão são digitados diretamente no Stripe e nunca passam pelo site. O Stripe recebe o número do pedido, o nome, o e-mail, o WhatsApp e a descrição do projeto, para identificar a cobrança, e guarda o registro do pagamento conforme a política de privacidade dele. O site guarda apenas o status do pedido (pago ou pendente).",
         "Para evitar abuso, o servidor limita o número de envios por origem. O endereço IP é transformado em um código irreversível (hash) e mantido por até 10 minutos apenas para essa contagem. A hospedagem do site pode registrar dados técnicos de acesso, como IP e navegador, em seus próprios registros de segurança.",
       ],
     },
     {
       title: "Armazenamento no navegador",
       paragraphs: [
-        "O site guarda apenas a sua preferência de tema (escuro, claro ou do sistema) no armazenamento local do navegador. Não usamos cookies de rastreamento, ferramentas de analytics ou publicidade.",
+        "O site guarda a sua preferência de tema (escuro, claro ou do sistema) no armazenamento local do navegador e, durante uma contratação, o resumo do pedido até a confirmação.",
+        "Para medir visitas e contratações de forma agregada, usamos o Google Analytics 4, que grava cookies próprios (como _ga) no seu navegador. Os sinais do Google para publicidade e a personalização de anúncios ficam desligados, e nenhum dado de pagamento é enviado ao Analytics. Você pode bloquear esses cookies nas configurações do navegador sem prejudicar o uso do site. Não usamos ferramentas de publicidade.",
       ],
     },
     {
@@ -68,13 +70,15 @@ export const privacyPolicy: Record<Locale, PrivacySection[]> = {
       title: "How the data is processed",
       paragraphs: [
         "The website does not store messages in a database. The form content is passed to an email delivery provider engaged for this purpose and delivered to the owner's inbox, where it remains for as long as the conversation requires.",
+        "Payments happen on Stripe's secure page (card, Pix or boleto). Card details are typed directly into Stripe and never pass through this website. Stripe receives the order number, name, email, WhatsApp number and project description to identify the charge, and keeps the payment record under its own privacy policy. The website stores only the order status (paid or pending).",
         "To prevent abuse, the server limits the number of submissions per origin. The IP address is turned into an irreversible code (hash) and kept for up to 10 minutes only for this count. The hosting provider may record technical access data, such as IP and browser, in its own security logs.",
       ],
     },
     {
       title: "Browser storage",
       paragraphs: [
-        "The website only stores your theme preference (dark, light or system) in the browser's local storage. We do not use tracking cookies, analytics or advertising tools.",
+        "The website stores your theme preference (dark, light or system) in the browser's local storage and, during a hiring flow, the order summary until it is confirmed.",
+        "To measure visits and hires in aggregate, we use Google Analytics 4, which sets its own cookies (such as _ga) in your browser. Google signals for advertising and ad personalization are turned off, and no payment data is sent to Analytics. You can block these cookies in your browser settings without affecting the website. We do not use advertising tools.",
       ],
     },
     {

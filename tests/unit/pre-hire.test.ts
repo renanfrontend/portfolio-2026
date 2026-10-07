@@ -73,7 +73,13 @@ describe("pedido para o pagamento", () => {
 });
 
 describe("endpoint de pré-contratação", () => {
-  const deps = () => ({ email: createTestAdapter(), limiter: createMemoryRateLimiter(5, 600), to: "renan@example.com" });
+  const deps = () => ({
+    email: createTestAdapter(),
+    limiter: createMemoryRateLimiter(5, 600),
+    to: "renan@example.com",
+    payments: null,
+    appUrl: "https://example.com",
+  });
 
   it("responde 200 com o pedido e avisa o Renan por e-mail", async () => {
     const d = deps();
