@@ -12,7 +12,7 @@ export const privacyPolicy: Record<Locale, PrivacySection[]> = {
     {
       title: "Quem é o responsável",
       paragraphs: [
-        "Este site é mantido por Renan Augusto dos Santos, responsável pelo tratamento dos dados descritos aqui. Para qualquer assunto de privacidade, escreva para renan.gabba@gmail.com.",
+        "Este site é mantido por Renan Augusto dos Santos, responsável pelo tratamento dos dados descritos aqui. Para qualquer assunto de privacidade, escreva para contato@renanaugusto.com.br.",
       ],
     },
     {
@@ -38,7 +38,7 @@ export const privacyPolicy: Record<Locale, PrivacySection[]> = {
     {
       title: "Seus direitos",
       paragraphs: [
-        "Nos termos da Lei Geral de Proteção de Dados (LGPD), você pode pedir acesso, correção ou exclusão dos dados enviados, entre outros direitos. Basta escrever para renan.gabba@gmail.com.",
+        "Nos termos da Lei Geral de Proteção de Dados (LGPD), você pode pedir acesso, correção ou exclusão dos dados enviados, entre outros direitos. Basta escrever para contato@renanaugusto.com.br.",
       ],
     },
   ],
@@ -46,7 +46,7 @@ export const privacyPolicy: Record<Locale, PrivacySection[]> = {
     {
       title: "Who is responsible",
       paragraphs: [
-        "This website is maintained by Renan Augusto dos Santos, who is responsible for the processing described here. For any privacy matter, write to renan.gabba@gmail.com.",
+        "This website is maintained by Renan Augusto dos Santos, who is responsible for the processing described here. For any privacy matter, write to contato@renanaugusto.com.br.",
       ],
     },
     {
@@ -72,7 +72,7 @@ export const privacyPolicy: Record<Locale, PrivacySection[]> = {
     {
       title: "Your rights",
       paragraphs: [
-        "Under Brazil's General Data Protection Law (LGPD), you can request access to, correction of or deletion of the data you sent, among other rights. Just write to renan.gabba@gmail.com.",
+        "Under Brazil's General Data Protection Law (LGPD), you can request access to, correction of or deletion of the data you sent, among other rights. Just write to contato@renanaugusto.com.br.",
       ],
     },
   ],

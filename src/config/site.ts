@@ -18,7 +18,8 @@ export const siteConfig = {
   name: "Renan Augusto",
   fullName: "Renan Augusto dos Santos",
   url: resolveSiteUrl(),
-  email: "renan.gabba@gmail.com",
+  /** E-mail público (encaminhado pelo ImprovMX para a caixa pessoal). */
+  email: "contato@renanaugusto.com.br",
   github: "https://github.com/renanfrontend",
   linkedin: "https://www.linkedin.com/in/renan-augusto-santos/",
 } as const;

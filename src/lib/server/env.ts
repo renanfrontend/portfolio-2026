@@ -1,6 +1,5 @@
 import "server-only";
 import { z } from "zod";
-import { siteConfig } from "@/config/site";
 
 const emptyToUndefined = (value: unknown) => (typeof value === "string" && value.trim() === "" ? undefined : value);
 
@@ -13,6 +12,8 @@ const serverEnvSchema = z.object({
   UPSTASH_REDIS_REST_TOKEN: z.preprocess(emptyToUndefined, z.string().optional()),
 });
 
+const DEFAULT_CONTACT_TO = "renan.gabba@gmail.com";
+
 export type ServerEnv = z.infer<typeof serverEnvSchema> & { contactTo: string };
 
 /** Lê as variáveis de servidor a cada chamada. Valores inválidos viram ausentes, sem derrubar o site. */
@@ -22,5 +23,6 @@ export function getServerEnv(): ServerEnv {
   if (!parsed.success) {
     console.error("[env] Variáveis de servidor inválidas:", parsed.error.issues.map((issue) => issue.path.join(".")));
   }
-  return { ...env, contactTo: env.CONTACT_TO_EMAIL ?? siteConfig.email };
+  // O formulário entrega direto na caixa pessoal, sem passar pelo encaminhamento do contato@.
+  return { ...env, contactTo: env.CONTACT_TO_EMAIL ?? DEFAULT_CONTACT_TO };
 }
