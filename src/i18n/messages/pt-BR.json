@@ -255,7 +255,6 @@
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "whatsapp": "WhatsApp",
-    "whatsappMessage": "Olá, Renan! Vim pelo seu site (renanaugusto.com.br) e gostaria de conversar.",
     "form": {
       "title": "Formulário de contato",
       "requiredHint": "Campos marcados com * são obrigatórios.",
@@ -303,7 +302,13 @@
       },
       "fallbackEmail": "Enviar por e-mail"
     },
-    "whatsappCta": "Conversar no WhatsApp"
+    "whatsappCta": "Conversar no WhatsApp",
+    "whatsappTemplates": {
+      "default": "Olá, Renan! Encontrei seu portfólio (renanaugusto.com.br). Meu nome é [seu nome] e gostaria de falar sobre: [projeto, orçamento ou vaga]",
+      "service": "Olá, Renan! Vi no seu site o serviço de *{service}* e gostaria de um orçamento. Meu nome é [seu nome], da empresa [empresa]. O que preciso: [descreva rapidamente]",
+      "project": "Olá, Renan! Vi o projeto *{project}* no seu portfólio e gostaria de conversar sobre algo parecido. Meu nome é [seu nome], da empresa [empresa]. A ideia é: [descreva rapidamente]",
+      "about": "Olá, Renan! Vi seu perfil em renanaugusto.com.br e gostaria de conversar sobre uma oportunidade de frontend. Sou [seu nome], da empresa [empresa]. A vaga é: [cargo e modelo de trabalho]"
+    }
   },
   "privacy": {
     "eyebrow": "Privacidade",

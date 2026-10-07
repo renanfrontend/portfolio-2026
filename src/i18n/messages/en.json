@@ -255,7 +255,6 @@
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "whatsapp": "WhatsApp",
-    "whatsappMessage": "Hi Renan! I found your website (renanaugusto.com.br) and would like to talk.",
     "form": {
       "title": "Contact form",
       "requiredHint": "Fields marked with * are required.",
@@ -303,7 +302,13 @@
       },
       "fallbackEmail": "Send by email"
     },
-    "whatsappCta": "Chat on WhatsApp"
+    "whatsappCta": "Chat on WhatsApp",
+    "whatsappTemplates": {
+      "default": "Hi Renan! I found your portfolio (renanaugusto.com.br). My name is [your name] and I would like to talk about: [project, quote or job opening]",
+      "service": "Hi Renan! I saw your *{service}* service on your website and would like a quote. My name is [your name], from [company]. What I need: [short description]",
+      "project": "Hi Renan! I saw the *{project}* project in your portfolio and would like to talk about something similar. My name is [your name], from [company]. The idea is: [short description]",
+      "about": "Hi Renan! I saw your profile at renanaugusto.com.br and would like to talk about a frontend opportunity. I am [your name], from [company]. The role is: [title and work model]"
+    }
   },
   "privacy": {
     "eyebrow": "Privacy",

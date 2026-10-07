@@ -2,6 +2,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { IntroScreen } from "@/components/shared/intro-screen";
 import { WhatsappButton } from "@/components/shared/whatsapp-button";
+import { getProjects } from "@/features/projects/server/queries";
+import { getServices } from "@/features/services/server/queries";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { notFound } from "next/navigation";
@@ -25,7 +27,15 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[lo
         {children}
       </main>
       <SiteFooter locale={locale} dict={dict} />
-      <WhatsappButton label={dict.contact.whatsappCta} message={dict.contact.whatsappMessage} newTabHint={dict.common.opensInNewTab} />
+      <WhatsappButton
+        label={dict.contact.whatsappCta}
+        newTabHint={dict.common.opensInNewTab}
+        templates={dict.contact.whatsappTemplates}
+        context={{
+          services: Object.fromEntries(getServices(locale).map((service) => [service.slug, service.title])),
+          projects: Object.fromEntries((await getProjects(locale)).map((project) => [project.slug, project.title])),
+        }}
+      />
     </>
   );
 }

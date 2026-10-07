@@ -14,7 +14,7 @@ export function ContactChannels({ dict }: { dict: Dictionary }) {
     { label: t.linkedin, value: "renan-augusto-santos", href: siteConfig.linkedin, icon: LinkedinIcon, external: true },
     { label: t.github, value: "renanfrontend", href: siteConfig.github, icon: GithubIcon, external: true },
     ...(whatsapp
-      ? [{ label: t.whatsapp, value: formatWhatsapp(whatsapp), href: whatsappHref(whatsapp, t.whatsappMessage), icon: WhatsappIcon, external: true }]
+      ? [{ label: t.whatsapp, value: formatWhatsapp(whatsapp), href: whatsappHref(whatsapp, t.whatsappTemplates.default), icon: WhatsappIcon, external: true }]
       : []),
   ];
 
