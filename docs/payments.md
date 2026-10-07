@@ -95,8 +95,9 @@ privacidade descreve o uso.
 
 ## Teste na prévia da Vercel (branch `feature/pagina-servicos`)
 
-Endereço fixo da prévia desta branch (exige estar logado na Vercel, por causa da proteção de prévias):
-`https://portfolio-2026-git-feature-pagina-servicos-renans-projects-660e45d5.vercel.app/pt-BR/contratar`
+Endereço da prévia: Vercel → projeto `portfolio-2026` → **Deployments** → a prévia mais recente da branch
+`feature/pagina-servicos` → **Visit** (exige estar logado na Vercel, por causa da proteção de prévias).
+Acrescente `/pt-BR/contratar` ao endereço.
 
 1. **Chave de teste só para prévias:** Vercel → projeto `portfolio-2026` → Settings → Environment
    Variables → Add. Nome `STRIPE_SECRET_KEY`, valor `sk_test_...`, marque **apenas Preview**
