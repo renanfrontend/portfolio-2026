@@ -41,5 +41,5 @@ Em deploys de prévia (`VERCEL_ENV=preview`), o `robots.txt` bloqueia a indexaç
 **Publicado** em https://www.renanaugusto.com.br (também responde em https://renan-augusto-dev.vercel.app) (Vercel, importado do repositório `renanfrontend/portfolio-2026`; cada push na `main` gera um novo deploy). O endereço oficial está em `src/config/site.ts` (`PRODUCTION_URL`).
 
 Pendências:
-- **E-mail do formulário**: configurar `EMAIL_PROVIDER`, `RESEND_API_KEY` e `CONTACT_FROM_EMAIL`. Até lá, o formulário informa a indisponibilidade e oferece o e-mail.
+- E-mail do formulário: Resend com domínio verificado e variáveis configuradas na Vercel (funcionando desde 07/10/2026).
 - Domínio próprio: renanaugusto.com.br no Registro.br (registro A 216.198.79.1, modo simplificado), conectado à Vercel com redirecionamento para www.

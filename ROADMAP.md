@@ -3,7 +3,7 @@
 **Responsável:** Renan Augusto dos Santos  
 **Uso:** especificação de implementação para Claude Code  
 **Data:** 06/10/2026  
-**Status:** MVP publicado em https://www.renanaugusto.com.br (06/10/2026). Pendente: credenciais de e-mail do formulário.
+**Status:** MVP publicado em https://www.renanaugusto.com.br, com formulário de contato enviando e-mails (07/10/2026).
 
 ## 1. Missão para o Claude Code
 
@@ -430,7 +430,7 @@ Não usar prefixo `NEXT_PUBLIC_` para credenciais. Proteger módulos sensíveis 
 - [x] Tema escuro inicial com preferência persistente.
 - [x] Projetos e serviços com conteúdo verificável e links funcionais.
 - [x] Busca e filtros compartilháveis pela URL.
-- [ ] Formulário com resultado real e tratamento honesto de indisponibilidade. Implementado; integração pendente (tratamento de indisponibilidade verificado).
+- [x] Formulário com resultado real e tratamento honesto de indisponibilidade. Resend configurado com domínio verificado; envio real testado pelo Renan em 07/10/2026.
 - [x] Canal de contato funcional no lançamento.
 - [x] Nenhum segredo enviado ao navegador ou versionado.
 - [x] Build, typecheck e lint aprovados.
@@ -566,4 +566,14 @@ Domínio: www.renanaugusto.com.br (Registro.br, registro A 216.198.79.1; o domí
 Validações: HTTPS ativo; /pt-BR, /en, /pt-BR/projetos e /pt-BR/sobre 200; /fr 404;
   canonical, robots e sitemap usando https://www.renanaugusto.com.br
 Commit publicado: 4d9464b
+```
+
+### Registro da integração de e-mail (07/10/2026)
+
+```text
+Provedor: Resend (região sa-east-1), domínio renanaugusto.com.br verificado (DKIM e SPF no Registro.br, modo avançado)
+Variáveis na Vercel (Production): EMAIL_PROVIDER, RESEND_API_KEY, CONTACT_FROM_EMAIL
+Teste real: formulário em produção respondeu "Mensagem enviada" (provedor aceitou a mensagem)
+Também publicado: FNaF Web e HELIOS Lab, destaques só com projetos no ar e importação
+  automática de repositórios com o tópico portfolio-site (commit 1166ad8)
 ```
