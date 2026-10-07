@@ -1,5 +1,7 @@
+import { OTHER_SERVICE } from "@/config/contact";
 import { submitContact } from "@/features/contact/server/submit-contact";
-import { getServiceSlugs } from "@/features/services/server/queries";
+import { getServices, getServiceSlugs } from "@/features/services/server/queries";
+import { getDictionary } from "@/i18n/dictionaries";
 import { getEmailAdapter } from "@/lib/server/email";
 import { getServerEnv } from "@/lib/server/env";
 import { clientKeyFromHeaders, getRateLimiter } from "@/lib/server/rate-limit";
@@ -29,7 +31,15 @@ export async function POST(request: Request) {
     limiter: getRateLimiter(env),
     serviceSlugs: getServiceSlugs(),
     to: env.contactTo,
+    labels: contactLabels(),
   });
 
   return Response.json(result.body, { status: result.status, headers: { "Cache-Control": "no-store" } });
+}
+
+/** Nomes em português para o e-mail que chega ao Renan. */
+function contactLabels() {
+  const form = getDictionary("pt-BR").contact.form;
+  const services = Object.fromEntries(getServices("pt-BR").map((service) => [service.slug, service.title]));
+  return { services: { ...services, [OTHER_SERVICE]: form.serviceOther }, budgets: form.budgets };
 }

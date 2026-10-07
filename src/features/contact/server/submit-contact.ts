@@ -10,6 +10,11 @@ export type SubmitContactDeps = {
   serviceSlugs: readonly string[];
   /** Destinatário das mensagens (configuração exclusiva do servidor). */
   to: string;
+  /** Nomes legíveis para o e-mail (ex.: "automacao-ia" -> "Automação com IA"). */
+  labels?: {
+    services?: Record<string, string>;
+    budgets?: Record<string, string>;
+  };
 };
 
 export type SubmitContactResult = { status: number; body: ContactApiResponse };
@@ -41,7 +46,7 @@ export async function submitContact(
   if (!deps.email) return { status: 503, body: { ok: false, error: "unavailable" } };
 
   try {
-    await deps.email.send(buildMessage(parsed.data, deps.to));
+    await deps.email.send(buildMessage(parsed.data, deps.to, deps.labels));
     return { status: 200, body: { ok: true } };
   } catch (error) {
     if (error instanceof EmailProviderError) {
@@ -53,23 +58,31 @@ export async function submitContact(
   }
 }
 
-function buildMessage(input: ContactInput, to: string) {
+const localeNames: Record<string, string> = { "pt-BR": "Português", en: "Inglês" };
+
+export function buildMessage(input: ContactInput, to: string, labels: SubmitContactDeps["labels"] = {}) {
+  const service = labels.services?.[input.service] ?? input.service;
+  const budget = input.budget ? (labels.budgets?.[input.budget] ?? input.budget) : undefined;
   const lines = [
     `Nome: ${input.name}`,
     `E-mail: ${input.email}`,
     input.company && `Empresa: ${input.company}`,
     input.phone && `Telefone: ${input.phone}`,
-    `Serviço: ${input.service}`,
-    input.budget && `Orçamento: ${input.budget}`,
+    `Serviço: ${service}`,
+    budget && `Orçamento: ${budget}`,
     input.timeline && `Prazo desejado: ${input.timeline}`,
+    input.locale && `Idioma da página: ${localeNames[input.locale] ?? input.locale}`,
     "",
+    "Mensagem:",
     input.message,
+    "",
+    "Responda este e-mail para falar diretamente com a pessoa.",
   ].filter((line): line is string => typeof line === "string");
 
   return {
     to,
     replyTo: input.email,
-    subject: `[Site] Contato de ${input.name} (${input.service})`,
+    subject: `[Site] ${service}: contato de ${input.name}`,
     text: lines.join("\n"),
   };
 }

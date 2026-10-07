@@ -54,6 +54,8 @@ export function createContactSchema(serviceSlugs: readonly string[]) {
       .max(CONTACT_LIMITS.message.max, { error: "message" }),
     /** Armadilha para robôs: precisa chegar vazio. */
     website: z.string().max(0).optional(),
+    /** Idioma da página de onde a mensagem saiu (informativo). */
+    locale: z.enum(["pt-BR", "en"]).optional().catch(undefined),
   });
 }
 

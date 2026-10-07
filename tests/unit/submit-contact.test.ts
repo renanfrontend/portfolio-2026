@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { submitContact, type SubmitContactDeps } from "@/features/contact/server/submit-contact";
+import { buildMessage, submitContact, type SubmitContactDeps } from "@/features/contact/server/submit-contact";
 import { createTestAdapter, EmailProviderError, type EmailAdapter } from "@/lib/server/email";
 import { createMemoryRateLimiter, type RateLimiter } from "@/lib/server/rate-limit";
 
@@ -85,5 +85,20 @@ describe("createMemoryRateLimiter", () => {
     expect(await limiter.limit("a")).toEqual({ allowed: false });
     now = 10_001;
     expect(await limiter.limit("a")).toEqual({ allowed: true });
+  });
+});
+
+describe("buildMessage", () => {
+  it("usa nomes legíveis para serviço e orçamento e informa o idioma da página", () => {
+    const message = buildMessage(
+      { name: "Ana", email: "ana@example.com", company: undefined, phone: undefined, timeline: undefined, service: "automacao-ia", budget: "5k-15k", message: "Quero automatizar a triagem de pedidos.", locale: "en" },
+      "destino@example.com",
+      { services: { "automacao-ia": "Automação com IA" }, budgets: { "5k-15k": "De R$ 5 mil a R$ 15 mil" } },
+    );
+    expect(message.subject).toBe("[Site] Automação com IA: contato de Ana");
+    expect(message.text).toContain("Serviço: Automação com IA");
+    expect(message.text).toContain("Orçamento: De R$ 5 mil a R$ 15 mil");
+    expect(message.text).toContain("Idioma da página: Inglês");
+    expect(message.replyTo).toBe("ana@example.com");
   });
 });

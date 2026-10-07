@@ -100,7 +100,7 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
       response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formValues),
+        body: JSON.stringify({ ...formValues, locale: document.documentElement.lang }),
       });
     } catch {
       setStatus({ kind: "error", reason: "network" });
