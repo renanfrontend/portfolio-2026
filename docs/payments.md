@@ -92,3 +92,31 @@ Com `NEXT_PUBLIC_GA_ID=G-...`, o site carrega o gtag depois da hidratação e en
 Para tratar `purchase_success` como conversão: GA4 → Administrador → Eventos → marcar como evento
 principal. Sinais do Google e personalização de anúncios ficam desligados; a política de
 privacidade descreve o uso.
+
+## Teste na prévia da Vercel (branch `feature/pagina-servicos`)
+
+Endereço fixo da prévia desta branch (exige estar logado na Vercel, por causa da proteção de prévias):
+`https://portfolio-2026-git-feature-pagina-servicos-renans-projects-660e45d5.vercel.app/pt-BR/contratar`
+
+1. **Chave de teste só para prévias:** Vercel → projeto `portfolio-2026` → Settings → Environment
+   Variables → Add. Nome `STRIPE_SECRET_KEY`, valor `sk_test_...`, marque **apenas Preview**
+   (nunca Production com chave de teste). Salve.
+2. **Gere a prévia de novo** para ela ler a variável: Deployments → a prévia mais recente da branch →
+   menu "⋯" → Redeploy.
+3. Abra o endereço acima, escolha **Diagnóstico Técnico** → "Contratar Serviço", preencha o modal
+   com dados fictícios e clique em "Avançar para pagamento".
+4. No Checkout (deve mostrar "Área restrita" e o nome da empresa), teste:
+   - **Cartão aprovado:** `4242 4242 4242 4242`, validade futura (ex.: 12/30), CVC `123`.
+   - **Cartão recusado:** `4000 0000 0000 0002` (o Stripe mostra o erro e nada é cobrado).
+   - **Pix:** escolha Pix → no modo de teste, o Stripe mostra um QR de teste e permite simular
+     a confirmação.
+   - **Cancelar:** clique na seta "←" no topo do checkout → volta para `/contratar` com o aviso
+     "Pagamento não concluído".
+5. Depois do cartão aprovado, a página **"Pagamento confirmado"** mostra o pedido e o valor.
+6. Confira no painel do Stripe (modo de teste) → **Transações**: o pagamento aparece com o número
+   do pedido `RA-...` na descrição e os dados do modal em "Metadados".
+
+Limitação da prévia: a proteção da Vercel bloqueia chamadas externas, então o **webhook não roda na
+prévia** (os e-mails de "pedido pago" não saem). A página de confirmação funciona porque consulta o
+Stripe diretamente. O webhook é testado localmente com `stripe listen` (seção acima) e, em produção,
+com o endpoint cadastrado no Stripe.
