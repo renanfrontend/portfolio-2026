@@ -71,8 +71,10 @@ test.describe("abertura", () => {
     await page.goto("/pt-BR");
     const intro = page.locator(".intro");
     await expect(intro).toBeVisible();
+    // Espera a abertura começar a contar (JavaScript ativo) antes de apertar Esc.
+    await expect(intro.locator(".tabular-nums")).not.toHaveText("0%", { timeout: 15000 });
     await page.keyboard.press("Escape");
-    await expect(intro).toBeHidden();
+    await expect(intro).toBeHidden({ timeout: 10000 });
     await page.reload();
     await expect(intro).toBeHidden();
   });
