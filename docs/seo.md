@@ -21,6 +21,20 @@ Celular: LCP 2,7 s, CLS 0, TBT 0,65–1,3 s (o restante é a hidratação do Rea
 
 ## Passos manuais (gratuitos)
 
-1. Google Search Console: propriedade de **domínio** `renanaugusto.com.br`, verificada por registro TXT no Registro.br; enviar `sitemap.xml`; solicitar indexação das páginas principais.
+1. Google Search Console: propriedade de **domínio** `renanaugusto.com.br` **verificada em 07/10/2026** por TXT `google-site-verification=...` no Registro.br (não remover). Enviar `sitemap.xml` e solicitar indexação das páginas principais.
 2. Bing Webmaster Tools: importar a propriedade do Search Console (cobre Bing e DuckDuckGo).
 3. Links para o site: LinkedIn (campo Site), perfil e README do GitHub, campo Website dos repositórios.
+
+## DNS no Registro.br (9 entradas, não remover nenhuma)
+
+| Tipo | Nome | Para que serve |
+| --- | --- | --- |
+| A | (domínio) | site na Vercel (216.198.79.1) |
+| CNAME | www | site na Vercel |
+| MX | (domínio) | recebimento do contato@ (ImprovMX, prioridade 10) |
+| MX | (domínio) | recebimento do contato@ (ImprovMX, prioridade 20) |
+| TXT | (domínio) | SPF do ImprovMX |
+| TXT | (domínio) | verificação do Google Search Console |
+| TXT | resend._domainkey | DKIM do Resend (envio do formulário) |
+| CNAME | send | envio do formulário (Resend) |
+| CNAME | rsend | envio do formulário (Resend) |
