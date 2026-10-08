@@ -1,9 +1,12 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 function storage() {
   const data = new Map<string, string>();
   return { getItem: (key: string) => data.get(key) ?? null, setItem: (key: string, value: string) => data.set(key, value), removeItem: (key: string) => data.delete(key) };
 }
+
+// Warm the module transform so the first test does not pay the cold import cost.
+beforeAll(async () => { await import("@/lib/analytics"); }, 30_000);
 
 beforeEach(() => {
   vi.resetModules();
