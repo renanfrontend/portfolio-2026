@@ -64,11 +64,6 @@ FFMPEG=... node scripts/demo-video/import-voice.mjs video-demo/voz "$W"  # ou vi
 
 O guia para quem grava fica em `video-demo/GRAVE-SUA-VOZ.md` (fora do Git, junto com os vídeos).
 
-## Diagnóstico
-
-`DEMO_DEBUG=1 DEMO_STOP_AFTER=<cena>` mostra quem chamou cada rolagem da página e encerra a gravação
-depois da cena indicada (ex.: `pacotes`), sem gastar tempo com o resto do fluxo.
-
 ### Arquivo único: como os trechos são separados
 
 - As pausas são medidas pelo volume médio a cada 50 ms, numa cópia só com redução de ruído. O detector
@@ -78,3 +73,8 @@ depois da cena indicada (ex.: `pacotes`), sem gastar tempo com o resto do fluxo.
 - Se dois trechos foram falados quase sem pausa, informe onde o segundo começa com
   `--cortes=SEGUNDOS` (vários separados por vírgula). O script lista os trechos encontrados quando não
   consegue chegar a 11.
+
+## Diagnóstico
+
+`DEMO_DEBUG=1 DEMO_STOP_AFTER=<cena>` mostra quem chamou cada rolagem da página e encerra a gravação
+depois da cena indicada (ex.: `pacotes`), sem gastar tempo com o resto do fluxo.
