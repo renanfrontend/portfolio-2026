@@ -2,6 +2,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { IntroScreen } from "@/components/shared/intro-screen";
 import { WhatsappButton } from "@/components/shared/whatsapp-button";
+import { TrafficAnalytics } from "@/components/shared/traffic-analytics";
+import { Suspense } from "react";
 import { getProjects } from "@/features/projects/server/queries";
 import { getServices } from "@/features/services/server/queries";
 import { isLocale } from "@/i18n/config";
@@ -27,6 +29,9 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[lo
         {children}
       </main>
       <SiteFooter locale={locale} dict={dict} />
+      <Suspense fallback={null}>
+        <TrafficAnalytics locale={locale} measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? ""} />
+      </Suspense>
       <WhatsappButton
         label={dict.contact.whatsappCta}
         newTabHint={dict.common.opensInNewTab}

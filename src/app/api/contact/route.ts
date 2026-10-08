@@ -4,6 +4,7 @@ import { getServices, getServiceSlugs } from "@/features/services/server/queries
 import { getDictionary } from "@/i18n/dictionaries";
 import { getEmailAdapter } from "@/lib/server/email";
 import { getServerEnv } from "@/lib/server/env";
+import { getLeadAdapter } from "@/lib/server/leads";
 import { clientKeyFromHeaders, getRateLimiter } from "@/lib/server/rate-limit";
 
 const MAX_BODY_BYTES = 16 * 1024;
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
     serviceSlugs: getServiceSlugs(),
     to: env.contactTo,
     labels: contactLabels(),
+    leads: getLeadAdapter(),
   });
 
   return Response.json(result.body, { status: result.status, headers: { "Cache-Control": "no-store" } });

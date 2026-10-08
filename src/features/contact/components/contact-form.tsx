@@ -7,6 +7,7 @@ import { Button, buttonClasses } from "@/components/ui/button";
 import { budgetOptions, OTHER_SERVICE } from "@/config/contact";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { cn } from "@/lib/cn";
+import { getAcquisition, trackEvent } from "@/lib/analytics";
 import { CONTACT_LIMITS, createContactSchema, toFieldErrors } from "../schemas/contact-schema";
 import type { ContactApiResponse, ContactField, ContactFieldErrors } from "../types";
 import { ServiceParamReader } from "./service-param-reader";
@@ -62,6 +63,7 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const formRef = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
+  const started = useRef(false);
   const idPrefix = useId();
   const id = (field: string) => `${idPrefix}-${field}`;
 
@@ -85,6 +87,7 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
 
     const parsed = schema.safeParse(formValues);
     if (!parsed.success) {
+      trackEvent("contact_error", { error_type: "validation" });
       const fieldErrors = toFieldErrors(parsed.error);
       setErrors(fieldErrors);
       setStatus({ kind: "error", reason: "validation" });
@@ -100,9 +103,10 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
       response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formValues, locale: document.documentElement.lang }),
+        body: JSON.stringify({ ...formValues, locale: document.documentElement.lang, acquisition: getAcquisition() }),
       });
     } catch {
+      trackEvent("contact_error", { error_type: "network" });
       setStatus({ kind: "error", reason: "network" });
       statusRef.current?.focus();
       return;
@@ -111,6 +115,8 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
     const body = (await response.json().catch(() => null)) as ContactApiResponse | null;
 
     if (response.ok && body?.ok) {
+      trackEvent("generate_lead", { service });
+      started.current = false;
       setStatus({ kind: "success" });
       setValues(emptyValues());
       setServiceTouched(false);
@@ -119,6 +125,7 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
     }
 
     if (body && !body.ok && body.error === "validation") {
+      trackEvent("contact_error", { error_type: "validation" });
       setErrors(body.fieldErrors);
       setStatus({ kind: "error", reason: "validation" });
       focusFirstError(body.fieldErrors);
@@ -127,6 +134,7 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
 
     const reason =
       response.status === 429 ? "rateLimited" : response.status === 503 ? "unavailable" : "server";
+    trackEvent("contact_error", { error_type: reason });
     setStatus({ kind: "error", reason });
     statusRef.current?.focus();
   }
@@ -158,7 +166,9 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
   const mailto = `mailto:${fallbackEmail}?subject=${encodeURIComponent(labels.title)}&body=${encodeURIComponent(values.message)}`;
 
   return (
-    <form ref={formRef} noValidate onSubmit={onSubmit} aria-labelledby={id("title")} className="relative rounded-2xl card-neon p-6 sm:p-8">
+    <form ref={formRef} noValidate onSubmit={onSubmit} onFocus={() => {
+      if (!started.current) { trackEvent("contact_start"); started.current = true; }
+    }} aria-labelledby={id("title")} className="relative rounded-2xl card-neon p-6 sm:p-8">
       <Suspense fallback={null}>
         <ServiceParamReader serviceSlugs={serviceSlugs} onResolve={onResolveService} />
       </Suspense>
