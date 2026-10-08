@@ -40,15 +40,19 @@ export const projectsCopy: Record<string, ProjectCopy> = {
   "gemini-beyond-prompts": {
     title: "Gemini Beyond Prompts",
     summary:
-      "Sistema de IA que reúne chat com memória, análise de documentos com RAG e agentes orquestrados em uma única interface.",
+      "Protótipo de painel de IA que reúne chat com o Google Gemini e telas de análise de documentos (RAG) e de agentes em uma única interface.",
     coverAlt: "Tela inicial do Gemini Beyond Prompts com os módulos de chat, análise de documentos e assistente.",
     galleryAlt: [],
     challenge:
       "Explorar como recursos de IA generativa vão além de um campo de prompt: conversa com contexto, busca semântica em documentos próprios e tarefas executadas por agentes.",
     solution:
-      "Aplicação em Next.js e TypeScript com três módulos: chat com Google Gemini, biblioteca de documentos com busca semântica por embeddings e um assistente com agentes de pesquisa, planejamento e execução inspirados no LangGraph.",
+      "Aplicação em React, Vite e TypeScript com três módulos: chat com o Google Gemini, que mantém o contexto da conversa; uma biblioteca de documentos no estilo RAG; e um assistente com agentes de pesquisa, planejamento e execução inspirados no LangGraph. O chat chama a API de verdade; a análise de documentos e os agentes são protótipos de interface com processamento simulado, e o banco da versão completa (Supabase com pgvector) já está modelado.",
     contribution: "Projeto individual de estudo: interface, integração com a API do Gemini e organização dos módulos.",
-    outcomes: ["Demonstração publicada na Vercel.", "Upload de PDF, Word, Excel e texto para consulta em linguagem natural."],
+    outcomes: [
+      "Demonstração publicada na Vercel.",
+      "Chat funcional com a API do Gemini, usando a chave do próprio visitante.",
+      "Banco modelado no Supabase com pgvector para a próxima etapa: a busca semântica.",
+    ],
   },
   "fnaf-web": {
     title: "Five Nights at Freddy's Web",
@@ -59,7 +63,7 @@ export const projectsCopy: Record<string, ProjectCopy> = {
     challenge:
       "O projeto de fã original (Wendell de Sousa, 2021) não rodava mais com o Node atual e tinha falhas de estado: timers que nunca eram limpos, animatrônicos que ignoravam o que acontecia e telas que não atualizavam.",
     solution:
-      "Migração para Vite 6 e React 18, reducers do Redux corrigidos e um motor de jogo novo baseado em ticks, sem setTimeout, que pode ser pausado, reiniciado e testado de forma determinística. O comportamento ficou mais fiel ao original: rotas aleatórias, dificuldade crescente, blecaute em três fases.",
+      "Migração para Vite 6 e React 18 e um motor de jogo novo baseado em ticks, sem setTimeout, no lugar dos reducers do Redux e dos timers soltos: ele pode ser pausado, reiniciado e testado de forma determinística. O comportamento ficou mais fiel ao original: rotas aleatórias, dificuldade crescente, blecaute em três fases.",
     contribution:
       "Remaster individual: diagnóstico e correção dos bugs, reescrita do motor, 20 testes automatizados com Vitest, acessibilidade (teclado, aria-label, movimento reduzido) e deploy automático no GitHub Pages. Five Nights at Freddy's © Scott Cawthon; projeto de fã, sem fins lucrativos.",
     outcomes: [
@@ -72,7 +76,7 @@ export const projectsCopy: Record<string, ProjectCopy> = {
     title: "UP! BEATS Karaokê",
     summary:
       "Karaokê que roda no navegador: letra sincronizada, remoção da voz original em tempo real e microfone com eco, tudo processado no próprio aparelho.",
-    coverAlt: "Painel do modo karaokê do UP! BEATS com os controles de voz original (Original, Guia e Karaokê) e de microfone.",
+    coverAlt: "Modo karaokê do UP! BEATS com a voz original removida, os controles de voz e de microfone, o visualizador de áudio e a letra sincronizada preenchendo a linha cantada.",
     galleryAlt: [],
     challenge:
       "Fazer karaokê de verdade sem servidor de áudio: tirar a voz de músicas comuns, mostrar a letra no tempo certo e deixar a pessoa ouvir a própria voz junto, sem atraso nem microfonia, em qualquer navegador.",
@@ -107,7 +111,7 @@ export const projectsCopy: Record<string, ProjectCopy> = {
     title: "Manor Escape",
     summary:
       "Escape room vitoriano jogável no navegador, com quatro enigmas encadeados e um cofre interativo em 3D.",
-    coverAlt: "Tela do jogo Manor Escape mostrando um cômodo da mansão e o painel de enigmas.",
+    coverAlt: "Enigma do relógio de pêndulo no Manor Escape, com o mostrador em algarismos romanos, o ajuste de horas e minutos e o botão de dica.",
     galleryAlt: [],
     challenge:
       "Modelar um jogo com fluxo não linear, temporizador, dicas e progresso salvo sem espalhar regras pela interface.",
