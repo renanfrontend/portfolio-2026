@@ -58,7 +58,9 @@ export function getAcquisition(): Acquisition | undefined {
 export function initializeAnalytics(id: string) {
   if (getConsent() !== "granted" || configuredId === id) return;
   window.dataLayer ??= [];
-  window.gtag ??= (...args: unknown[]) => { window.dataLayer?.push(args); };
+  // gtag.js only processes `arguments` objects; pushing a plain array is silently ignored.
+  // eslint-disable-next-line prefer-rest-params
+  window.gtag ??= function gtag() { window.dataLayer?.push(arguments); };
   window.gtag("consent", "default", {
     analytics_storage: "granted", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied",
   });

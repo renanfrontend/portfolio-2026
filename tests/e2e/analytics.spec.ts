@@ -4,8 +4,8 @@ import type { Page } from "@playwright/test";
 test.use({ analyticsPrompt: true });
 
 async function events(page: Page, name: string) {
-  return page.evaluate((eventName) => (window.dataLayer ?? []).filter((entry) =>
-    Array.isArray(entry) && entry[0] === "event" && entry[1] === eventName,
+  return page.evaluate((eventName) => (window.dataLayer ?? []).map((entry) => Array.from(entry as ArrayLike<unknown>)).filter((entry) =>
+    entry[0] === "event" && entry[1] === eventName,
   ), name);
 }
 

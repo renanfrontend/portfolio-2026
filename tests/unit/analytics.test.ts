@@ -44,6 +44,8 @@ describe("analytics consent", () => {
     analytics.initializeAnalytics("G-TEST123");
     analytics.initializeAnalytics("G-TEST123");
     analytics.trackEvent("generate_lead", { service: "automacao-ia" });
+    // gtag.js ignores plain arrays, so commands must be pushed as `arguments` objects.
+    expect(window.dataLayer!.every((entry) => Object.prototype.toString.call(entry) === "[object Arguments]")).toBe(true);
     const commands = window.dataLayer as unknown[][];
     expect(commands.filter((entry) => entry[0] === "config")).toHaveLength(1);
     expect(commands.find((entry) => entry[0] === "config")?.[2]).toMatchObject({ send_page_view: false, allow_google_signals: false });
