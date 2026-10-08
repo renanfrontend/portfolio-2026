@@ -4,13 +4,15 @@
 > iniciada em 07/10/2026, prazo de 2 a 3 dias úteis).
 > Detalhes técnicos do fluxo: [payments.md](payments.md).
 
-**Situação em 07/10/2026**
+**Situação em 08/10/2026**
 
 - Código pronto e testado de ponta a ponta no modo de teste (modal → Stripe Checkout → webhook →
-  "Pagamento confirmado"), na branch `feature/pagina-servicos`.
-- Ainda **não** está na `main`: o site oficial não tem a página `/contratar`.
-- Sem as chaves do Stripe, o site funciona normalmente: o modal registra o pedido por e-mail e
-  oferece o WhatsApp. Por isso a branch pode ir para a `main` antes ou depois deste checklist.
+  "Pagamento confirmado").
+- Já está na `main` e no ar: `/contratar` funciona **sem pagamento online**, porque a produção
+  ainda não tem `STRIPE_SECRET_KEY`. O modal registra o pedido por e-mail e mostra "o pagamento
+  online não abriu agora", com o botão do WhatsApp. Isso é o esperado até concluir este checklist.
+- A mesma mensagem aparece se a chave existir e o Stripe recusar a sessão. Nesse caso, os logs da
+  Vercel mostram `[pre-hire] Falha ao criar o checkout` com o motivo.
 
 ---
 
