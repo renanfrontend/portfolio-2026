@@ -49,9 +49,14 @@ describe("importação de projetos do GitHub", () => {
       liveUrl: "https://flowboard.example.com/",
       featured: true,
       fromGithub: true,
-      technologies: ["TypeScript", "react"],
+      technologies: ["TypeScript", "React"],
     });
     expect(result.cover?.src).toContain("opengraph.githubassets.com");
+  });
+
+  it("mostra tecnologias com o nome oficial e sem repetir a linguagem", () => {
+    const result = repoToProject(repo({ topics: ["portfolio-site", "typescript", "web-audio-api", "react-query"] }));
+    expect(result.technologies).toEqual(["TypeScript", "Web Audio API", "React Query"]);
   });
 
   it("não trata o próprio GitHub nem links inválidos como site publicado", () => {

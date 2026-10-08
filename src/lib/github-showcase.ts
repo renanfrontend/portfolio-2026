@@ -40,6 +40,34 @@ const categoryByTopic: [string, ProjectCategory][] = [
 /** Tópicos técnicos que não devem aparecer como tecnologia. */
 const hiddenTopics = new Set([SHOWCASE_TOPIC, HIGHLIGHT_TOPIC, "portfolio", "game", "games", "jogo", "ai", "ia"]);
 
+/** Nomes oficiais dos tópicos de tecnologia mais comuns (o GitHub só aceita tópicos em minúsculas). */
+const topicLabels: Record<string, string> = {
+  react: "React",
+  typescript: "TypeScript",
+  javascript: "JavaScript",
+  nextjs: "Next.js",
+  vite: "Vite",
+  vue: "Vue",
+  nodejs: "Node.js",
+  threejs: "Three.js",
+  "react-three-fiber": "React Three Fiber",
+  tailwindcss: "Tailwind CSS",
+  glsl: "GLSL",
+  vitest: "Vitest",
+  playwright: "Playwright",
+  redux: "Redux",
+  "web-audio-api": "Web Audio API",
+  supabase: "Supabase",
+  firebase: "Firebase",
+  python: "Python",
+  java: "Java",
+};
+
+/** Tópico em rótulo legível: nome oficial quando conhecido; senão, palavras com inicial maiúscula. */
+export function topicLabel(topic: string): string {
+  return topicLabels[topic] ?? topic.split("-").map((word) => word[0].toUpperCase() + word.slice(1)).join(" ");
+}
+
 /** Nome do repositório em título legível (ex.: "flowboard-kanban" -> "Flowboard Kanban"). */
 export function titleFromRepo(name: string): string {
   return name
@@ -67,7 +95,9 @@ export function repoToProject(repo: GithubRepo): Project {
   const topics = repo.topics.map((topic) => topic.toLowerCase());
   const category = categoryByTopic.find(([topic]) => topics.includes(topic))?.[1] ?? "web";
   const liveUrl = validHomepage(repo.homepage);
-  const technologies = [...new Set([repo.language, ...topics.filter((topic) => !hiddenTopics.has(topic))].filter(Boolean) as string[])];
+  // Linguagem + tópicos técnicos, sem repetir ("TypeScript" e o tópico "typescript" são a mesma coisa).
+  const labels = [repo.language, ...topics.filter((topic) => !hiddenTopics.has(topic)).map(topicLabel)].filter(Boolean) as string[];
+  const technologies = labels.filter((label, index) => labels.findIndex((other) => other.toLowerCase() === label.toLowerCase()) === index);
 
   return {
     id: `github:${repo.name}`,

@@ -68,6 +68,24 @@ export const projectsCopy: Record<string, ProjectCopy> = {
       "Pausa automática ao trocar de aba, progresso salvo e atalhos de teclado.",
     ],
   },
+  "upbeats-karaoke-player": {
+    title: "UP! BEATS Karaokê",
+    summary:
+      "Karaokê que roda no navegador: letra sincronizada, remoção da voz original em tempo real e microfone com eco, tudo processado no próprio aparelho.",
+    coverAlt: "Painel do modo karaokê do UP! BEATS com os controles de voz original (Original, Guia e Karaokê) e de microfone.",
+    galleryAlt: [],
+    challenge:
+      "Fazer karaokê de verdade sem servidor de áudio: tirar a voz de músicas comuns, mostrar a letra no tempo certo e deixar a pessoa ouvir a própria voz junto, sem atraso nem microfonia, em qualquer navegador.",
+    solution:
+      "Um único grafo da Web Audio API mistura música e microfone. A voz sai pela diferença entre os canais esquerdo e direito, e grave e brilho voltam por filtros em cascata fora da faixa vocal, com controle contínuo entre Original, Guia e Karaokê. As letras vêm sincronizadas do LRCLIB e podem ser calibradas tocando na linha cantada, com o ajuste salvo por música. O microfone tem compressor, eco e dois modos: caixas de som (com cancelamento de eco) e fones.",
+    contribution:
+      "Projeto pessoal: motor de áudio, integração com as APIs do iTunes (busca e prévias) e do LRCLIB (letras), calibração da letra, reprodução de arquivos do próprio aparelho, interface em três idiomas e deploy automático no GitHub Pages.",
+    outcomes: [
+      "Publicado no GitHub Pages, com deploy a cada push.",
+      "Remoção de voz e microfone processados no navegador, sem servidor.",
+      "Interface em português, inglês e espanhol.",
+    ],
+  },
   "mwm-portal": {
     title: "MWM Portal",
     summary:

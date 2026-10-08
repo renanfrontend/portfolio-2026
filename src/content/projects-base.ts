@@ -60,6 +60,19 @@ export const projectsBase: ProjectBase[] = [
     liveUrl: "https://renanfrontend.github.io/fnaf-web/",
   },
   {
+    id: "upbeats-karaoke-player",
+    slug: "upbeats-karaoke-player",
+    category: "web",
+    technologies: ["React", "TypeScript", "Web Audio API", "Vite", "Tailwind CSS", "TanStack Query", "i18next", "GitHub Actions"],
+    kind: "personal",
+    status: "live",
+    featured: true,
+    cover: { src: "/images/projects/karaoke.png", width: 1440, height: 900 },
+    gallery: [],
+    repositoryUrl: github("upbeats-karaoke-player"),
+    liveUrl: "https://renanfrontend.github.io/upbeats-karaoke-player/",
+  },
+  {
     id: "mwm-portal",
     slug: "mwm-portal",
     category: "dashboard",
@@ -137,4 +150,4 @@ export const projectsBase: ProjectBase[] = [
  * Ordem dos destaques na home: os melhores projetos com site no ar.
  * Projetos do GitHub com o tópico "portfolio-destaque" entram depois destes.
  */
-export const highlightOrder = ["visionstock-ai", "logiflow-3d", "fnaf-web", "manor-escape", "gemini-beyond-prompts", "escudo-cidadao"];
+export const highlightOrder = ["visionstock-ai", "logiflow-3d", "upbeats-karaoke-player", "fnaf-web", "manor-escape", "gemini-beyond-prompts", "escudo-cidadao"];

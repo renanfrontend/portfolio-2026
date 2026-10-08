@@ -587,3 +587,17 @@ Formulário: continua entregando direto na caixa pessoal (CONTACT_TO padrão)
 E-mail do formulário: assunto e corpo com nome do serviço, orçamento e idioma da página
 Testes: e-mail externo para contato@ recebido no Gmail; site atualizado (commits db73d27, b7bce00)
 ```
+
+### Registro da contratação e da gestão de tráfego (08/10/2026)
+
+```text
+Publicado (PR #3, merge c0b6523): /contratar com 4 pacotes, modal de pré-contratação,
+  Stripe Checkout (cartão, Pix, boleto; Suporte Mensal como assinatura) com o visual do site,
+  webhook /api/webhooks/stripe e confirmação /contratar/sucesso
+Sem chaves do Stripe em produção: pedido registrado por e-mail + WhatsApp (até a conta ser aprovada)
+Gestão de tráfego (PRs #1 e #2, ChatGPT) integrada: um GA4 só, com consentimento, mais os eventos
+  do funil de contratação; pedido de pacote com UTM e lead no CRM/n8n (campo order)
+Correção: troca de página pelo menu abria rolada (data-scroll-behavior no <html>)
+Projeto novo em destaque: UP! BEATS Karaokê (estudo de caso + capa própria)
+Pendências: docs/go-live-pagamentos.md (chaves live, webhook, métodos de pagamento)
+```
