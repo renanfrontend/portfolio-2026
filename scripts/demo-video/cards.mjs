@@ -30,12 +30,12 @@ const base = (body, extraCss = "") => `<!doctype html>
 export function titleCard() {
   return base(
     `<main>
-      <span class="badge in"><i></i>Modo de teste · Stripe</span>
-      <h1 class="in" style="animation-delay:.15s">Do clique ao <span class="grad">pagamento</span></h1>
-      <p class="lead in" style="animation-delay:.35s">Fluxo de contratação com Next.js, React e Stripe</p>
+      <span class="badge in"><i></i>Demonstração · modo de teste</span>
+      <h1 class="in" style="animation-delay:.15s">Seu cliente contrata e paga <span class="grad">no seu site</span></h1>
+      <p class="lead in" style="animation-delay:.35s">Pix, boleto e cartão, com confirmação automática</p>
       <p class="site in" style="animation-delay:.55s">renanaugusto.com.br</p>
     </main>`,
-    `h1 { font-size:clamp(44px, 10vmin, 120px); margin-top:.45em; }
+    `h1 { font-size:clamp(40px, 8.6vmin, 104px); margin-top:.45em; }
      .lead { margin-top:.9em; font-size:clamp(18px, 3.6vmin, 36px); color:var(--muted); }
      .site { margin-top:2.2em; font-family:"JetBrains Mono", monospace; font-size:clamp(14px, 2.6vmin, 24px); color:var(--subtle); letter-spacing:.06em; }`,
   );
@@ -79,20 +79,20 @@ export function terminalCard({ lines, orderId }) {
 }
 
 export function outroCard({ origin }) {
-  const stack = ["Next.js 16", "React 19", "TypeScript", "Stripe", "Playwright"];
+  const benefits = ["Pix, boleto e cartão", "Confirmação automática", "Com a cara da sua marca", "Pronto para o celular"];
   return base(
     `<main>
       <img class="in" src="${escapeHtml(origin)}/images/profile/renan-github.jpg" alt="">
       <h1 class="in" style="animation-delay:.15s">Renan <span class="grad">Augusto</span></h1>
-      <p class="role in" style="animation-delay:.3s">Desenvolvedor Frontend Sênior</p>
+      <p class="role in" style="animation-delay:.3s">Sites que vendem para empresas, comércios e prestadores de serviço</p>
       <p class="site in" style="animation-delay:.5s">renanaugusto.com.br</p>
-      <ul class="in" style="animation-delay:.7s">${stack.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+      <ul class="in" style="animation-delay:.7s">${benefits.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
     </main>`,
     `img { width:clamp(96px, 20vmin, 200px); height:clamp(96px, 20vmin, 200px); border-radius:50%; object-fit:cover;
         border:3px solid transparent; background:linear-gradient(#0a0d0d,#0a0d0d) padding-box, linear-gradient(135deg,var(--accent),var(--blue),var(--violet)) border-box;
         box-shadow:0 0 50px -10px rgb(34 211 238 / .55); }
      h1 { font-size:clamp(40px, 9vmin, 104px); margin-top:.35em; }
-     .role { margin-top:.5em; font-size:clamp(18px, 3.4vmin, 34px); color:var(--muted); }
+     .role { margin:.5em auto 0; max-width:24em; font-size:clamp(17px, 3.2vmin, 32px); color:var(--muted); text-wrap:balance; }
      .site { display:inline-block; margin-top:1.3em; padding:.5em 1.2em; border-radius:999px; font-family:"Space Grotesk", sans-serif; font-weight:700;
         font-size:clamp(20px, 4vmin, 40px); color:#03141a; background:var(--accent); box-shadow:0 0 40px -8px rgb(34 211 238 / .8); }
      ul { list-style:none; padding:0; margin-top:1.6em; display:flex; flex-wrap:wrap; justify-content:center; gap:.6em; }

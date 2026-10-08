@@ -1,75 +1,68 @@
-// Roteiro do vídeo de demonstração do checkout (modo de teste).
-// `text` vira legenda; `say` é o que a voz lê (pronúncia das palavras em inglês e do domínio).
-// Cada cena do record.mjs dura, no mínimo, o tempo da sua narração.
+// Roteiro do vídeo de demonstração do checkout (modo de teste), narrado em primeira pessoa pelo Renan.
+// `text` vira legenda (e é o que o Renan lê na gravação da própria voz).
+// `say` só é usado na voz sintética de reserva (prepare-audio.mjs), para acertar a pronúncia.
+// Cada cena do record.mjs dura, no mínimo, o tempo da sua fala.
 
 const say = {
   site: "renan augusto ponto com ponto bê érre",
-  next: "Nékst jêi ésse",
-  react: "Riéct",
-  ts: "Táipi iscrípti",
   stripe: "Istráipi",
   whatsapp: "Uótsápi",
-  webhook: "uébi rúqui",
-  kickoff: "quíqui ófi",
+  frontend: "frônti ênd",
 };
 
 export const narration = [
   {
     id: "intro",
-    text: "Veja como funciona a contratação no site do Renan, do primeiro clique ao pagamento confirmado.",
+    text: "Quer que o seu cliente contrate e pague direto pelo seu site, sem ficar trocando mensagem e mandando boleto na mão? Deixa eu te mostrar.",
   },
   {
     id: "home",
-    text: "O site foi construído com Next.js, React e TypeScript, com animações próprias e foco em acessibilidade.",
-    say: `O site foi construído com ${say.next}, ${say.react} e ${say.ts}, com animações próprias e foco em acessibilidade.`,
+    text: "Eu sou o Renan, desenvolvedor front-end, e esse é o fluxo de contratação que eu construí no meu próprio site.",
+    say: `Eu sou o Renan, desenvolvedor ${say.frontend}, e esse é o fluxo de contratação que eu construí no meu próprio site.`,
   },
   {
     id: "pacotes",
-    text: "Na página de contratação, cada pacote mostra o que está incluso, o prazo e o preço, tudo a partir de um único arquivo de configuração.",
+    text: "O cliente vê cada pacote com o que está incluso, o prazo e o preço. Tudo claro, sem precisar pedir orçamento.",
   },
   {
     id: "modal",
-    text: "Ao clicar em Contratar Serviço, um modal mostra o resumo do pacote e o valor.",
+    text: "Escolheu? Na mesma tela ele confere o resumo e o valor.",
   },
   {
     id: "validacao",
-    text: "Os campos são validados antes de avançar, e o WhatsApp ganha máscara brasileira enquanto é digitado.",
-    say: `Os campos são validados antes de avançar, e o ${say.whatsapp} ganha máscara brasileira enquanto é digitado.`,
+    text: "Os dados são preenchidos em segundos, com validação e WhatsApp já formatado. Nada de contato errado.",
+    say: `Os dados são preenchidos em segundos, com validação e ${say.whatsapp} já formatado. Nada de contato errado.`,
   },
   {
     id: "servidor",
-    text: "O servidor valida tudo de novo, calcula o preço sem confiar no navegador e cria uma sessão segura de pagamento no Stripe.",
-    say: `O servidor valida tudo de novo, calcula o preço sem confiar no navegador e cria uma sessão segura de pagamento no ${say.stripe}.`,
+    text: "Ao avançar, o sistema confere tudo e abre o pagamento seguro, com o preço protegido contra alteração.",
   },
   {
     id: "checkout",
-    text: "O cliente pode pagar com Pix, boleto ou cartão. Aqui, no modo de teste, usamos o cartão de testes do Stripe.",
-    say: `O cliente pode pagar com Pix, boleto ou cartão. Aqui, no modo de teste, usamos o cartão de testes do ${say.stripe}.`,
+    text: "Seu cliente paga como preferir: Pix, boleto ou cartão. Aqui estou no modo de teste, então nenhuma cobrança é real.",
   },
   {
     id: "cartao",
-    text: "Os dados do cartão ficam só com o Stripe e nunca passam pelo site.",
-    say: `Os dados do cartão ficam só com o ${say.stripe} e nunca passam pelo site.`,
+    text: "E os dados do cartão ficam com o Stripe, nunca passam pelo site.",
+    say: `E os dados do cartão ficam com o ${say.stripe}, nunca passam pelo site.`,
   },
   {
     id: "sucesso",
-    text: "Pagamento aprovado! O cliente volta ao site com o número do pedido e os próximos passos, incluindo o agendamento do kickoff.",
-    say: `Pagamento aprovado! O cliente volta ao site com o número do pedido e os próximos passos, incluindo o agendamento do ${say.kickoff}.`,
+    text: "Pagamento aprovado! O cliente recebe a confirmação na hora, com o número do pedido e o próximo passo.",
   },
   {
     id: "bastidores",
-    text: "Nos bastidores, o Stripe avisa o site por um webhook com assinatura verificada, que marca o pedido como pago e envia os e-mails de confirmação.",
-    say: `Nos bastidores, o ${say.stripe} avisa o site por um ${say.webhook} com assinatura verificada, que marca o pedido como pago e envia os e-mails de confirmação.`,
+    text: "Nos bastidores, o site recebe o aviso do pagamento, marca o pedido como pago e manda os e-mails, para o cliente e para mim. Sem planilha, sem conferir na mão.",
   },
   {
     id: "outro",
-    text: "Precisa de um fluxo como este no seu projeto? Fale com o Renan em renanaugusto.com.br.",
-    say: `Precisa de um fluxo como este no seu projeto? Fale com o Renan em ${say.site}.`,
+    text: "Tem uma empresa, um comércio ou presta serviço? Eu crio isso para o seu negócio. Fala comigo em renanaugusto.com.br.",
+    say: `Tem uma empresa, um comércio ou presta serviço? Eu crio isso para o seu negócio. Fala comigo em ${say.site}.`,
   },
 ];
 
 const escapeXml = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-/** SSML aceito pelas vozes do Windows. */
+/** SSML aceito pelas vozes do Windows (voz sintética de reserva). */
 export const toSsml = (item) =>
   `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="pt-BR">${escapeXml(item.say ?? item.text)}</speak>`;

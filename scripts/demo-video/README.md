@@ -48,6 +48,22 @@ Repita `record.mjs` e `compose.mjs` com `portrait` para a versão vertical.
   - Posiciona as falas, queima as legendas e normaliza o áudio em -14 LUFS (referência de Instagram, LinkedIn e YouTube).
 - `cards.mjs`: telas de abertura, bastidores (com o log real do `stripe listen`) e encerramento.
 
+## Narração com a voz do Renan
+
+O roteiro (`narration.mjs`) está em primeira pessoa. Com a gravação da própria voz, use
+`import-voice.mjs` no lugar de `prepare-audio.mjs`:
+
+```bash
+FFMPEG=... node scripts/demo-video/import-voice.mjs video-demo/voz "$W"
+```
+
+- Aceita uma pasta com `01` a `11` (um arquivo por trecho, qualquer formato de áudio) ou um arquivo
+  único com pausas de uns 3 segundos entre os trechos.
+- Limpa o ruído, suaviza os "s", comprime de leve e grava `audio/<cena>.wav` e `durations.json`.
+- Depois, siga com `record.mjs` e `compose.mjs` normalmente.
+
+O guia para quem grava fica em `video-demo/GRAVE-SUA-VOZ.md` (fora do Git, junto com os vídeos).
+
 ## Diagnóstico
 
 `DEMO_DEBUG=1 DEMO_STOP_AFTER=<cena>` mostra quem chamou cada rolagem da página e encerra a gravação
