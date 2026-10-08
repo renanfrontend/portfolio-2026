@@ -66,7 +66,7 @@ describe("sessão do Stripe Checkout", () => {
 
   it("aplica o visual do site no checkout, que pode ser desligado", () => {
     expect(buildCheckoutSessionParams(order(), urls).branding_settings).toEqual(CHECKOUT_BRANDING);
-    expect(CHECKOUT_BRANDING.icon?.url).toMatch(/^https:\/\/.+\/apple-icon$/);
+    expect(CHECKOUT_BRANDING.icon?.url).toMatch(/^https:\/\/.+\/icon\.svg$/);
     const plain = buildCheckoutSessionParams(order(), urls, { paymentMethods: ["card"], installments: false, branding: false });
     expect(plain.branding_settings).toBeUndefined();
   });
@@ -87,7 +87,7 @@ describe("gateway do Stripe", () => {
       async create(params: Stripe.Checkout.SessionCreateParams) {
         calls.push(params);
         if (params.branding_settings) {
-          throw new Stripe.errors.StripeInvalidRequestError({ type: "invalid_request_error", message: "Invalid icon", param: "branding_settings[icon][url]" });
+          throw new Stripe.errors.StripeInvalidRequestError({ type: "invalid_request_error", message: "The icon URL path must end with .png, .jpg or .svg" });
         }
         return { id: "cs_test_semvisual123", url: "https://checkout.stripe.com/c/pay/cs_test_semvisual123" };
       },

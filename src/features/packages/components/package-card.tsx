@@ -44,7 +44,7 @@ export function PackageCard({ item, locale, labels }: PackageCardProps) {
         </p>
       )}
 
-      <h2 id={`pacote-${item.id}`} className="mt-2 text-xl font-bold text-fg xl:min-h-[2.8rem]">
+      <h2 id={`pacote-${item.id}`} className="mt-2 text-xl font-bold text-fg xl:min-h-[2lh]">
         {item.name}
       </h2>
       <p className="mt-2 text-[0.95rem] text-fg-muted xl:min-h-[6.25rem]">{item.description}</p>

@@ -43,7 +43,8 @@ export const CHECKOUT_BRANDING: Stripe.Checkout.SessionCreateParams.BrandingSett
   border_style: "rounded",
   button_color: "#0e7490",
   // Sempre do domínio oficial: o Stripe precisa baixar o ícone, e localhost ou prévias protegidas não são acessíveis.
-  icon: { type: "url", url: `${PRODUCTION_URL}/apple-icon` },
+  // A URL precisa terminar em .png, .jpg ou .svg (exigência do Stripe).
+  icon: { type: "url", url: `${PRODUCTION_URL}/icon.svg` },
 };
 
 const DEFAULT_PAYMENT_METHODS = ["card", "pix", "boleto"];
@@ -140,8 +141,7 @@ export const isCheckoutSessionId = (value: string) => /^cs_(test|live)_[A-Za-z0-
 /** Só a parte do SDK que o gateway usa (os testes passam um cliente falso). */
 type StripeCheckoutClient = Pick<Stripe["checkout"]["sessions"], "create" | "retrieve">;
 
-const isBrandingError = (error: unknown) =>
-  error instanceof Stripe.errors.StripeInvalidRequestError && Boolean(error.param?.startsWith("branding_settings"));
+const isInvalidRequest = (error: unknown) => error instanceof Stripe.errors.StripeInvalidRequestError;
 
 export function createStripeGateway(sessions: StripeCheckoutClient, options: CheckoutOptions): PaymentGateway {
   const create = async (checkout: CheckoutPayload, urls: CheckoutUrls, branding: boolean) => {
@@ -158,9 +158,10 @@ export function createStripeGateway(sessions: StripeCheckoutClient, options: Che
       try {
         return await create(checkout, urls, options.branding !== false);
       } catch (error) {
-        // O visual é um extra: se o Stripe recusar (ex.: ícone fora do ar), cobra com o visual padrão.
-        if (!isBrandingError(error)) throw error;
-        console.error("[checkout] Visual personalizado recusado pelo Stripe; usando o padrão.");
+        // O visual é um extra: se o Stripe recusar a sessão (ex.: ícone inválido), tenta com o visual padrão.
+        // Se o problema for outro, a segunda tentativa falha do mesmo jeito e o erro segue adiante.
+        if (options.branding === false || !isInvalidRequest(error)) throw error;
+        console.error("[checkout] Sessão recusada com o visual personalizado; tentando com o padrão:", (error as Error).message);
         return create(checkout, urls, false);
       }
     },

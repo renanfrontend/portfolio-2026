@@ -49,8 +49,10 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[lo
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
+  // data-scroll-behavior: o Next desliga a rolagem suave do CSS durante a navegação. Sem isso, as
+  // rolagens suaves encadeadas da troca de página param no meio e a página nova abre fora do topo.
   return (
-    <html lang={locale} data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${display.variable}`}>
+    <html lang={locale} data-theme="dark" data-scroll-behavior="smooth" suppressHydrationWarning className={`${inter.variable} ${display.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>

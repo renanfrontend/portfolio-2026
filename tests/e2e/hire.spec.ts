@@ -130,6 +130,10 @@ test.describe("contratação de serviços", () => {
     await page.goto("/pt-BR/servicos", { waitUntil: "networkidle" });
     await page.getByRole("link", { name: "Ver pacotes" }).click();
     await expect(page).toHaveURL(/\/pt-BR\/contratar$/);
+    // A página nova abre no topo (com rolagem suave no CSS, a troca de página parava no meio).
+    await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
+    await page.waitForTimeout(800);
+    expect(await page.evaluate(() => scrollY)).toBeLessThan(20);
     await page.goto("/contratar");
     await expect(page).toHaveURL(/\/pt-BR\/contratar$/);
   });
