@@ -49,7 +49,7 @@ oferece o WhatsApp. Cancelar no Stripe volta para `/[locale]/contratar?cancelado
    `checkout.session.completed`, `checkout.session.async_payment_succeeded` e
    `checkout.session.async_payment_failed`. Copiar o segredo `whsec_...`.
 3. Na Vercel (Settings → Environment Variables): `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`,
-   `NEXT_PUBLIC_APP_URL=https://www.renanaugusto.com.br`, `NEXT_PUBLIC_GA_ID` e, se houver,
+   `NEXT_PUBLIC_APP_URL=https://www.renanaugusto.com.br`, `NEXT_PUBLIC_GA_MEASUREMENT_ID` e, se houver,
    `NEXT_PUBLIC_SCHEDULING_URL` (Cal.com/Calendly). Recomendado: `UPSTASH_REDIS_REST_URL/TOKEN`.
 4. Comece com as chaves de teste (`sk_test_`) e troque pelas de produção (`sk_live_` e o
    `whsec_` do endpoint de produção) só depois de testar.
@@ -82,7 +82,10 @@ oferece o WhatsApp. Cancelar no Stripe volta para `/[locale]/contratar?cancelado
 
 ## Google Analytics 4
 
-Com `NEXT_PUBLIC_GA_ID=G-...`, o site carrega o gtag depois da hidratação e envia:
+O Analytics é o da gestão de tráfego ([lead-automation.md](lead-automation.md)): com
+`NEXT_PUBLIC_GA_MEASUREMENT_ID=G-...`, o site mostra o pedido de permissão e, **só depois que o
+visitante aceita**, carrega o gtag (`src/components/shared/traffic-analytics.tsx`). Além dos eventos de
+contato e origem (UTM), o funil de contratação envia, por `trackEvent` de `src/lib/analytics.ts`:
 
 | Evento | Quando |
 | --- | --- |

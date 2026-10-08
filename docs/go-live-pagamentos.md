@@ -57,7 +57,7 @@ Settings → Environment Variables (marcar **Production**):
 | `STRIPE_WEBHOOK_SECRET` | `whsec_...` do webhook acima |
 | `NEXT_PUBLIC_APP_URL` | `https://www.renanaugusto.com.br` |
 | `STRIPE_CARD_INSTALLMENTS` | `true` (só se ativou o parcelamento) |
-| `NEXT_PUBLIC_GA_ID` | `G-...` (opcional) |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | `G-...` (opcional; pode já estar configurada pela gestão de tráfego) |
 | `NEXT_PUBLIC_SCHEDULING_URL` | link do Cal.com ou Calendly (opcional) |
 
 - [ ] Conferir se já existem `EMAIL_PROVIDER=resend`, `RESEND_API_KEY` e `CONTACT_FROM_EMAIL`

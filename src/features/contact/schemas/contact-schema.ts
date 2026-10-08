@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { budgetOptions, OTHER_SERVICE } from "@/config/contact";
+import { acquisitionSchema } from "@/lib/acquisition";
 import { contactFields, type ContactField, type ContactFieldErrorCode, type ContactFieldErrors } from "../types";
 
 export const CONTACT_LIMITS = {
@@ -58,6 +59,8 @@ export function createContactSchema(serviceSlugs: readonly string[]) {
     locale: z.enum(["pt-BR", "en"]).optional().catch(undefined),
     /** Pacote de /contratar escolhido (informativo; valores desconhecidos são ignorados no e-mail). */
     package: z.string().max(60).optional().catch(undefined),
+    /** Optional session attribution; bad tracking data must never reject a valid contact. */
+    acquisition: acquisitionSchema.optional().catch(undefined),
   });
 }
 

@@ -67,3 +67,7 @@ Documentadas em [.env.example](.env.example). Credenciais ficam só no servidor;
 ## Publicação
 
 Veja [docs/deployment.md](docs/deployment.md). Decisões técnicas em [docs/decisions.md](docs/decisions.md).
+
+## Captação orgânica e pedidos
+
+Veja [docs/lead-automation.md](docs/lead-automation.md) para ativar Analytics com consentimento, medir contatos e encaminhar pedidos a um CRM por webhook. As integrações são opcionais e ficam desligadas sem configuração. IDs e origem disponível acompanham os e-mails; cliques no WhatsApp não são contados como pedidos confirmados.
