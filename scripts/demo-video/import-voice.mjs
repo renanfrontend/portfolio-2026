@@ -3,8 +3,9 @@
 //        (2) um único arquivo com uma pausa de uns 3 segundos entre os trechos.
 // Uso: FFMPEG=caminho/ffmpeg.exe node scripts/demo-video/import-voice.mjs <arquivo-ou-pasta> <pasta-de-trabalho> [--cortes=14.5,21.6]
 // --cortes: inícios de trecho (em segundos) onde a pausa ficou curta demais para ser detectada sozinha.
+// --enxugar [--ritmo=1.1]: encurta pausas de leitura e acelera a fala (ritmo de comercial).
 import { execFileSync, spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { narration } from "./narration.mjs";
 
@@ -14,6 +15,8 @@ const cuts = (args.find((arg) => arg.startsWith("--cortes="))?.slice("--cortes="
   .split(",")
   .map(Number)
   .filter((value) => Number.isFinite(value) && value > 0);
+const tighten = args.includes("--enxugar");
+const tempo = Number(args.find((arg) => arg.startsWith("--ritmo="))?.slice("--ritmo=".length) ?? 1.1);
 if (!source || !existsSync(source)) throw new Error("Informe o arquivo ou a pasta com a gravação.");
 const ffmpeg = process.env.FFMPEG || "ffmpeg";
 const audio = path.join(work, "audio");
@@ -166,6 +169,18 @@ if (statSync(source).isDirectory()) {
     const [start, end] = segments[index];
     run(["-ss", Math.max(0, start - 0.12).toFixed(3), "-to", (end + 0.18).toFixed(3), "-i", full, "-af", fades, "-c:a", "pcm_s16le", path.join(audio, `${item.id}.wav`)]);
   });
+}
+
+// --enxugar: ritmo de comercial. Pausas de leitura no meio das frases viram respiros curtos e a fala
+// acelera um pouco, sem mudar o tom (atempo preserva a altura da voz).
+if (tighten) {
+  const pauses = "silenceremove=stop_periods=-1:stop_duration=0.18:stop_threshold=-42dB:stop_silence=0.12:detection=rms:window=0.02";
+  for (const item of narration) {
+    const file = path.join(audio, `${item.id}.wav`);
+    const tmp = path.join(audio, `${item.id}.tmp.wav`);
+    run(["-i", file, "-af", `${pauses},atempo=${tempo}`, "-c:a", "pcm_s16le", tmp]);
+    renameSync(tmp, file);
+  }
 }
 
 const durations = Object.fromEntries(narration.map((item) => [item.id, Math.round(wavSeconds(path.join(audio, `${item.id}.wav`)) * 1000)]));

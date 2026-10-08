@@ -60,6 +60,8 @@ FFMPEG=... node scripts/demo-video/import-voice.mjs video-demo/voz "$W"  # ou vi
 - Aceita uma pasta com `01` a `11` (um arquivo por trecho, qualquer formato de áudio) ou um arquivo
   único com pausas de uns 3 segundos entre os trechos.
 - Limpa o ruído, suaviza os "s", comprime de leve e grava `audio/<cena>.wav` e `durations.json`.
+- `--enxugar` deixa o ritmo de comercial: pausas de leitura acima de 0,18 s viram respiros de 0,12 s e a
+  fala acelera 10% sem mudar o tom (ajuste com `--ritmo=1.05` a `1.15`).
 - Depois, siga com `record.mjs` e `compose.mjs` normalmente.
 
 O guia para quem grava fica em `video-demo/GRAVE-SUA-VOZ.md` (fora do Git, junto com os vídeos).
