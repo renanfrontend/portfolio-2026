@@ -17,6 +17,8 @@ export default defineConfig({
   reporter: [["list"]],
   // Com a suíte inteira em paralelo, navegações num build de produção local passam de 5 s.
   expect: { timeout: 15_000 },
+  // Testes com várias navegações passam de 30 s quando a suíte inteira roda em paralelo nesta máquina.
+  timeout: 60_000,
   use: {
     baseURL: `http://localhost:${PORT}`,
     channel,

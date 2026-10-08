@@ -66,6 +66,24 @@ export const projectsCopy: Record<string, ProjectCopy> = {
       "Auto-pause when switching tabs, saved progress and keyboard shortcuts.",
     ],
   },
+  "upbeats-karaoke-player": {
+    title: "UP! BEATS Karaoke",
+    summary:
+      "Karaoke that runs in the browser: synced lyrics, real-time removal of the original vocals and a microphone with echo, all processed on the device.",
+    coverAlt: "UP! BEATS karaoke mode panel with the original-vocals controls (Original, Guide and Karaoke) and the microphone controls.",
+    galleryAlt: [],
+    challenge:
+      "Build real karaoke without an audio server: strip the vocals from regular songs, show the lyrics on time and let people hear their own voice along with the track, without lag or feedback, in any browser.",
+    solution:
+      "A single Web Audio API graph mixes music and microphone. Vocals are removed by subtracting the right channel from the left, while bass and treble come back through cascaded filters outside the vocal range, with a smooth control between Original, Guide and Karaoke. Synced lyrics come from LRCLIB and can be calibrated by tapping the line being sung, with the offset saved per song. The microphone has a compressor, echo and two modes: speakers (with echo cancellation) and headphones.",
+    contribution:
+      "Personal project: audio engine, integration with the iTunes (search and previews) and LRCLIB (lyrics) APIs, lyric calibration, playback of local files, a three-language interface and automatic deployment to GitHub Pages.",
+    outcomes: [
+      "Published on GitHub Pages, deployed on every push.",
+      "Vocal removal and microphone processed in the browser, with no server.",
+      "Interface in Portuguese, English and Spanish.",
+    ],
+  },
   "mwm-portal": {
     title: "MWM Portal",
     summary: "Frontend for corporate and logistics systems: operations dashboards, gate management and cooperative member data.",

@@ -16,6 +16,8 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("no tag before consent or after refusal; accepting tracks navigation once", async ({ page }) => {
+  // Várias navegações e esperas: ~25 s sozinho, passa de 30 s com a suíte inteira rodando em paralelo.
+  test.slow();
   await page.goto("/pt-BR?utm_source=linkedin&utm_medium=social&utm_campaign=portfolio");
   await expect(page.getByRole("button", { name: "Continuar sem permitir" })).toBeVisible();
   await expect(page.locator('script[src*="googletagmanager"]')).toHaveCount(0);
