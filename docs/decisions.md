@@ -45,6 +45,12 @@ Projeto novo criado com `create-next-app@latest` em `C:\Projetos\renan-portfolio
 - Logs não registram corpo da mensagem nem dados pessoais (há teste para isso).
 - Armadilha de robôs (campo `website`) e limite de 16 KB por requisição.
 
+## Contratação e pagamentos
+
+- Modal de pré-contratação → `POST /api/pre-contratacao` → Stripe Checkout hospedado → webhook `POST /api/webhooks/stripe` → `/[locale]/contratar/sucesso`. Detalhes, configuração e teste local em [payments.md](payments.md).
+- Preço sempre do servidor; sem Stripe configurado ou em falha, o pedido é registrado por e-mail e o modal oferece o WhatsApp.
+- GA4 com consentimento (`NEXT_PUBLIC_GA_MEASUREMENT_ID`, da gestão de tráfego), com os eventos do funil de contratação somados aos de contato.
+
 ## Identidade visual
 
 - A referência (rafalmeida.com.br) inspirou a estrutura (hero com nome em destaque, retrato interativo, abertura). A pedido do Renan, a linguagem visual foi diferenciada para não parecer cópia:

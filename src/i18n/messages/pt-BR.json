@@ -27,7 +27,11 @@
       "description": "Como o site de Renan Augusto trata os dados enviados pelo formulário de contato e as preferências salvas no navegador, conforme a LGPD."
     },
     "caseStudySuffix": "estudo de caso",
-    "serviceSuffix": "serviço"
+    "serviceSuffix": "serviço",
+    "hire": {
+      "title": "Contratar: pacotes de desenvolvimento e consultoria",
+      "description": "Pacotes para contratar Renan Augusto: diagnóstico técnico, setup de MVP, horas de consultoria e suporte mensal em React, Next.js e TypeScript."
+    }
   },
   "common": {
     "skipToContent": "Pular para o conteúdo",
@@ -46,7 +50,8 @@
     "contact": "Contato",
     "cta": "Fale comigo",
     "openMenu": "Abrir menu",
-    "closeMenu": "Fechar menu"
+    "closeMenu": "Fechar menu",
+    "hire": "Contratar"
   },
   "theme": {
     "label": "Tema",
@@ -244,7 +249,11 @@
     "faqTitle": "Perguntas frequentes",
     "back": "Voltar para serviços",
     "otherServices": "Outros serviços",
-    "details": "Ver detalhes"
+    "details": "Ver detalhes",
+    "packagesBanner": {
+      "title": "Quer ver pacotes e formatos de contratação?",
+      "cta": "Ver pacotes"
+    }
   },
   "contact": {
     "eyebrow": "Contato",
@@ -300,7 +309,8 @@
         "network": "Não foi possível conectar. Verifique a sua internet e tente novamente; seu texto foi preservado.",
         "server": "Ocorreu um erro inesperado. Seu texto foi preservado; tente novamente ou use o e-mail."
       },
-      "fallbackEmail": "Enviar por e-mail"
+      "fallbackEmail": "Enviar por e-mail",
+      "packageMessage": "Quero contratar o pacote: {package}."
     },
     "whatsappCta": "Conversar no WhatsApp",
     "whatsappTemplates": {
@@ -342,5 +352,129 @@
       "retrato em código pronto",
       "interface montada"
     ]
+  },
+  "hire": {
+    "eyebrow": "contratar",
+    "title": "Escolha como começar",
+    "description": "Pacotes com escopo claro para tirar a sua ideia do papel ou evoluir o que já existe. Não sabe qual escolher? Comece pelo diagnóstico ou fale comigo.",
+    "badges": {
+      "popular": "Mais popular",
+      "start-here": "Comece por aqui",
+      "recurring": "Recorrente"
+    },
+    "statuses": {
+      "available": "Agenda aberta",
+      "limited": "Agenda limitada",
+      "unavailable": "Indisponível no momento"
+    },
+    "deliverables": "O que está incluído",
+    "deadline": "Prazo estimado",
+    "deadlineDefault": "Combinado na proposta",
+    "priceOnRequest": "Sob consulta",
+    "priceFrom": "a partir de",
+    "perMonth": "/mês",
+    "cta": "Contratar Serviço",
+    "ctaUnavailable": "Indisponível",
+    "note": "Valores e prazos são confirmados em uma proposta por escrito, depois de entender o seu cenário.",
+    "faqTitle": "Dúvidas sobre a contratação",
+    "faq": [
+      {
+        "question": "Como funciona o início do trabalho?",
+        "answer": "Depois do seu contato, marcamos uma conversa rápida para entender o objetivo. Em seguida envio uma proposta por escrito com escopo, entregáveis, prazo e valor. O trabalho começa após a sua aprovação."
+      },
+      {
+        "question": "Os prazos são garantidos?",
+        "answer": "Os prazos dos pacotes são estimativas. O prazo definitivo vai na proposta, depois de conhecer o escopo, e é acompanhado em entregas frequentes que você consegue ver."
+      },
+      {
+        "question": "Como é feito o pagamento?",
+        "answer": "A forma de pagamento e o cronograma são definidos na proposta, de acordo com o pacote e o tamanho do projeto."
+      },
+      {
+        "question": "Não sei qual pacote escolher. E agora?",
+        "answer": "Comece pelo Diagnóstico Técnico ou me mande uma mensagem contando o que precisa. Eu indico o caminho mais adequado, mesmo que seja um formato diferente dos pacotes."
+      },
+      {
+        "question": "Você trabalha de forma remota?",
+        "answer": "Sim. Atendo de forma remota e, em São Paulo, também em formato híbrido quando faz sentido para o projeto."
+      },
+      {
+        "question": "Posso trocar de pacote depois?",
+        "answer": "Pode. É comum começar pelo diagnóstico ou por um MVP e depois seguir com horas de consultoria ou suporte mensal."
+      }
+    ],
+    "installments": "ou parcelado no cartão",
+    "ctaTalk": "Falar sobre o projeto",
+    "opensInNewTab": "(abre o WhatsApp em nova aba)",
+    "modal": {
+      "title": "Contratar serviço",
+      "summary": "Resumo do pacote",
+      "price": "Valor",
+      "close": "Fechar",
+      "requiredHint": "Todos os campos são obrigatórios.",
+      "name": "Nome completo",
+      "email": "E-mail",
+      "whatsapp": "WhatsApp",
+      "whatsappPlaceholder": "(11) 98765-4321",
+      "message": "Conte brevemente sobre o seu projeto ou necessidade",
+      "messageHint": "Objetivo, prazo e o que já existe hoje.",
+      "submit": "Avançar para pagamento",
+      "submitting": "Processando…",
+      "privacyNotice": "Seus dados são usados só para esta contratação. Veja a",
+      "privacyLink": "política de privacidade",
+      "errors": {
+        "name": "Informe nome e sobrenome.",
+        "email": "Informe um e-mail válido.",
+        "whatsapp": "Informe um WhatsApp válido com DDD.",
+        "message": "Conte um pouco mais (mínimo de 10 caracteres).",
+        "summary": "Revise os campos destacados.",
+        "rateLimited": "Muitas tentativas em pouco tempo. Aguarde alguns minutos.",
+        "unavailable": "Não foi possível registrar agora. Seus dados foram mantidos; tente de novo ou fale pelo WhatsApp.",
+        "network": "Falha de conexão. Seus dados foram mantidos; tente novamente.",
+        "server": "Ocorreu um erro inesperado. Seus dados foram mantidos; tente novamente."
+      },
+      "successTitle": "Pedido {order} recebido",
+      "successText": "Seus dados foram registrados, mas o pagamento online não abriu agora. Fale comigo no WhatsApp para receber o link de pagamento, ou tente de novo em alguns minutos.",
+      "successWhatsapp": "Falar sobre o pedido no WhatsApp",
+      "successWhatsappMessage": "Olá, Renan! Acabei de fazer a pré-contratação do pacote *{package}* no seu site (pedido {order}).",
+      "done": "Concluir",
+      "redirecting": "Abrindo pagamento seguro…",
+      "secureNotice": "Pagamento seguro processado pelo Stripe."
+    },
+    "canceled": {
+      "title": "Pagamento não concluído",
+      "text": "Nenhuma cobrança foi feita. Escolha o pacote de novo para tentar outra vez, ou fale comigo pelo WhatsApp."
+    },
+    "success": {
+      "metaTitle": "Confirmação do pedido",
+      "eyebrow": "Contratação",
+      "paidBadge": "Pagamento confirmado",
+      "pendingBadge": "Aguardando pagamento",
+      "paidTitle": "Tudo certo, {name}!",
+      "pendingTitle": "Pedido registrado, {name}",
+      "paidText": "Obrigado pela confiança. Seu pacote está garantido e o próximo passo é a nossa reunião de kickoff.",
+      "pendingText": "Seu Pix ou boleto foi gerado. Assim que o pagamento compensar, você recebe a confirmação por e-mail: o Pix costuma levar segundos e o boleto, até 3 dias úteis.",
+      "order": "Pedido",
+      "package": "Pacote",
+      "amount": "Valor",
+      "perMonth": "/mês",
+      "stepsTitle": "Próximos passos",
+      "steps": [
+        "Seu pedido foi registrado com sucesso.",
+        "Enviamos os detalhes para o seu e-mail.",
+        "Agende nossa reunião de alinhamento técnico (Kickoff)."
+      ],
+      "pendingEmailStep": "Você recebe a confirmação no seu e-mail quando o pagamento compensar.",
+      "schedule": "Agendar kickoff",
+      "scheduleWhatsapp": "Agendar kickoff pelo WhatsApp",
+      "whatsapp": "Falar via WhatsApp",
+      "whatsappMessage": "Olá, Renan! Acabei de contratar o pacote *{package}* no seu site (pedido {order}). Vamos agendar o kickoff?",
+      "home": "Voltar para a página inicial",
+      "notFoundTitle": "Não encontramos este pedido",
+      "notFoundText": "O link pode estar incompleto ou o pagamento não foi concluído. Se você pagou, a confirmação chega por e-mail; em caso de dúvida, fale comigo.",
+      "backToPackages": "Ver pacotes",
+      "loading": "Confirmando o pagamento…",
+      "notFoundWhatsappMessage": "Olá, Renan! Tentei contratar um pacote pelo seu site e não encontrei a confirmação do pedido. Pode me ajudar?"
+    }
   }
 }

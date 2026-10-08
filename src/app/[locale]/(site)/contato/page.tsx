@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { siteConfig } from "@/config/site";
 import { ContactChannels } from "@/features/contact/components/contact-channels";
 import { ContactForm } from "@/features/contact/components/contact-form";
+import { getPackages } from "@/features/packages/packages";
 import { getServices } from "@/features/services/server/queries";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -27,6 +28,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
   const formProps = {
     labels: t.form,
     services: getServices(locale).map((service) => ({ slug: service.slug, title: service.title })),
+    packages: getPackages(locale).map((item) => ({ id: item.id, name: item.name })),
     privacyHref: localePath(locale, "/privacidade"),
     fallbackEmail: siteConfig.email,
   };

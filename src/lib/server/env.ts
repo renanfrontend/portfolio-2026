@@ -10,6 +10,13 @@ const serverEnvSchema = z.object({
   CONTACT_TO_EMAIL: z.preprocess(emptyToUndefined, z.email().optional()),
   UPSTASH_REDIS_REST_URL: z.preprocess(emptyToUndefined, z.url().optional()),
   UPSTASH_REDIS_REST_TOKEN: z.preprocess(emptyToUndefined, z.string().optional()),
+  STRIPE_SECRET_KEY: z.preprocess(emptyToUndefined, z.string().regex(/^(sk|rk)_/).optional()),
+  STRIPE_WEBHOOK_SECRET: z.preprocess(emptyToUndefined, z.string().startsWith("whsec_").optional()),
+  /** Métodos aceitos no Checkout, separados por vírgula. Vazio = card,pix,boleto. */
+  STRIPE_PAYMENT_METHODS: z.preprocess(emptyToUndefined, z.string().optional()),
+  /** Parcelamento no cartão (Brasil). Precisa estar liberado na conta Stripe. */
+  STRIPE_CARD_INSTALLMENTS: z.preprocess(emptyToUndefined, z.enum(["true", "false"]).optional()),
+  NEXT_PUBLIC_APP_URL: z.preprocess(emptyToUndefined, z.url().optional()),
 });
 
 const DEFAULT_CONTACT_TO = "renan.gabba@gmail.com";

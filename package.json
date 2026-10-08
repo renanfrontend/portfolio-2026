@@ -11,13 +11,14 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "validate": "npm run lint && npm run typecheck && npm run test && npm run build:check",
-    "build:check": "cross-env NEXT_DIST_DIR=.next-check next build"
+    "build:check": "cross-env NEXT_DIST_DIR=.next-check NEXT_PUBLIC_GA_MEASUREMENT_ID=G-TEST123 next build"
   },
   "dependencies": {
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "server-only": "^0.0.1",
+    "stripe": "^23.0.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {

@@ -3,7 +3,7 @@ import { z } from "zod";
 // Only public portfolio paths; never retain arbitrary URLs, queries or fragments.
 export function publicPagePath(path: string): string {
   const clean = path.split(/[?#]/)[0];
-  return /^\/(pt-BR|en)(\/(sobre|contato|privacidade|servicos|projetos)(\/[a-z0-9-]+)?)?\/?$/.test(clean)
+  return /^\/(pt-BR|en)(\/(sobre|contato|privacidade|servicos|projetos|contratar)(\/[a-z0-9-]+)?)?\/?$/.test(clean)
     ? clean
     : "/";
 }

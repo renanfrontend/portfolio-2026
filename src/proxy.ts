@@ -4,7 +4,7 @@ import { services } from "@/content/pt-BR/services";
 import { defaultLocale, isLocale } from "@/i18n/config";
 import { fetchShowcaseReposOrNull } from "@/lib/github-showcase";
 
-const localizedSections = new Set(["sobre", "projetos", "servicos", "contato", "privacidade"]);
+const localizedSections = new Set(["sobre", "projetos", "servicos", "contratar", "contato", "privacidade"]);
 
 /** Slugs são estáveis entre idiomas, então a lista do pt-BR vale para todos. */
 const knownSlugs: Record<string, Set<string>> = {

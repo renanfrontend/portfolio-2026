@@ -27,7 +27,11 @@
       "description": "How Renan Augusto website handles data sent through the contact form and preferences stored in the browser, under Brazil LGPD."
     },
     "caseStudySuffix": "case study",
-    "serviceSuffix": "service"
+    "serviceSuffix": "service",
+    "hire": {
+      "title": "Hire: development and consulting packages",
+      "description": "Packages to hire Renan Augusto: technical assessment, MVP setup, consulting hours and monthly support with React, Next.js and TypeScript."
+    }
   },
   "common": {
     "skipToContent": "Skip to content",
@@ -46,7 +50,8 @@
     "contact": "Contact",
     "cta": "Get in touch",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "hire": "Hire"
   },
   "theme": {
     "label": "Theme",
@@ -244,7 +249,11 @@
     "faqTitle": "Frequently asked questions",
     "back": "Back to services",
     "otherServices": "Other services",
-    "details": "View details"
+    "details": "View details",
+    "packagesBanner": {
+      "title": "Want to see packages and ways to hire?",
+      "cta": "See packages"
+    }
   },
   "contact": {
     "eyebrow": "Contact",
@@ -300,7 +309,8 @@
         "network": "Could not connect. Check your internet connection and try again; your text was kept.",
         "server": "An unexpected error occurred. Your text was kept; try again or use email."
       },
-      "fallbackEmail": "Send by email"
+      "fallbackEmail": "Send by email",
+      "packageMessage": "I would like to hire the package: {package}."
     },
     "whatsappCta": "Chat on WhatsApp",
     "whatsappTemplates": {
@@ -342,5 +352,129 @@
       "code portrait ready",
       "interface mounted"
     ]
+  },
+  "hire": {
+    "eyebrow": "hire",
+    "title": "Choose how to start",
+    "description": "Packages with a clear scope to get your idea off the ground or improve what already exists. Not sure which one? Start with the assessment or get in touch.",
+    "badges": {
+      "popular": "Most popular",
+      "start-here": "Start here",
+      "recurring": "Recurring"
+    },
+    "statuses": {
+      "available": "Open schedule",
+      "limited": "Limited schedule",
+      "unavailable": "Currently unavailable"
+    },
+    "deliverables": "What is included",
+    "deadline": "Estimated timeline",
+    "deadlineDefault": "Agreed in the proposal",
+    "priceOnRequest": "On request",
+    "priceFrom": "from",
+    "perMonth": "/month",
+    "cta": "Hire Service",
+    "ctaUnavailable": "Unavailable",
+    "note": "Prices and timelines are confirmed in a written proposal after understanding your scenario.",
+    "faqTitle": "Questions about hiring",
+    "faq": [
+      {
+        "question": "How does the work start?",
+        "answer": "After you reach out, we schedule a short call to understand the goal. Then I send a written proposal with scope, deliverables, timeline and price. Work starts after your approval."
+      },
+      {
+        "question": "Are timelines guaranteed?",
+        "answer": "Package timelines are estimates. The final timeline goes in the proposal, once the scope is known, and is tracked through frequent deliveries you can see."
+      },
+      {
+        "question": "How does payment work?",
+        "answer": "The payment method and schedule are defined in the proposal, according to the package and project size."
+      },
+      {
+        "question": "I am not sure which package to choose. What now?",
+        "answer": "Start with the Technical Assessment or send me a message about what you need. I will suggest the best path, even if it is a different format from these packages."
+      },
+      {
+        "question": "Do you work remotely?",
+        "answer": "Yes. I work remotely and, in São Paulo, also in a hybrid format when it makes sense for the project."
+      },
+      {
+        "question": "Can I switch packages later?",
+        "answer": "Yes. It is common to start with the assessment or an MVP and then continue with consulting hours or monthly support."
+      }
+    ],
+    "installments": "or in card installments",
+    "ctaTalk": "Talk about the project",
+    "opensInNewTab": "(opens WhatsApp in a new tab)",
+    "modal": {
+      "title": "Hire service",
+      "summary": "Package summary",
+      "price": "Price",
+      "close": "Close",
+      "requiredHint": "All fields are required.",
+      "name": "Full name",
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "whatsappPlaceholder": "(11) 98765-4321",
+      "message": "Briefly tell me about your project or need",
+      "messageHint": "Goal, timeline and what already exists.",
+      "submit": "Continue to payment",
+      "submitting": "Processing…",
+      "privacyNotice": "Your data is used only for this request. See the",
+      "privacyLink": "privacy policy",
+      "errors": {
+        "name": "Enter your first and last name.",
+        "email": "Enter a valid email address.",
+        "whatsapp": "Enter a valid Brazilian WhatsApp number with area code.",
+        "message": "Tell me a bit more (at least 10 characters).",
+        "summary": "Please review the highlighted fields.",
+        "rateLimited": "Too many attempts in a short time. Wait a few minutes.",
+        "unavailable": "Could not register it right now. Your data was kept; try again or reach out on WhatsApp.",
+        "network": "Connection failed. Your data was kept; try again.",
+        "server": "An unexpected error occurred. Your data was kept; try again."
+      },
+      "successTitle": "Order {order} received",
+      "successText": "Your details were saved, but online payment could not open right now. Message me on WhatsApp to get the payment link, or try again in a few minutes.",
+      "successWhatsapp": "Talk about the order on WhatsApp",
+      "successWhatsappMessage": "Hi Renan! I just submitted a hire request for the *{package}* package on your website (order {order}).",
+      "done": "Done",
+      "redirecting": "Opening secure checkout…",
+      "secureNotice": "Secure payment processed by Stripe."
+    },
+    "canceled": {
+      "title": "Payment not completed",
+      "text": "You were not charged. Choose the package again to retry, or message me on WhatsApp."
+    },
+    "success": {
+      "metaTitle": "Order confirmation",
+      "eyebrow": "Hiring",
+      "paidBadge": "Payment confirmed",
+      "pendingBadge": "Awaiting payment",
+      "paidTitle": "All set, {name}!",
+      "pendingTitle": "Order received, {name}",
+      "paidText": "Thank you for your trust. Your package is secured and the next step is our kickoff meeting.",
+      "pendingText": "Your Pix or boleto was generated. Once the payment clears you will get a confirmation email: Pix usually takes seconds and boleto up to 3 business days.",
+      "order": "Order",
+      "package": "Package",
+      "amount": "Amount",
+      "perMonth": "/month",
+      "stepsTitle": "Next steps",
+      "steps": [
+        "Your order was registered successfully.",
+        "We sent the details to your email.",
+        "Schedule our technical alignment meeting (Kickoff)."
+      ],
+      "pendingEmailStep": "You will get a confirmation email once the payment clears.",
+      "schedule": "Schedule kickoff",
+      "scheduleWhatsapp": "Schedule kickoff on WhatsApp",
+      "whatsapp": "Talk on WhatsApp",
+      "whatsappMessage": "Hi Renan! I just hired the *{package}* package on your website (order {order}). Shall we schedule the kickoff?",
+      "home": "Back to home page",
+      "notFoundTitle": "We could not find this order",
+      "notFoundText": "The link may be incomplete or the payment was not completed. If you paid, the confirmation arrives by email; if in doubt, message me.",
+      "backToPackages": "See packages",
+      "loading": "Confirming payment…",
+      "notFoundWhatsappMessage": "Hi Renan! I tried to hire a package on your website and could not find my order confirmation. Can you help?"
+    }
   }
 }

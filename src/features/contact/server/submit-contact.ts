@@ -16,6 +16,7 @@ export type SubmitContactDeps = {
   labels?: {
     services?: Record<string, string>;
     budgets?: Record<string, string>;
+    packages?: Record<string, string>;
   };
 };
 
@@ -75,6 +76,8 @@ const localeNames: Record<string, string> = { "pt-BR": "Português", en: "Inglê
 export function buildMessage(input: ContactInput, to: string, labels: SubmitContactDeps["labels"] = {}, lead?: Lead) {
   const service = labels.services?.[input.service] ?? input.service;
   const budget = input.budget ? (labels.budgets?.[input.budget] ?? input.budget) : undefined;
+  // Só pacotes conhecidos entram no e-mail.
+  const pkg = input.package ? labels.packages?.[input.package] : undefined;
   const lines = [
     lead && `ID do pedido: ${lead.id}`,
     lead && `Recebido em (UTC): ${lead.createdAt}`,
@@ -83,6 +86,7 @@ export function buildMessage(input: ContactInput, to: string, labels: SubmitCont
     input.company && `Empresa: ${input.company}`,
     input.phone && `Telefone: ${input.phone}`,
     `Serviço: ${service}`,
+    pkg && `Pacote: ${pkg}`,
     budget && `Orçamento: ${budget}`,
     input.timeline && `Prazo desejado: ${input.timeline}`,
     input.locale && `Idioma da página: ${localeNames[input.locale] ?? input.locale}`,
@@ -101,7 +105,7 @@ export function buildMessage(input: ContactInput, to: string, labels: SubmitCont
   return {
     to,
     replyTo: input.email,
-    subject: `[Site] ${service}: contato de ${input.name}`,
+    subject: pkg ? `[Site] Contratar ${pkg}: contato de ${input.name}` : `[Site] ${service}: contato de ${input.name}`,
     text: lines.join("\n"),
   };
 }

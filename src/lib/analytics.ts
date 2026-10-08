@@ -77,12 +77,31 @@ export function initializeAnalytics(id: string) {
   configuredId = id;
 }
 
-type FunnelEvent = "page_view" | "contact_start" | "contact_error" | "generate_lead" | "whatsapp_click" | "email_click";
-type EventDetails = { service?: string; error_type?: string };
+type FunnelEvent =
+  | "page_view"
+  | "contact_start"
+  | "contact_error"
+  | "generate_lead"
+  | "whatsapp_click"
+  | "email_click"
+  // Funil de contratação (/contratar): pacote, valor e número do pedido, nunca dados pessoais.
+  | "open_service_modal"
+  | "submit_lead_form"
+  | "begin_checkout"
+  | "purchase_success";
+type EventItem = { item_id: string; item_name: string; price?: number; quantity: number };
+type EventDetails = {
+  service?: string;
+  error_type?: string;
+  package_id?: string;
+  package_name?: string;
+  value?: number;
+  currency?: string;
+  transaction_id?: string;
+  items?: EventItem[];
+};
 
-/** Intentionally accepts no form values, email addresses, message or link URL. */
-export function trackEvent(event: FunnelEvent, details: EventDetails = {}) {
-  if (typeof window === "undefined" || !configuredId || getConsent() !== "granted") return;
+function send(event: FunnelEvent, details: EventDetails, extra: Record<string, unknown> = {}) {
   const acquisition = getAcquisition();
   window.gtag?.("event", event, {
     send_to: configuredId,
@@ -92,7 +111,42 @@ export function trackEvent(event: FunnelEvent, details: EventDetails = {}) {
     ...(acquisition?.medium ? { campaign_medium: acquisition.medium } : {}),
     ...(acquisition?.campaign ? { campaign_name: acquisition.campaign } : {}),
     ...details,
+    ...extra,
   });
+}
+
+const canTrack = () => typeof window !== "undefined" && Boolean(configuredId) && getConsent() === "granted";
+
+/** Intentionally accepts no form values, email addresses, message or link URL. */
+export function trackEvent(event: FunnelEvent, details: EventDetails = {}) {
+  if (canTrack()) send(event, details);
+}
+
+/**
+ * Envia o evento e só então chama `next` (ex.: sair para o Stripe). Sem permissão, sem Analytics
+ * ou sem resposta do Google em `timeoutMs`, segue mesmo assim: nunca trava a navegação.
+ */
+export function trackEventThen(event: FunnelEvent, details: EventDetails, next: () => void, timeoutMs = 600) {
+  if (!canTrack() || !window.gtag) return next();
+  let done = false;
+  const finish = () => {
+    if (done) return;
+    done = true;
+    next();
+  };
+  const timer = window.setTimeout(finish, timeoutMs);
+  try {
+    send(event, details, {
+      transport_type: "beacon",
+      event_callback: () => {
+        window.clearTimeout(timer);
+        finish();
+      },
+    });
+  } catch {
+    window.clearTimeout(timer);
+    finish();
+  }
 }
 
 /** Reload unloads the already executed Google script; no further events after withdrawal. */

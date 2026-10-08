@@ -17,6 +17,8 @@ export type ContactFormLabels = Dictionary["contact"]["form"];
 type ContactFormProps = {
   labels: ContactFormLabels;
   services: { slug: string; title: string }[];
+  /** Pacotes de /contratar; com ?pacote=id a mensagem já vem preenchida. */
+  packages?: { id: string; name: string }[];
   privacyHref: string;
   fallbackEmail: string;
 };
@@ -49,14 +51,25 @@ const inputClass = (invalid: boolean) =>
     invalid ? "border-danger" : "border-border-strong",
   );
 
-export function ContactForm({ labels, services, privacyHref, fallbackEmail }: ContactFormProps) {
+export function ContactForm({ labels, services, packages = [], privacyHref, fallbackEmail }: ContactFormProps) {
   const serviceSlugs = useMemo(() => services.map((service) => service.slug), [services]);
+  const packageIds = useMemo(() => packages.map((item) => item.id), [packages]);
   const schema = useMemo(() => createContactSchema(serviceSlugs), [serviceSlugs]);
   const [values, setValues] = useState<Values>(() => emptyValues());
   // Serviço vindo da URL; vale até a pessoa escolher outro no campo.
   const [preselected, setPreselected] = useState<string | undefined>();
   const [serviceTouched, setServiceTouched] = useState(false);
-  const onResolveService = useCallback((slug: string | undefined) => setPreselected(slug), []);
+  const [packageId, setPackageId] = useState<string | undefined>();
+  const onResolveService = useCallback(
+    (slug: string | undefined, resolvedPackage: string | undefined) => {
+      setPreselected(slug);
+      setPackageId(resolvedPackage);
+      const name = packages.find((item) => item.id === resolvedPackage)?.name;
+      // Pré-preenche a mensagem só se a pessoa ainda não escreveu nada.
+      if (name) setValues((current) => (current.message ? current : { ...current, message: labels.packageMessage.replace("{package}", name) }));
+    },
+    [packages, labels.packageMessage],
+  );
   const service = serviceTouched ? values.service : values.service || preselected || "";
   const formValues: Values = { ...values, service };
   const [errors, setErrors] = useState<ContactFieldErrors>({});
@@ -103,7 +116,7 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
       response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formValues, locale: document.documentElement.lang, acquisition: getAcquisition() }),
+        body: JSON.stringify({ ...formValues, package: packageId, locale: document.documentElement.lang, acquisition: getAcquisition() }),
       });
     } catch {
       trackEvent("contact_error", { error_type: "network" });
@@ -121,6 +134,7 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
       setValues(emptyValues());
       setServiceTouched(false);
       setPreselected(undefined);
+      setPackageId(undefined);
       return;
     }
 
@@ -170,7 +184,7 @@ export function ContactForm({ labels, services, privacyHref, fallbackEmail }: Co
       if (!started.current) { trackEvent("contact_start"); started.current = true; }
     }} aria-labelledby={id("title")} className="relative rounded-2xl card-neon p-6 sm:p-8">
       <Suspense fallback={null}>
-        <ServiceParamReader serviceSlugs={serviceSlugs} onResolve={onResolveService} />
+        <ServiceParamReader serviceSlugs={serviceSlugs} packageIds={packageIds} onResolve={onResolveService} />
       </Suspense>
       <h2 id={id("title")} className="text-2xl font-bold text-fg">
         {labels.title}

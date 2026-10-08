@@ -242,3 +242,27 @@
   inherits: true;
   initial-value: 42%;
 }
+
+/* Modal de pré-contratação: sobe de baixo no celular e aparece suavemente no computador. */
+@media (prefers-reduced-motion: no-preference) {
+  .hire-dialog[open] {
+    animation: hire-dialog-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .hire-dialog[open]::backdrop {
+    animation: hire-backdrop-in 0.28s ease;
+  }
+}
+
+@keyframes hire-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes hire-backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
