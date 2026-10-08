@@ -20,6 +20,14 @@ O código prepara medição GA4 com consentimento, identificação de pedidos po
 | `generate_lead` | API confirma que o provedor de e-mail aceitou o pedido |
 | `whatsapp_click` | Clique em link do WhatsApp; sem número ou mensagem |
 | `email_click` | Clique em link de e-mail; sem endereço ou conteúdo |
+| `open_service_modal` | Modal de contratação aberto em `/contratar` (pacote) |
+| `submit_lead_form` | Pré-contratação aceita pelo servidor (pacote e valor) |
+| `begin_checkout` | Antes de ir ao Stripe (número do pedido, valor); espera até 600 ms e segue |
+| `purchase_success` | Página de confirmação com pagamento confirmado, uma vez por pedido |
+
+Para o funil de contratação ([payments.md](payments.md)), marcar também `submit_lead_form` (pedido de
+pacote recebido) e `purchase_success` (venda) como eventos principais. Nenhum desses eventos leva nome,
+e-mail, telefone ou mensagem.
 
 Eventos aceitos não garantem entrega do e-mail na caixa de entrada. Analytics depende de permissão, disponibilidade da tag e bloqueadores; o e-mail é o registro operacional. Não envie dados pessoais em UTMs. O código aceita somente slugs de até 80 caracteres e descarta queries arbitrárias, fragmentos e URLs completas de referência. Mantém o domínio de referência e a primeira página vista após o consentimento durante a sessão da aba. Recusar estatísticas não impede contato. Não há rastreamento retroativo de visitas anteriores à permissão. O controle no rodapé permite desativar a coleta; recarrega a página e remove os cookies GA criados neste host. Desativar não apaga dados já processados pelo Google.
 
@@ -59,6 +67,18 @@ Para encaminhar os pedidos ao sistema escolhido:
 }
 ```
 
+Os pedidos de pacote em `/contratar` usam o mesmo formato, com `contact.phone` em E.164,
+`contact.package` e um campo extra `order` (o número `RA-...` é o mesmo do e-mail e do Stripe):
+
+```json
+"order": { "id": "RA-ZP5AHF-042", "packageId": "diagnostico-tecnico", "amountInCents": 190000, "currency": "BRL", "checkout": "stripe" }
+```
+
+`checkout` vale `stripe` quando o cliente foi ao pagamento online e `manual` quando o pagamento será
+combinado depois (Stripe ainda não configurado ou fora do ar). A confirmação do pagamento chega pelo
+webhook do Stripe, não por este evento. Num pedido de pacote, se o e-mail falhar mas o Checkout já tiver
+aberto, o pedido segue para o pagamento e também é enviado ao webhook (o registro fica no Stripe).
+
 Empresa, telefone, orçamento, prazo e atribuição são opcionais. O payload é validado no servidor, mas os textos continuam sendo conteúdo não confiável: escapar HTML, tratar como texto ao gravar em planilhas e nunca executar instruções vindas da mensagem. Atribuição é declarada pelo navegador e pode estar ausente ou ser adulterada.
 
 Fluxo a configurar no sistema escolhido: receber → gravar por ID → exibir em lista privada de oportunidades. Colunas sugeridas: ID, data, nome, empresa, serviço, orçamento, prazo, origem, status, próxima ação. Estados sugeridos: novo, em conversa, proposta enviada, ganho, perdido. Lembretes e resumo semanal devem consultar essa lista; **ainda não estão agendados**. Mensagens automáticas a clientes também não foram ativadas.
@@ -76,7 +96,7 @@ Acompanhar semanalmente: consultas e páginas com impressões/cliques no Search 
 ## Validação e ativação
 
 - `npm run validate` verifica lint, tipos, testes unitários e build.
-- Para testes de medição: `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-TEST123 GITHUB_SHOWCASE=off npm run build:check`, depois `npm run test:e2e -- --project=desktop tests/e2e/analytics.spec.ts tests/e2e/contact.spec.ts`. A tag é simulada nos testes; nenhum dado é enviado ao Google.
+- Testes de medição: `npm run build:check` já compila com `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-TEST123` (só no build de validação, nunca no deploy). Depois, `npm run test:e2e` roda tudo, inclusive `tests/e2e/analytics.spec.ts`. A tag é simulada nos testes; nenhum dado é enviado ao Google.
 - Conferir no navegador: rejeitar → nenhuma tag; aceitar → uma visita por navegação; erro de formulário → nenhum lead; sucesso → um lead; WhatsApp → clique somente; desativar → nenhuma nova coleta.
 - Testar o webhook em homologação, inclusive erro/timeout, antes de configurar em produção.
 - Nunca usar `EMAIL_PROVIDER=test` em produção. Não publicar o ID fictício usado nos testes.

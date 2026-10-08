@@ -14,6 +14,9 @@ describe("acquisition privacy boundaries", () => {
     expect(data.source).toBeUndefined();
     expect(data.referrerHost).toBeUndefined();
     expect(publicPagePath("/account/private@example.com")).toBe("/");
+    // Páginas de contratação contam como páginas próprias, não como a página inicial.
+    expect(publicPagePath("/pt-BR/contratar")).toBe("/pt-BR/contratar");
+    expect(publicPagePath("/pt-BR/contratar/sucesso?session_id=cs_test_x")).toBe("/pt-BR/contratar/sucesso");
   });
   it("invalid attribution cannot prevent a valid enquiry", () => {
     const result = createContactSchema(["automacao-ia"]).safeParse({

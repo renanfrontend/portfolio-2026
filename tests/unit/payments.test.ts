@@ -15,6 +15,7 @@ import {
 import { processStripeWebhook } from "@/features/packages/server/stripe-webhook";
 import { submitPreHire } from "@/features/packages/server/submit-pre-hire";
 import { createTestAdapter } from "@/lib/server/email";
+import type { Lead } from "@/lib/server/leads";
 import { createMemoryRateLimiter } from "@/lib/server/rate-limit";
 
 const input = {
@@ -139,6 +140,23 @@ describe("pré-contratação com pagamento", () => {
     appUrl: "https://example.com",
   });
   const body = { ...input, website: "" };
+
+  it("vira lead no CRM com o pedido e a origem da visita, sem quebrar se o CRM falhar", async () => {
+    const sent: Lead[] = [];
+    const leads = { async send(lead: Lead) { sent.push(lead); } };
+    const acquisition = { landingPage: "/pt-BR/contratar", referrerHost: "www.instagram.com", source: "instagram", medium: "social", campaign: "reels_checkout" };
+    const d = { ...deps(fakeGateway("ok")), leads };
+    const result = await submitPreHire({ ...body, acquisition }, "ip", d);
+    expect(result.status).toBe(200);
+    expect(sent).toHaveLength(1);
+    expect(sent[0].order).toMatchObject({ packageId: "diagnostico-tecnico", amountInCents: 190000, currency: "BRL", checkout: "stripe" });
+    expect(sent[0].order?.id).toBe(result.body.ok ? result.body.checkout.orderId : "");
+    expect(sent[0].contact).toMatchObject({ phone: "+5511987654321", service: "consultoria-frontend", package: "diagnostico-tecnico", acquisition });
+    expect(d.email!.outbox[0].text).toContain("UTM source: instagram");
+
+    const failing = { async send() { throw new Error("CRM fora do ar"); } };
+    expect((await submitPreHire(body, "ip", { ...deps(null), leads: failing })).status).toBe(200);
+  });
 
   it("devolve a URL do checkout e avisa o Renan com a sessão", async () => {
     const d = deps(fakeGateway("ok"));

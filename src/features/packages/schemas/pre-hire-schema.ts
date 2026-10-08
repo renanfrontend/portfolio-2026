@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { acquisitionSchema } from "@/lib/acquisition";
 import { isValidBrazilPhone } from "@/lib/phone";
 
 export const PRE_HIRE_LIMITS = {
@@ -36,6 +37,8 @@ export function createPreHireSchema(packageIds: readonly string[]) {
     locale: z.enum(["pt-BR", "en"]).optional().catch(undefined),
     /** Armadilha para robôs: precisa chegar vazio. */
     website: z.string().max(0).optional(),
+    /** Origem da visita (UTM e página de entrada); dados ruins nunca bloqueiam o pedido. */
+    acquisition: acquisitionSchema.optional().catch(undefined),
   });
 }
 

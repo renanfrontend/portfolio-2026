@@ -1,5 +1,6 @@
 import "server-only";
 import { EmailProviderError, type EmailAdapter } from "@/lib/server/email";
+import { createLead, type LeadAdapter } from "@/lib/server/leads";
 import type { RateLimiter } from "@/lib/server/rate-limit";
 import { buildCheckoutPayload, type CheckoutPayload } from "../checkout";
 import { formatPrice, getPackages } from "../packages";
@@ -20,12 +21,14 @@ type Deps = {
   payments: PaymentGateway | null;
   /** Origem pública para as URLs de retorno do Stripe, ex.: https://www.renanaugusto.com.br */
   appUrl: string;
+  /** CRM/n8n da gestão de tráfego (LEADS_WEBHOOK_URL); null quando não configurado. */
+  leads?: LeadAdapter | null;
   now?: Date;
 };
 
 /**
  * Pré-contratação: limite de requisições -> validação -> pedido com valores do servidor ->
- * sessão do Stripe Checkout (quando configurado) -> aviso por e-mail ao Renan.
+ * sessão do Stripe Checkout (quando configurado) -> aviso por e-mail ao Renan -> lead no CRM.
  * Só responde sucesso quando o pedido ficou registrado em algum lugar: no Stripe ou no e-mail.
  */
 export async function submitPreHire(payload: unknown, clientKey: string, deps: Deps): Promise<{ status: number; body: PreHireResponse }> {
@@ -46,6 +49,7 @@ export async function submitPreHire(payload: unknown, clientKey: string, deps: D
   if (!deps.email && !deps.payments) return { status: 503, body: { ok: false, error: "unavailable" } };
 
   const checkout = buildCheckoutPayload({ ...parsed.data, locale }, item, deps.now);
+  const { acquisition } = parsed.data;
 
   // Pacotes sob consulta ou de conversa (MVP) não têm cobrança direta.
   let checkoutUrl: string | null = null;
@@ -60,10 +64,43 @@ export async function submitPreHire(payload: unknown, clientKey: string, deps: D
       paymentNote = "Pagamento online: FALHOU ao abrir o Stripe. O cliente viu a opção de WhatsApp; enviar o link de pagamento manualmente.";
     }
   }
+
+  // Mesmo formato de lead do formulário de contato, com o pedido junto, para o CRM/n8n.
+  const lead = createLead(
+    {
+      name: checkout.customer.name,
+      email: checkout.customer.email,
+      phone: checkout.customer.phone,
+      company: undefined,
+      timeline: undefined,
+      service: item.serviceSlug,
+      message: checkout.message,
+      locale,
+      package: item.id,
+      acquisition,
+    },
+    {
+      id: checkout.orderId,
+      packageId: item.id,
+      amountInCents: checkout.package.amountInCents,
+      currency: "BRL",
+      checkout: checkoutUrl ? "stripe" : "manual",
+    },
+  );
+  const sendLead = async () => {
+    if (!deps.leads) return;
+    try {
+      // Requisição com limite de tempo: em serverless, trabalho solto pode ser descartado.
+      await deps.leads.send(lead);
+    } catch {
+      console.error("[leads] Integração falhou; recuperar pedido pelo e-mail. ID:", lead.id);
+    }
+  };
+
   if (!deps.email) {
-    return checkoutUrl
-      ? { status: 200, body: { ok: true, checkout, checkoutUrl } }
-      : { status: 503, body: { ok: false, error: "unavailable" } };
+    if (!checkoutUrl) return { status: 503, body: { ok: false, error: "unavailable" } };
+    await sendLead();
+    return { status: 200, body: { ok: true, checkout, checkoutUrl } };
   }
   const ptName = getPackages("pt-BR").find((candidate) => candidate.id === item.id)?.name ?? item.name;
   const price = formatPrice(item.price, "pt-BR");
@@ -75,6 +112,7 @@ export async function submitPreHire(payload: unknown, clientKey: string, deps: D
       subject: `[Site] Pré-contratação ${checkout.orderId}: ${ptName} (${checkout.customer.name})`,
       text: [
         `Pedido: ${checkout.orderId}`,
+        `ID do lead: ${lead.id}`,
         `Pacote: ${ptName}`,
         `Valor: ${price ? `${item.priceFrom ? "a partir de " : ""}${price}${item.pricePeriod === "month" ? "/mês" : ""}` : "sob consulta"}`,
         `Parcelamento no cartão: ${item.installments ? "sim" : "não"}`,
@@ -83,21 +121,32 @@ export async function submitPreHire(payload: unknown, clientKey: string, deps: D
         `E-mail: ${checkout.customer.email}`,
         `WhatsApp: ${checkout.customer.phone}`,
         `Idioma da página: ${locale === "en" ? "Inglês" : "Português"}`,
+        acquisition && `Página de entrada: ${acquisition.landingPage}`,
+        acquisition?.referrerHost && `Origem (domínio): ${acquisition.referrerHost}`,
+        acquisition?.source && `UTM source: ${acquisition.source}`,
+        acquisition?.medium && `UTM medium: ${acquisition.medium}`,
+        acquisition?.campaign && `UTM campaign: ${acquisition.campaign}`,
         "",
         "Sobre o projeto:",
         checkout.message,
         "",
         paymentNote,
-      ].join("\n"),
+      ]
+        .filter((line): line is string => typeof line === "string")
+        .join("\n"),
     });
   } catch (error) {
     console.error("[pre-hire] Falha no envio:", error instanceof Error ? error.name : "erro desconhecido");
     // Com o checkout aberto, o pedido já está no Stripe: o cliente segue para o pagamento.
-    if (checkoutUrl) return { status: 200, body: { ok: true, checkout, checkoutUrl } };
+    if (checkoutUrl) {
+      await sendLead();
+      return { status: 200, body: { ok: true, checkout, checkoutUrl } };
+    }
     return error instanceof EmailProviderError
       ? { status: 503, body: { ok: false, error: "unavailable" } }
       : { status: 500, body: { ok: false, error: "server" } };
   }
 
+  await sendLead();
   return { status: 200, body: { ok: true, checkout, checkoutUrl } };
 }

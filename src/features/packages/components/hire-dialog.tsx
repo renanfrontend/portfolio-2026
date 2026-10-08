@@ -5,7 +5,7 @@ import { createContext, use, useCallback, useEffect, useId, useMemo, useRef, use
 import { CheckIcon, CloseIcon, WhatsappIcon } from "@/components/shared/icons";
 import { Button, buttonClasses } from "@/components/ui/button";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { trackEvent, trackEventThen } from "@/lib/analytics";
+import { getAcquisition, trackEvent, trackEventThen } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 import { whatsappHref } from "@/lib/links";
 import { formatBrazilPhone } from "@/lib/phone";
@@ -117,7 +117,8 @@ export function HireDialogProvider({
     event.preventDefault();
     if (!selected || busy) return;
 
-    const payload = { ...values, packageId: selected.id, locale };
+    // Origem da visita (UTM) só existe com o consentimento de estatísticas.
+    const payload = { ...values, packageId: selected.id, locale, acquisition: getAcquisition() };
     const parsed = schema.safeParse(payload);
     if (!parsed.success) {
       const fieldErrors = toPreHireErrors(parsed.error);

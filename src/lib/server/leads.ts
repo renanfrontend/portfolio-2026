@@ -2,6 +2,16 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import type { ContactInput } from "@/features/contact/schemas/contact-schema";
 
+/** Pedido de pacote em /contratar: número, pacote, valor do servidor e como o pagamento seguiu. */
+export type LeadOrder = {
+  id: string;
+  packageId: string;
+  amountInCents: number | null;
+  currency: "BRL";
+  /** stripe = cliente foi ao Checkout; manual = pagamento combinado depois (WhatsApp/e-mail). */
+  checkout: "stripe" | "manual";
+};
+
 export type Lead = {
   version: 1;
   event: "lead.created";
@@ -9,13 +19,23 @@ export type Lead = {
   createdAt: string;
   status: "new";
   contact: Omit<ContactInput, "website">;
+  /** Só nos pedidos de pacote; campo novo e opcional, compatível com quem já consome o webhook. */
+  order?: LeadOrder;
 };
 export interface LeadAdapter { send(lead: Lead): Promise<void> }
 
-export function createLead(input: ContactInput): Lead {
+export function createLead(input: ContactInput, order?: LeadOrder): Lead {
   const { website: _honeypot, ...contact } = input;
   void _honeypot;
-  return { version: 1, event: "lead.created", id: randomUUID(), createdAt: new Date().toISOString(), status: "new", contact };
+  return {
+    version: 1,
+    event: "lead.created",
+    id: randomUUID(),
+    createdAt: new Date().toISOString(),
+    status: "new",
+    contact,
+    ...(order ? { order } : {}),
+  };
 }
 
 /** Credentials are read independently so a bad webhook setting cannot disable email. */
