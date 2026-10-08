@@ -17,7 +17,7 @@ const base = (body, extraCss = "") => `<!doctype html>
     background: radial-gradient(ellipse 55% 45% at 12% 0%, rgb(34 211 238 / .18), transparent 70%), radial-gradient(ellipse 50% 45% at 90% 100%, rgb(168 85 247 / .16), transparent 70%); }
   main { position:relative; z-index:1; width:min(88vw, 1100px); text-align:center; }
   .grad { background:linear-gradient(100deg, var(--accent), var(--blue) 55%, var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 0 22px rgb(34 211 238 / .35)); }
-  h1 { font-family:"Space Grotesk", sans-serif; font-weight:700; letter-spacing:-.02em; line-height:1.05; }
+  h1 { font-family:"Space Grotesk", sans-serif; font-weight:700; letter-spacing:-.02em; line-height:1.05; text-wrap:balance; }
   .badge { display:inline-flex; align-items:center; gap:.6em; border:1px solid rgb(34 211 238 / .45); background:rgb(34 211 238 / .1); color:var(--accent);
     border-radius:999px; padding:.45em 1.1em; font-family:"JetBrains Mono", monospace; font-size:clamp(12px, 2.1vmin, 20px); letter-spacing:.12em; text-transform:uppercase; }
   .badge i { width:.6em; height:.6em; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); }
