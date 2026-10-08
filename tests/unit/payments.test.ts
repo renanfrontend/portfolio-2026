@@ -5,7 +5,9 @@ import { getPackages } from "@/features/packages/packages";
 import { createMemoryOrderStore } from "@/features/packages/server/order-store";
 import {
   buildCheckoutSessionParams,
+  CHECKOUT_BRANDING,
   checkoutUrls,
+  createStripeGateway,
   isCheckoutSessionId,
   orderFromSession,
   type PaymentGateway,
@@ -62,10 +64,56 @@ describe("sessão do Stripe Checkout", () => {
     expect(String(params.metadata?.message).length).toBe(500);
   });
 
+  it("aplica o visual do site no checkout, que pode ser desligado", () => {
+    expect(buildCheckoutSessionParams(order(), urls).branding_settings).toEqual(CHECKOUT_BRANDING);
+    expect(CHECKOUT_BRANDING.icon?.url).toMatch(/^https:\/\/.+\/apple-icon$/);
+    const plain = buildCheckoutSessionParams(order(), urls, { paymentMethods: ["card"], installments: false, branding: false });
+    expect(plain.branding_settings).toBeUndefined();
+  });
+
   it("aceita só ids de sessão no formato do Stripe", () => {
     expect(isCheckoutSessionId("cs_test_a1B2c3D4e5F6g7")).toBe(true);
     expect(isCheckoutSessionId("cs_test_../../x")).toBe(false);
     expect(isCheckoutSessionId("pi_123")).toBe(false);
+  });
+});
+
+describe("gateway do Stripe", () => {
+  const options = { paymentMethods: ["card", "pix", "boleto"], installments: false };
+
+  it("se o Stripe recusar o visual, cria a sessão com o visual padrão", async () => {
+    const calls: Stripe.Checkout.SessionCreateParams[] = [];
+    const sessions = {
+      async create(params: Stripe.Checkout.SessionCreateParams) {
+        calls.push(params);
+        if (params.branding_settings) {
+          throw new Stripe.errors.StripeInvalidRequestError({ type: "invalid_request_error", message: "Invalid icon", param: "branding_settings[icon][url]" });
+        }
+        return { id: "cs_test_semvisual123", url: "https://checkout.stripe.com/c/pay/cs_test_semvisual123" };
+      },
+      async retrieve() {
+        throw new Error("não usado");
+      },
+    };
+    const gateway = createStripeGateway(sessions as never, options);
+    await expect(gateway.createCheckout(order(), urls)).resolves.toEqual({
+      id: "cs_test_semvisual123",
+      url: "https://checkout.stripe.com/c/pay/cs_test_semvisual123",
+    });
+    expect(calls).toHaveLength(2);
+    expect(calls[1].branding_settings).toBeUndefined();
+  });
+
+  it("outros erros do Stripe não são mascarados", async () => {
+    const sessions = {
+      async create() {
+        throw new Stripe.errors.StripeInvalidRequestError({ type: "invalid_request_error", message: "Invalid amount", param: "line_items" });
+      },
+      async retrieve() {
+        throw new Error("não usado");
+      },
+    };
+    await expect(createStripeGateway(sessions as never, options).createCheckout(order(), urls)).rejects.toThrow("Invalid amount");
   });
 });
 

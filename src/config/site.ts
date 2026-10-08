@@ -3,7 +3,7 @@
  * (confirmados pelo responsável) ou nas variáveis de ambiente públicas.
  */
 /** Endereço público oficial. Ao usar um domínio próprio, troque aqui ou defina NEXT_PUBLIC_SITE_URL. */
-const PRODUCTION_URL = "https://www.renanaugusto.com.br";
+export const PRODUCTION_URL = "https://www.renanaugusto.com.br";
 
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();

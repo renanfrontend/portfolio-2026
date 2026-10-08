@@ -1,5 +1,6 @@
 import "server-only";
 import Stripe from "stripe";
+import { PRODUCTION_URL } from "@/config/site";
 import type { ServerEnv } from "@/lib/server/env";
 import type { CheckoutPayload } from "../checkout";
 
@@ -29,7 +30,21 @@ export interface PaymentGateway {
   retrieveOrder(sessionId: string): Promise<PaidOrder | null>;
 }
 
-type CheckoutOptions = { paymentMethods: string[]; installments: boolean };
+type CheckoutOptions = {
+  paymentMethods: string[];
+  installments: boolean;
+  /** Visual do site no Checkout (fonte, cor do botão e ícone). Padrão: ligado. */
+  branding?: boolean;
+};
+
+/** Visual do Checkout alinhado ao site: fonte Inter, cantos arredondados e o ciano do tema claro (contraste AA com texto branco). */
+export const CHECKOUT_BRANDING: Stripe.Checkout.SessionCreateParams.BrandingSettings = {
+  font_family: "inter",
+  border_style: "rounded",
+  button_color: "#0e7490",
+  // Sempre do domínio oficial: o Stripe precisa baixar o ícone, e localhost ou prévias protegidas não são acessíveis.
+  icon: { type: "url", url: `${PRODUCTION_URL}/apple-icon` },
+};
 
 const DEFAULT_PAYMENT_METHODS = ["card", "pix", "boleto"];
 /** Limite do Stripe por valor de metadata. */
@@ -78,6 +93,7 @@ export function buildCheckoutSessionParams(
         },
       },
     ],
+    ...(options.branding === false ? {} : { branding_settings: CHECKOUT_BRANDING }),
     allowed_payment_method_types: paymentMethods as Stripe.Checkout.SessionCreateParams.AllowedPaymentMethodType[],
     ...(!recurring && options.installments && paymentMethods.includes("card")
       ? { payment_method_options: { card: { installments: { enabled: true } } } }
@@ -121,22 +137,37 @@ export function orderFromSession(session: Stripe.Checkout.Session): PaidOrder | 
 /** Formato dos ids de sessão do Checkout; evita consultar o Stripe com lixo vindo da URL. */
 export const isCheckoutSessionId = (value: string) => /^cs_(test|live)_[A-Za-z0-9]{10,200}$/.test(value);
 
-export function createStripeGateway(secretKey: string, options: CheckoutOptions): PaymentGateway {
-  const stripe = new Stripe(secretKey, { maxNetworkRetries: 1, timeout: 15_000 });
+/** Só a parte do SDK que o gateway usa (os testes passam um cliente falso). */
+type StripeCheckoutClient = Pick<Stripe["checkout"]["sessions"], "create" | "retrieve">;
+
+const isBrandingError = (error: unknown) =>
+  error instanceof Stripe.errors.StripeInvalidRequestError && Boolean(error.param?.startsWith("branding_settings"));
+
+export function createStripeGateway(sessions: StripeCheckoutClient, options: CheckoutOptions): PaymentGateway {
+  const create = async (checkout: CheckoutPayload, urls: CheckoutUrls, branding: boolean) => {
+    const session = await sessions.create(buildCheckoutSessionParams(checkout, urls, { ...options, branding }), {
+      // Repetir o mesmo pedido não cria duas sessões.
+      idempotencyKey: `checkout-${checkout.orderId}${branding ? "" : "-plain"}`,
+    });
+    if (!session.url) throw new Error("Stripe não devolveu a URL do checkout.");
+    return { id: session.id, url: session.url };
+  };
   return {
     name: "stripe",
     async createCheckout(checkout, urls) {
-      const session = await stripe.checkout.sessions.create(buildCheckoutSessionParams(checkout, urls, options), {
-        // Repetir o mesmo pedido não cria duas sessões.
-        idempotencyKey: `checkout-${checkout.orderId}`,
-      });
-      if (!session.url) throw new Error("Stripe não devolveu a URL do checkout.");
-      return { id: session.id, url: session.url };
+      try {
+        return await create(checkout, urls, options.branding !== false);
+      } catch (error) {
+        // O visual é um extra: se o Stripe recusar (ex.: ícone fora do ar), cobra com o visual padrão.
+        if (!isBrandingError(error)) throw error;
+        console.error("[checkout] Visual personalizado recusado pelo Stripe; usando o padrão.");
+        return create(checkout, urls, false);
+      }
     },
     async retrieveOrder(sessionId) {
       if (!isCheckoutSessionId(sessionId)) return null;
       try {
-        return orderFromSession(await stripe.checkout.sessions.retrieve(sessionId));
+        return orderFromSession(await sessions.retrieve(sessionId));
       } catch (error) {
         if (error instanceof Stripe.errors.StripeInvalidRequestError) return null;
         throw error;
@@ -149,7 +180,8 @@ export function createStripeGateway(secretKey: string, options: CheckoutOptions)
 export function getPaymentGateway(env: ServerEnv): PaymentGateway | null {
   if (!env.STRIPE_SECRET_KEY) return null;
   const methods = env.STRIPE_PAYMENT_METHODS?.split(",").map((method) => method.trim()).filter(Boolean);
-  return createStripeGateway(env.STRIPE_SECRET_KEY, {
+  const stripe = new Stripe(env.STRIPE_SECRET_KEY, { maxNetworkRetries: 1, timeout: 15_000 });
+  return createStripeGateway(stripe.checkout.sessions, {
     paymentMethods: methods?.length ? methods : DEFAULT_PAYMENT_METHODS,
     installments: env.STRIPE_CARD_INSTALLMENTS === "true",
   });
