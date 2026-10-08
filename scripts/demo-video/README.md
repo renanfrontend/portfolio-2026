@@ -45,7 +45,7 @@ Repita `record.mjs` e `compose.mjs` com `portrait` para a versão vertical.
   - Cada cena dura, no mínimo, o tempo da sua fala.
 - `compose.mjs`:
   - Volta à velocidade real e acelera até 4x as esperas sem fala (digitação, carregamentos).
-  - Posiciona as falas, queima as legendas e normaliza o áudio em -16 LUFS.
+  - Posiciona as falas, queima as legendas e normaliza o áudio em -14 LUFS (referência de Instagram, LinkedIn e YouTube).
 - `cards.mjs`: telas de abertura, bastidores (com o log real do `stripe listen`) e encerramento.
 
 ## Diagnóstico
