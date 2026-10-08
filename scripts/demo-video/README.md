@@ -54,7 +54,7 @@ O roteiro (`narration.mjs`) está em primeira pessoa. Com a gravação da própr
 `import-voice.mjs` no lugar de `prepare-audio.mjs`:
 
 ```bash
-FFMPEG=... node scripts/demo-video/import-voice.mjs video-demo/voz "$W"
+FFMPEG=... node scripts/demo-video/import-voice.mjs video-demo/voz "$W"  # ou video-demo/voz/arquivo.wav [--cortes=14.5,21.6]
 ```
 
 - Aceita uma pasta com `01` a `11` (um arquivo por trecho, qualquer formato de áudio) ou um arquivo
@@ -68,3 +68,13 @@ O guia para quem grava fica em `video-demo/GRAVE-SUA-VOZ.md` (fora do Git, junto
 
 `DEMO_DEBUG=1 DEMO_STOP_AFTER=<cena>` mostra quem chamou cada rolagem da página e encerra a gravação
 depois da cena indicada (ex.: `pacotes`), sem gastar tempo com o resto do fluxo.
+
+### Arquivo único: como os trechos são separados
+
+- As pausas são medidas pelo volume médio a cada 50 ms, numa cópia só com redução de ruído. O detector
+  de silêncio do ffmpeg falha com o chiado de microfone embutido.
+- Vários limiares e pausas mínimas são testados. Fica a divisão em 11 trechos cujas durações mais
+  combinam com o tamanho de cada texto do roteiro.
+- Se dois trechos foram falados quase sem pausa, informe onde o segundo começa com
+  `--cortes=SEGUNDOS` (vários separados por vírgula). O script lista os trechos encontrados quando não
+  consegue chegar a 11.
