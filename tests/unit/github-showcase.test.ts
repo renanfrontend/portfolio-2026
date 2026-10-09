@@ -65,15 +65,19 @@ describe("importação de projetos do GitHub", () => {
     expect(repoToProject(repo({ homepage: null })).status).toBeUndefined();
   });
 
-  it("busca só repositórios públicos, não arquivados e com o tópico de vitrine", async () => {
+  it("busca todos os repositórios públicos que são projetos, sem exigir tópico", async () => {
     const payload = [
       repo({ name: "ok" }),
-      repo({ name: "sem-topico", topics: ["react"] }),
+      repo({ name: "sem-topico", topics: [] }),
       repo({ name: "fork", fork: true }),
       repo({ name: "arquivado", archived: true }),
+      repo({ name: "privado", private: true }),
+      repo({ name: "escondido", topics: ["react", "portfolio-ocultar"] }),
+      repo({ name: "renanfrontend" }),
+      repo({ name: "portfolio-2026" }),
     ];
     const fakeFetch = (async () => new Response(JSON.stringify(payload), { status: 200 })) as typeof fetch;
-    expect((await fetchShowcaseRepos(fakeFetch)).map((item) => item.name)).toEqual(["ok"]);
+    expect((await fetchShowcaseRepos(fakeFetch)).map((item) => item.name)).toEqual(["ok", "sem-topico"]);
   });
 
   it("em falha do GitHub devolve lista vazia (ou null, para quem precisa distinguir)", async () => {

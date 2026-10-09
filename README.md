@@ -14,7 +14,7 @@ Site profissional de Renan Augusto dos Santos, desenvolvedor frontend sênior: a
 | --- | --- |
 | **Início** | Abertura com monograma e log de terminal, nome em destaque e retrato em chuva de caracteres: o cursor funciona como uma lente que decodifica o retrato em TypeScript. |
 | **Sobre** | Trajetória, experiência e formação. |
-| **Projetos** | Estudos de caso com filtros por categoria, mais os repositórios do GitHub marcados com o tópico `portfolio-site` (os com `portfolio-destaque` entram na ordem de destaque). |
+| **Projetos** | Estudos de caso com filtros por categoria, mais todos os repositórios públicos do GitHub, que entram sozinhos (os com `portfolio-destaque` entram na ordem de destaque; `portfolio-ocultar` esconde um repositório). |
 | **Serviços** | Consultoria frontend e páginas por serviço, com perguntas frequentes. |
 | **Contratar** | Pacotes com preço, parcelamento e prazo. O modal de pré-contratação valida os dados, aplica a máscara de telefone e leva ao **Stripe Checkout** (cartão, Pix e boleto); sem pagamento online, o pedido segue por e-mail e WhatsApp. |
 | **Contato** | Formulário com envio por e-mail, limite de requisições e proteção contra robôs, além do WhatsApp. |
