@@ -3,7 +3,7 @@ import { cacheLife } from "next/cache";
 import { contentByLocale } from "@/content";
 import { highlightOrder, projectsBase } from "@/content/projects-base";
 import type { Locale } from "@/i18n/config";
-import { fetchShowcaseRepos, repoToProject } from "@/lib/github-showcase";
+import { fetchShowcaseReposOrNull, repoToProject } from "@/lib/github-showcase";
 import { mergeProjects, pickHighlights } from "../ordering";
 import type { Project } from "../types";
 
@@ -29,12 +29,14 @@ function getCuratedProjects(locale: Locale): Project[] {
   });
 }
 
-/** Repositórios do GitHub com o tópico de vitrine, revalidados a cada hora. */
+/** Repositórios públicos do GitHub, revalidados a cada hora. */
 async function getGithubProjects(): Promise<Project[]> {
   "use cache";
-  cacheLife("hours");
-  const repos = await fetchShowcaseRepos();
-  return repos.map(repoToProject);
+  const repos = await fetchShowcaseReposOrNull();
+  // Se o GitHub não respondeu (limite da API sem GITHUB_TOKEN, por exemplo), não guarda a falha por horas.
+  if (repos === null) cacheLife("minutes");
+  else cacheLife("hours");
+  return (repos ?? []).map(repoToProject);
 }
 
 /** Todos os projetos: curados + GitHub, com os que estão no ar primeiro. */
