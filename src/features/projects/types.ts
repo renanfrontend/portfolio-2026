@@ -51,6 +51,6 @@ export type Project = Omit<ProjectBase, "cover" | "gallery"> & {
   solution?: string;
   contribution?: string;
   outcomes: string[];
-  /** Verdadeiro quando o projeto veio do GitHub (tópico portfolio-site), sem texto curado. */
+  /** Verdadeiro quando o projeto veio do GitHub (repositório público importado automaticamente), sem texto curado. */
   fromGithub?: boolean;
 };

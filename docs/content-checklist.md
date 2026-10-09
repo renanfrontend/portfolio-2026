@@ -25,13 +25,16 @@ Estado dos materiais em 06/10/2026.
 - [x] Formação revisada com o Renan (07/10/2026): Tecnólogo em Logística (concluído), pós em Administração Empresarial, ADS na São Judas (1 ano, não concluído) e pós em IA em andamento. Instituição e ano da Logística e da pós em Administração não informados (omitidos).
 - [ ] **Currículo em PDF desatualizado:** começa em 2020 e lista ADS sem indicar que não foi concluído. Substituir por versão atualizada (mesmo caminho em `public/documents/`).
 
-## Adicionar um projeto novo (automático)
+## Projetos novos do GitHub (automático)
 
-1. No repositório **público** do GitHub, clique na engrenagem ⚙ ao lado de **About**.
+**Todo repositório público** (que não seja fork nem arquivado) aparece sozinho em Projetos, sem novo deploy, em até 1 hora. Ficam de fora o repositório de perfil (`renanfrontend`) e o código deste site (`portfolio-2026`).
+
+Para o projeto ficar bom no site, no repositório do GitHub (engrenagem ⚙ ao lado de **About**):
+
+1. Escreva uma boa **descrição**: ela vira o resumo do projeto.
 2. Em **Website**, coloque o link do site publicado (se houver). Com link, o projeto ganha o selo "No ar" e o botão "Ver ao vivo".
-3. Em **Topics**, adicione `portfolio-site`. Para ele entrar também nos destaques da home, adicione `portfolio-destaque`.
-4. Escreva uma boa **descrição** no About: ela vira o resumo do projeto.
-5. Em até 1 hora o projeto aparece no site, sem novo deploy. Tópicos como `ai`, `games` ou `dashboard` definem a categoria; a linguagem e os demais tópicos viram as tecnologias.
+3. Em **Topics**, `ai`, `games` ou `dashboard` definem a categoria; a linguagem e os demais tópicos viram as tecnologias. Adicione `portfolio-destaque` para ele entrar também nos destaques da home.
+4. Para **esconder** um repositório do site, adicione o tópico `portfolio-ocultar` (ou torne-o privado/arquivado).
 
 Para um estudo de caso completo (desafio, solução, contribuição, screenshot), o projeto pode ser "promovido" a curado em `src/content/projects-base.ts` e `src/content/<idioma>/projects.ts`. Opcional: `GITHUB_TOKEN` na Vercel (token de leitura de repositórios públicos) evita o limite de requisições da API do GitHub.
 

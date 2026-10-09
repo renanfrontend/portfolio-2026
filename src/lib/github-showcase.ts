@@ -3,12 +3,16 @@ import type { Project, ProjectCategory } from "@/features/projects/types";
 
 /**
  * Projetos importados automaticamente do GitHub.
- * Basta adicionar o tópico SHOWCASE_TOPIC a um repositório público (e o link do site em "Website", se houver);
- * com HIGHLIGHT_TOPIC ele também entra nos destaques da home.
+ * Todo repositório público (que não seja fork nem arquivado) aparece sozinho, com o link do site em "Website"
+ * (se houver). Com HIGHLIGHT_TOPIC ele também entra nos destaques da home; com HIDE_TOPIC ele fica de fora.
  */
 export const GITHUB_USER = "renanfrontend";
 export const SHOWCASE_TOPIC = "portfolio-site";
 export const HIGHLIGHT_TOPIC = "portfolio-destaque";
+export const HIDE_TOPIC = "portfolio-ocultar";
+
+/** Repositórios que não são projetos: o perfil do GitHub e o código deste próprio site. */
+const EXCLUDED_REPOS = new Set([GITHUB_USER.toLowerCase(), "portfolio-2026"]);
 
 const repoSchema = z.object({
   name: z.string(),
@@ -38,7 +42,7 @@ const categoryByTopic: [string, ProjectCategory][] = [
 ];
 
 /** Tópicos técnicos que não devem aparecer como tecnologia. */
-const hiddenTopics = new Set([SHOWCASE_TOPIC, HIGHLIGHT_TOPIC, "portfolio", "game", "games", "jogo", "ai", "ia"]);
+const hiddenTopics = new Set([SHOWCASE_TOPIC, HIGHLIGHT_TOPIC, HIDE_TOPIC, "portfolio", "game", "games", "jogo", "ai", "ia"]);
 
 /** Nomes oficiais dos tópicos de tecnologia mais comuns (o GitHub só aceita tópicos em minúsculas). */
 const topicLabels: Record<string, string> = {
@@ -124,8 +128,13 @@ export function repoToProject(repo: GithubRepo): Project {
   };
 }
 
+/** Quais repositórios entram no site: públicos, sem fork nem arquivo, sem o tópico de ocultar e que sejam projetos. */
+export function isShowcaseRepo(repo: GithubRepo): boolean {
+  return !repo.private && !repo.fork && !repo.archived && !EXCLUDED_REPOS.has(repo.name.toLowerCase()) && !repo.topics.map((topic) => topic.toLowerCase()).includes(HIDE_TOPIC);
+}
+
 /**
- * Busca os repositórios públicos com o tópico de vitrine.
+ * Busca os repositórios públicos que entram na vitrine (todos, menos os ocultos).
  * Em qualquer falha (sem rede, limite da API), devolve lista vazia: o site segue só com os projetos curados.
  */
 export async function fetchShowcaseRepos(fetchImpl: typeof fetch = fetch): Promise<GithubRepo[]> {
@@ -152,7 +161,7 @@ export async function fetchShowcaseReposOrNull(fetchImpl: typeof fetch = fetch):
       .map((item) => repoSchema.safeParse(item))
       .filter((result) => result.success)
       .map((result) => result.data)
-      .filter((repo) => !repo.private && !repo.fork && !repo.archived && repo.topics.includes(SHOWCASE_TOPIC));
+      .filter(isShowcaseRepo);
   } catch {
     return null;
   }
