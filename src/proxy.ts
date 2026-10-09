@@ -3,6 +3,7 @@ import { projectsBase } from "@/content/projects-base";
 import { services } from "@/content/pt-BR/services";
 import { defaultLocale, isLocale } from "@/i18n/config";
 import { fetchShowcaseReposOrNull } from "@/lib/github-showcase";
+import { resolveShortLink } from "@/lib/short-links";
 
 const localizedSections = new Set(["sobre", "projetos", "servicos", "contratar", "contato", "privacidade"]);
 
@@ -28,6 +29,7 @@ async function getGithubSlugs(): Promise<Set<string> | null> {
 const NOT_FOUND_PATH = "/_nao-encontrado";
 
 /**
+ * - Atalhos de bio (/ig, /whatsapp) redirecionam antes de qualquer outra regra.
  * - "/" e seções sem idioma (ex.: /projetos) recebem o idioma padrão.
  * - Idiomas inválidos seguem sem alteração e caem no 404 global.
  * - Slugs inexistentes de projetos e serviços viram 404 real. Sem isso, o shell
@@ -35,6 +37,10 @@ const NOT_FOUND_PATH = "/_nao-encontrado";
  */
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  const shortLink = resolveShortLink(pathname);
+  if (shortLink) return NextResponse.redirect(new URL(shortLink, request.url));
+
   const [, first = "", section, slug, ...rest] = pathname.split("/");
 
   if (!isLocale(first)) {
