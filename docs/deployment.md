@@ -24,6 +24,7 @@ O proxy (`src/proxy.ts`) roda no runtime Node.js.
 | `CONTACT_TO_EMAIL` | Production | Opcional; padrão `renan.gabba@gmail.com` |
 | `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | Production | Recomendado: limite global entre instâncias |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | Todos | Opcional |
+| `GITHUB_TOKEN` | Production e Preview | **Necessária para os projetos do GitHub aparecerem.** Sem ela, o site usa o limite de 60 consultas por hora, que os servidores da Vercel costumam esgotar, e mostra só os projetos escritos à mão. Veja abaixo como criar |
 
 4. **Domínio e remetente**: adicione o domínio na Vercel e, no Resend, verifique o mesmo domínio (registros DNS SPF/DKIM indicados pelo painel). Sem domínio verificado, o Resend só envia a partir do endereço de teste dele.
 5. Após o deploy, verifique:
@@ -31,6 +32,13 @@ O proxy (`src/proxy.ts`) roda no runtime Node.js.
    - `robots.txt` libera indexação e aponta para `sitemap.xml` com o domínio final.
    - Envie uma mensagem de teste pelo formulário para um destinatário autorizado e confirme o recebimento.
    - Sem as variáveis de e-mail, o formulário deve exibir a mensagem de indisponibilidade com o e-mail alternativo (comportamento esperado, não um erro).
+
+## Token do GitHub (projetos automáticos)
+
+1. GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token.
+2. Nome: `portfolio-leitura`; expiração: 1 ano; **Repository access: Public repositories (read-only)**; sem nenhuma permissão extra.
+3. Copie o token (aparece uma vez) e cole na Vercel em Settings → Environment Variables → `GITHUB_TOKEN`, marcando **Production** e **Preview**. Faça um Redeploy.
+4. Nunca cole o token em conversa, issue ou arquivo do repositório. Quando expirar, gere outro e troque na Vercel.
 
 ## Prévias
 
