@@ -90,23 +90,6 @@ export const projectsCopy: Record<string, ProjectCopy> = {
       "Interface em português, inglês e espanhol.",
     ],
   },
-  "mwm-portal": {
-    title: "MWM Portal",
-    summary:
-      "Frontend de sistemas corporativos e logísticos: dashboards de operação, gestão de portaria e dados de cooperados.",
-    galleryAlt: [],
-    challenge:
-      "Centralizar dados operacionais e de logística em interfaces que funcionassem bem no dia a dia, modernizando telas legadas e automatizando a entrega das aplicações.",
-    solution:
-      "SPAs e PWAs em React, TypeScript e Vite, com dashboards de logística e qualidade, migração de interfaces legadas para Tailwind CSS e Shadcn/UI e integração com APIs REST em Java Spring Boot.",
-    contribution:
-      "Atuei como Senior Frontend Engineer (set/2025 a set/2026) em um time: desenvolvimento das interfaces, modernização do legado e automação de build e deploy com Docker, Azure Container Apps e pipelines no Azure DevOps.",
-    outcomes: [
-      "Gestão de portaria, cooperados e dados operacionais centralizada em dashboards.",
-      "Interfaces legadas modernizadas, com mais responsividade e acessibilidade.",
-      "Build e deploy automatizados no Azure DevOps.",
-    ],
-  },
   "manor-escape": {
     title: "Manor Escape",
     summary:

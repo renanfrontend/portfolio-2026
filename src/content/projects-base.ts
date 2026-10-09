@@ -73,15 +73,6 @@ export const projectsBase: ProjectBase[] = [
     liveUrl: "https://renanfrontend.github.io/upbeats-karaoke-player/",
   },
   {
-    id: "mwm-portal",
-    slug: "mwm-portal",
-    category: "dashboard",
-    technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Shadcn/UI", "Docker", "Azure DevOps"],
-    kind: "professional",
-    featured: false,
-    gallery: [],
-  },
-  {
     id: "manor-escape",
     slug: "manor-escape",
     category: "games",

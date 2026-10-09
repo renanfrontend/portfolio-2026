@@ -3,6 +3,7 @@ import { cacheLife } from "next/cache";
 import { contentByLocale } from "@/content";
 import { highlightOrder, projectsBase } from "@/content/projects-base";
 import type { Locale } from "@/i18n/config";
+import { githubCovers } from "@/content/github-covers";
 import { fetchShowcaseReposOrNull, repoToProject } from "@/lib/github-showcase";
 import { mergeProjects, pickHighlights } from "../ordering";
 import type { Project } from "../types";
@@ -36,7 +37,11 @@ async function getGithubProjects(): Promise<Project[]> {
   // Se o GitHub não respondeu (limite da API sem GITHUB_TOKEN, por exemplo), não guarda a falha por horas.
   if (repos === null) cacheLife("minutes");
   else cacheLife("hours");
-  return (repos ?? []).map(repoToProject);
+  return (repos ?? []).map(repoToProject).map((project) => {
+    // Captura real do site publicado (scripts/capture-github-covers.mjs) no lugar do cartão do GitHub.
+    const cover = githubCovers[project.slug];
+    return cover ? { ...project, cover: { ...cover, alt: `Página inicial do projeto ${project.title} publicada na web.` } } : project;
+  });
 }
 
 /** Todos os projetos: curados + GitHub, com os que estão no ar primeiro. */
