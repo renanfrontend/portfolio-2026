@@ -99,6 +99,7 @@ Todas são opcionais e estão documentadas em [.env.example](.env.example). Cred
 - [docs/payments.md](docs/payments.md): fluxo do Stripe, configuração e teste local com `stripe listen`.
 - [docs/go-live-pagamentos.md](docs/go-live-pagamentos.md): checklist para ligar os pagamentos em produção.
 - [docs/lead-automation.md](docs/lead-automation.md): Analytics com consentimento, eventos do funil e webhook de pedidos para um CRM. IDs e origem da visita acompanham os e-mails; cliques no WhatsApp não contam como pedidos confirmados.
+- Atalhos da bio do Instagram (`src/lib/short-links.ts`): `/ig` abre a página inicial com a campanha `instagram / social / bio`, e `/whatsapp` abre a conversa com a mensagem "Vim pelo Instagram" (sem número configurado, vai para o formulário de contato).
 
 ## Editando o conteúdo
 
