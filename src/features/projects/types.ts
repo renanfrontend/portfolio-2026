@@ -23,8 +23,10 @@ export type ProjectBase = {
   featured: boolean;
   cover?: Omit<ProjectImage, "alt">;
   gallery: Omit<ProjectImage, "alt">[];
-  /** Data da última atualização (AAAA-MM-DD), usada para ordenar. */
+  /** Data da última atualização (AAAA-MM-DD). */
   updatedAt?: string;
+  /** Data de criação do repositório (AAAA-MM-DD): a lista mostra os projetos mais recentes primeiro. */
+  createdAt?: string;
   repositoryUrl?: string;
   liveUrl?: string;
 };

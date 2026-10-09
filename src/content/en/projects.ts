@@ -88,22 +88,6 @@ export const projectsCopy: Record<string, ProjectCopy> = {
       "Interface in Portuguese, English and Spanish.",
     ],
   },
-  "mwm-portal": {
-    title: "MWM Portal",
-    summary: "Frontend for corporate and logistics systems: operations dashboards, gate management and cooperative member data.",
-    galleryAlt: [],
-    challenge:
-      "Bring operational and logistics data together in interfaces that work well day to day, while modernizing legacy screens and automating application delivery.",
-    solution:
-      "SPAs and PWAs in React, TypeScript and Vite, with logistics and quality dashboards, migration of legacy interfaces to Tailwind CSS and Shadcn/UI and integration with Java Spring Boot REST APIs.",
-    contribution:
-      "I worked as a Senior Frontend Engineer (Sep 2025 to Sep 2026) as part of a team: building the interfaces, modernizing legacy code and automating build and deployment with Docker, Azure Container Apps and Azure DevOps pipelines.",
-    outcomes: [
-      "Gate management, member and operational data centralized in dashboards.",
-      "Legacy interfaces modernized with better responsiveness and accessibility.",
-      "Automated build and deployment on Azure DevOps.",
-    ],
-  },
   "manor-escape": {
     title: "Manor Escape",
     summary: "A Victorian escape room playable in the browser, with four chained puzzles and an interactive 3D safe.",

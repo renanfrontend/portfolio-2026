@@ -96,17 +96,22 @@ describe("ordem e destaques", () => {
     project({ slug: "curado-no-ar", status: "live", liveUrl: "https://a.example", repositoryUrl: "https://github.com/renanfrontend/curado" }),
   ];
   const fromGithub = [
-    project({ slug: "curado", repositoryUrl: "https://github.com/renanfrontend/curado", fromGithub: true }),
-    project({ slug: "novo-antigo", fromGithub: true, updatedAt: "2026-01-01" }),
-    project({ slug: "novo-no-ar", fromGithub: true, status: "live", liveUrl: "https://b.example", updatedAt: "2026-10-01", featured: true }),
+    project({ slug: "curado", repositoryUrl: "https://github.com/renanfrontend/curado", fromGithub: true, createdAt: "2026-09-01" }),
+    project({ slug: "novo-antigo", fromGithub: true, createdAt: "2025-01-01" }),
+    project({ slug: "novo-no-ar", fromGithub: true, status: "live", liveUrl: "https://b.example", createdAt: "2026-10-01", featured: true }),
   ];
 
-  it("não duplica repositórios curados e põe os projetos no ar primeiro", () => {
-    expect(mergeProjects(curated, fromGithub).map((p) => p.slug)).toEqual(["curado-no-ar", "novo-no-ar", "curado-off", "novo-antigo"]);
+  it("não duplica repositórios curados e põe os mais recentes primeiro (sem data, no fim)", () => {
+    expect(mergeProjects(curated, fromGithub).map((p) => p.slug)).toEqual(["novo-no-ar", "curado-no-ar", "novo-antigo", "curado-off"]);
   });
 
-  it("ordena os projetos no ar pela ordem de destaque", () => {
-    expect(mergeProjects(curated, fromGithub, ["novo-no-ar"]).map((p) => p.slug)).toEqual(["novo-no-ar", "curado-no-ar", "curado-off", "novo-antigo"]);
+  it("o projeto curado herda a data de criação do seu repositório", () => {
+    expect(mergeProjects(curated, fromGithub).find((p) => p.slug === "curado-no-ar")?.createdAt).toBe("2026-09-01");
+  });
+
+  it("em datas iguais, segue a ordem de destaque", () => {
+    const sameDay = [project({ slug: "a", createdAt: "2026-05-05" }), project({ slug: "b", createdAt: "2026-05-05" })];
+    expect(mergeProjects(sameDay, [], ["b", "a"]).map((p) => p.slug)).toEqual(["b", "a"]);
   });
 
   it("destaca a ordem definida à mão e depois os marcados no GitHub, só os que estão no ar", () => {

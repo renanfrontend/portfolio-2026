@@ -66,5 +66,5 @@ Projeto novo criado com `create-next-app@latest` em `C:\Projetos\renan-portfolio
 
 - Fonte dos dados profissionais: README do perfil `renanfrontend`, repositório público `renan-portfolio` (portfólio anterior do Renan) e o currículo em PDF dele. Os PDFs e screenshots foram copiados desse repositório; LogiFlow 3D e VisionStock foram capturados das demonstrações públicas (`scripts/capture-screenshots.mjs`).
 - Anos de experiência: **8** (desde out/2018). Trajetória completa confirmada pelo Renan e pela linha do tempo do repositório `react-portfolio-template-master`: Smartest (freelancer), Edulabzz e Saraiva antes da Clude. Experiências citadas em portfólios antigos que não aparecem nessa linha do tempo (Conectcar, "agência digital") não foram usadas.
-- Projetos: apenas repositórios públicos (exceto o MWM Portal, profissional, sem links nem imagens, com o texto que o próprio Renan já publicou). Não foram incluídos números de certificações nem métricas de projetos.
+- Projetos: apenas repositórios públicos (os projetos da MWM foram retirados do site a pedido do Renan, em 09/10/2026). Não foram incluídos números de certificações nem métricas de projetos.
 - Projetos pessoais e de estudo aparecem identificados como tal.

@@ -25,6 +25,7 @@ const repoSchema = z.object({
   archived: z.boolean(),
   private: z.boolean(),
   pushed_at: z.string(),
+  created_at: z.string().optional(),
 });
 
 export type GithubRepo = z.infer<typeof repoSchema>;
@@ -124,6 +125,7 @@ export function repoToProject(repo: GithubRepo): Project {
     repositoryUrl: repo.html_url,
     liveUrl,
     updatedAt: repo.pushed_at.slice(0, 10),
+    createdAt: repo.created_at?.slice(0, 10),
     fromGithub: true,
   };
 }

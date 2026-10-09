@@ -17,7 +17,6 @@ Estado dos materiais em 06/10/2026.
 ## Pendências (não bloqueiam o layout)
 
 - [ ] **Confirmar a lista de projetos.** Escolhi os mais completos dos repositórios públicos (pedido do Renan: "meus melhores projetos"). Revisar se algum deve sair ou entrar.
-- [ ] **MWM Portal**: confirmar se o texto (já publicado no portfólio anterior) pode continuar no site e se há screenshot autorizado.
 - [ ] **Aster Centro Terapêutico**: confirmar se foi trabalho para cliente (está como "Profissional", conforme o portfólio anterior).
 - [ ] **Foto profissional** com fundo neutro melhoraria o retrato em meio-tom (hoje uma máscara aproximada remove o fundo do avatar).
 - [x] **WhatsApp profissional**: (11) 96578-1243, confirmado pelo Renan (07/10/2026). Botão flutuante em todas as páginas e canal na página de contato; padrão em `src/config/contact.ts`.
