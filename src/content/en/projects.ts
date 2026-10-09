@@ -39,15 +39,19 @@ export const projectsCopy: Record<string, ProjectCopy> = {
   },
   "gemini-beyond-prompts": {
     title: "Gemini Beyond Prompts",
-    summary: "AI system combining chat with memory, document analysis with RAG and orchestrated agents in a single interface.",
+    summary: "AI dashboard prototype combining a Google Gemini chat with document analysis (RAG) and agent screens in a single interface.",
     coverAlt: "Gemini Beyond Prompts home screen with the chat, document analysis and assistant modules.",
     galleryAlt: [],
     challenge:
       "Explore how generative AI features go beyond a prompt box: conversations with context, semantic search over your own documents and tasks carried out by agents.",
     solution:
-      "A Next.js and TypeScript application with three modules: chat with Google Gemini, a document library with embedding-based semantic search and an assistant with research, planning and execution agents inspired by LangGraph.",
+      "A React, Vite and TypeScript application with three modules: a Google Gemini chat that keeps the conversation context, a RAG-style document library and an assistant with research, planning and execution agents inspired by LangGraph. The chat calls the API for real; document analysis and agents are interface prototypes with simulated processing, and the database for the full version (Supabase with pgvector) is already modeled.",
     contribution: "Solo study project: interface, Gemini API integration and module structure.",
-    outcomes: ["Demo published on Vercel.", "Upload PDF, Word, Excel and text files and query them in natural language."],
+    outcomes: [
+      "Demo published on Vercel.",
+      "Working chat with the Gemini API, using the visitor's own key.",
+      "Database modeled in Supabase with pgvector for the next step: semantic search.",
+    ],
   },
   "fnaf-web": {
     title: "Five Nights at Freddy's Web",
@@ -57,7 +61,7 @@ export const projectsCopy: Record<string, ProjectCopy> = {
     challenge:
       "The original fan project (Wendell de Sousa, 2021) no longer ran on current Node and had state bugs: timers that were never cleared, animatronics ignoring what happened and screens that did not update.",
     solution:
-      "Migration to Vite 6 and React 18, fixed Redux reducers and a new tick-based game engine with no setTimeout that can be paused, restarted and tested deterministically. Behavior is closer to the original: random routes, rising difficulty and a three-phase blackout.",
+      "Migration to Vite 6 and React 18 and a new tick-based game engine with no setTimeout, replacing the Redux reducers and loose timers: it can be paused, restarted and tested deterministically. Behavior is closer to the original: random routes, rising difficulty and a three-phase blackout.",
     contribution:
       "Solo remaster: bug diagnosis and fixes, engine rewrite, 20 automated tests with Vitest, accessibility (keyboard, aria-label, reduced motion) and automatic deployment to GitHub Pages. Five Nights at Freddy's © Scott Cawthon; non-profit fan project.",
     outcomes: [
@@ -70,7 +74,7 @@ export const projectsCopy: Record<string, ProjectCopy> = {
     title: "UP! BEATS Karaoke",
     summary:
       "Karaoke that runs in the browser: synced lyrics, real-time removal of the original vocals and a microphone with echo, all processed on the device.",
-    coverAlt: "UP! BEATS karaoke mode panel with the original-vocals controls (Original, Guide and Karaoke) and the microphone controls.",
+    coverAlt: "UP! BEATS karaoke mode with the original vocals removed, the voice and microphone controls, the audio visualizer and the synced lyrics filling the line being sung.",
     galleryAlt: [],
     challenge:
       "Build real karaoke without an audio server: strip the vocals from regular songs, show the lyrics on time and let people hear their own voice along with the track, without lag or feedback, in any browser.",
@@ -103,7 +107,7 @@ export const projectsCopy: Record<string, ProjectCopy> = {
   "manor-escape": {
     title: "Manor Escape",
     summary: "A Victorian escape room playable in the browser, with four chained puzzles and an interactive 3D safe.",
-    coverAlt: "Manor Escape game screen showing a room of the mansion and the puzzle panel.",
+    coverAlt: "Grandfather clock puzzle in Manor Escape, with a Roman-numeral dial, hour and minute controls and the hint button.",
     galleryAlt: [],
     challenge: "Model a game with a non-linear flow, timer, hints and saved progress without scattering rules across the interface.",
     solution:
