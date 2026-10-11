@@ -1,6 +1,28 @@
 import type { ProjectCopy } from "@/features/projects/types";
 
 export const projectsCopy: Record<string, ProjectCopy> = {
+  "lazuli-arcade": {
+    title: "Lazuli Arcade",
+    summary:
+      "Arcade de jogos casuais para o celular, com lobby e dois jogos originais: Lazuli Blocks, um block puzzle de gemas, e Empilha, um duelo de pilhas contra um oponente em tempo real.",
+    coverAlt:
+      "Três telas do Lazuli Arcade no celular: o lobby com os cards dos jogos, uma jogada do Lazuli Blocks virando moedas e um duelo do Empilha limpando dez peças.",
+    galleryAlt: [
+      "Três telas do Empilha: partida no tema escuro com pilhas altas no tabuleiro isométrico, as regras em Como jogar e a tela de vitória com o placar final.",
+    ],
+    challenge:
+      "Criar jogos casuais com cara de aplicativo nativo, rodando no navegador do celular, e organizar o projeto para crescer: cada jogo novo precisava entrar sem mexer nos outros nem pesar o carregamento inicial.",
+    solution:
+      "Um shell em React com lobby, rotas por hash e um registro de jogos: cada jogo implementa um mesmo contrato, é carregado sob demanda e salva o progresso no próprio espaço do localStorage. As regras são TypeScript puro e determinístico (gerador aleatório com seed), em camadas de domínio, aplicação, infraestrutura e interface. No Empilha, cada jogada vira uma sequência de fusões e limpezas que a interface anima peça por peça, e o oponente joga o próprio tabuleiro com as mesmas regras. O tabuleiro isométrico é feito só com CSS, e o arrastar usa Pointer Events fora do ciclo de renderização do React.",
+    contribution:
+      "Projeto individual: game design dos dois jogos, mascote e ícones em SVG, arquitetura, interface, efeitos sonoros sintetizados com Web Audio, testes e publicação. Jogos, personagens e código originais, com todos os direitos reservados.",
+    outcomes: [
+      "Dois jogos publicados no GitHub Pages como PWA instalável, que também funciona offline.",
+      "125 testes automatizados de regras, saves e navegação, rodando no CI antes de cada deploy.",
+      "Jogável por toque, mouse e teclado, com narração para leitores de tela, temas claro e escuro e movimento reduzido.",
+      "Um jogo novo entra com um arquivo de definição e uma linha no registro.",
+    ],
+  },
   "logiflow-3d": {
     title: "LogiFlow 3D",
     summary:
