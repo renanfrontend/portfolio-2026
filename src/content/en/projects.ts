@@ -1,6 +1,28 @@
 import type { ProjectCopy } from "@/features/projects/types";
 
 export const projectsCopy: Record<string, ProjectCopy> = {
+  "lazuli-arcade": {
+    title: "Lazuli Arcade",
+    summary:
+      "A casual game arcade for phones, with a lobby and two original games: Lazuli Blocks, a gem block puzzle, and Empilha, a stacking duel against a real-time opponent.",
+    coverAlt:
+      "Three Lazuli Arcade phone screens: the lobby with the game cards, a Lazuli Blocks move turning gems into coins and an Empilha duel clearing ten tiles.",
+    galleryAlt: [
+      "Three Empilha screens: a dark-theme match with tall stacks on the isometric board, the How to play rules and the victory screen with the final score.",
+    ],
+    challenge:
+      "Build casual games that feel like native apps in a phone browser, and structure the project to grow: each new game had to plug in without touching the others or slowing down the first load.",
+    solution:
+      "A React shell with a lobby, hash routes and a game registry: every game implements the same contract, loads on demand and saves progress in its own localStorage namespace. Game rules are pure, deterministic TypeScript (seeded random generator), split into domain, application, infrastructure and UI layers. In Empilha, every move becomes a sequence of merges and clears that the UI animates tile by tile, and the opponent plays its own board under the same rules. The isometric board is pure CSS, and dragging runs on Pointer Events outside React's render loop.",
+    contribution:
+      "Solo project: game design for both games, SVG mascot and icons, architecture, UI, sound effects synthesized with Web Audio, tests and deployment. Original games, characters and code, all rights reserved.",
+    outcomes: [
+      "Two games published on GitHub Pages as an installable PWA that also works offline.",
+      "125 automated tests for rules, saves and navigation, run in CI before every deploy.",
+      "Playable by touch, mouse and keyboard, with screen reader narration, light and dark themes and reduced motion.",
+      "A new game plugs in with one definition file and one line in the registry.",
+    ],
+  },
   "logiflow-3d": {
     title: "LogiFlow 3D",
     summary:

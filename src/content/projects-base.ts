@@ -8,6 +8,19 @@ const github = (repo: string) => `https://github.com/renanfrontend/${repo}`;
  */
 export const projectsBase: ProjectBase[] = [
   {
+    id: "lazuli-arcade",
+    slug: "lazuli-arcade",
+    category: "games",
+    technologies: ["React", "TypeScript", "Vite", "PWA", "Web Animations API", "Web Audio API", "Vitest", "GitHub Actions"],
+    kind: "personal",
+    status: "live",
+    featured: true,
+    cover: { src: "/images/projects/lazuli-arcade.png", width: 1440, height: 900 },
+    gallery: [{ src: "/images/projects/lazuli-arcade-empilha.png", width: 1440, height: 900 }],
+    repositoryUrl: github("lazuli-arcade"),
+    liveUrl: "https://renanfrontend.github.io/lazuli-arcade/",
+  },
+  {
     id: "logiflow-3d",
     slug: "logiflow-3d",
     category: "dashboard",
@@ -141,4 +154,4 @@ export const projectsBase: ProjectBase[] = [
  * Ordem dos destaques na home: os melhores projetos com site no ar.
  * Projetos do GitHub com o tópico "portfolio-destaque" entram depois destes.
  */
-export const highlightOrder = ["visionstock-ai", "logiflow-3d", "upbeats-karaoke-player", "fnaf-web", "manor-escape", "gemini-beyond-prompts", "escudo-cidadao"];
+export const highlightOrder = ["visionstock-ai", "logiflow-3d", "lazuli-arcade", "upbeats-karaoke-player", "fnaf-web", "manor-escape", "gemini-beyond-prompts", "escudo-cidadao"];
