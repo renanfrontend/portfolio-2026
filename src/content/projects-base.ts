@@ -8,6 +8,15 @@ const github = (repo: string) => `https://github.com/renanfrontend/${repo}`;
  */
 export const projectsBase: ProjectBase[] = [
   {
+    id: "barbershop", slug: "barbershop", category: "web",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL", "NextAuth"],
+    kind: "demo", status: "live", featured: true,
+    cover: { src: "/images/projects/barbershop.png", width: 1440, height: 1000 },
+    gallery: [], repositoryUrl: github("barbershop"),
+    liveUrl: "https://renanaugusto.com.br/demos/barbershop/index.html",
+    updatedAt: "2026-10-14",
+  },
+  {
     id: "lazuli-arcade",
     slug: "lazuli-arcade",
     category: "games",
@@ -154,4 +163,4 @@ export const projectsBase: ProjectBase[] = [
  * Ordem dos destaques na home: os melhores projetos com site no ar.
  * Projetos do GitHub com o tópico "portfolio-destaque" entram depois destes.
  */
-export const highlightOrder = ["visionstock-ai", "logiflow-3d", "lazuli-arcade", "upbeats-karaoke-player", "fnaf-web", "manor-escape", "gemini-beyond-prompts", "escudo-cidadao"];
+export const highlightOrder = ["barbershop", "visionstock-ai", "logiflow-3d", "lazuli-arcade", "upbeats-karaoke-player", "fnaf-web", "manor-escape", "gemini-beyond-prompts", "escudo-cidadao"];

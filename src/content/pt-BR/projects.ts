@@ -1,6 +1,20 @@
 import type { ProjectCopy } from "@/features/projects/types";
 
 export const projectsCopy: Record<string, ProjectCopy> = {
+  "barbershop": {
+    "title": "Barber Shop",
+    "summary": "Experiência de descoberta e agendamento de barbearias, com busca, filtros e uma demonstração interativa de reservas no navegador.",
+    "coverAlt": "Barber Shop com identidade verde e creme, ilustração de barbearia e catálogo de serviços.",
+    "galleryAlt": [],
+    "challenge": "Apresentar o fluxo de agendamento de forma acessível para visitantes do portfólio, sem exigir conta ou banco de dados.",
+    "solution": "Demonstração estática responsiva com busca por nome e bairro, filtros por serviço e reservas simuladas no localStorage. O projeto completo usa Next.js, Prisma, PostgreSQL e autenticação Google.",
+    "contribution": "Evolução de um projeto educacional Full Stack Week: nova demonstração visual, integração ao portfólio, responsividade e validações de sessão e propriedade das reservas no servidor.",
+    "outcomes": [
+        "Demonstração acessível sem cadastro, com dados fictícios e identificação clara da simulação.",
+        "Fluxo de seleção de serviço, data e horário, persistência local e cancelamento.",
+        "Reservas reais dependem da configuração de PostgreSQL e Google OAuth no aplicativo completo."
+    ]
+},
   "lazuli-arcade": {
     title: "Lazuli Arcade",
     summary:
