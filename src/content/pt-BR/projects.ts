@@ -3,16 +3,16 @@ import type { ProjectCopy } from "@/features/projects/types";
 export const projectsCopy: Record<string, ProjectCopy> = {
   "barbershop": {
     "title": "Barber Shop",
-    "summary": "Experiência de descoberta e agendamento de barbearias, com busca, filtros e uma demonstração interativa de reservas no navegador.",
-    "coverAlt": "Barber Shop com identidade verde e creme, ilustração de barbearia e catálogo de serviços.",
+    "summary": "Aplicação de agendamento de barbearias com identidade visual original em tema escuro e roxo, login Google e reservas persistidas em PostgreSQL.",
+    "coverAlt": "Página original do RENANHARD Barber, com tema escuro, detalhes roxos e catálogo de barbearias.",
     "galleryAlt": [],
-    "challenge": "Apresentar o fluxo de agendamento de forma acessível para visitantes do portfólio, sem exigir conta ou banco de dados.",
-    "solution": "Demonstração estática responsiva com busca por nome e bairro, filtros por serviço e reservas simuladas no localStorage. O projeto completo usa Next.js, Prisma, PostgreSQL e autenticação Google.",
-    "contribution": "Evolução de um projeto educacional Full Stack Week: nova demonstração visual, integração ao portfólio, responsividade e validações de sessão e propriedade das reservas no servidor.",
+    "challenge": "Conectar clientes e barbearias em uma experiência simples, preservando a identidade visual e a autenticação do aplicativo original.",
+    "solution": "Aplicação Next.js com componentes React e Tailwind CSS, autenticação Google via NextAuth e persistência com Prisma e PostgreSQL.",
+    "contribution": "Evolução de um projeto educacional Full Stack Week. A aplicação original é a base do produto; a expansão da gestão comercial está em desenvolvimento e validação.",
     "outcomes": [
-        "Demonstração acessível sem cadastro, com dados fictícios e identificação clara da simulação.",
-        "Fluxo de seleção de serviço, data e horário, persistência local e cancelamento.",
-        "Reservas reais dependem da configuração de PostgreSQL e Google OAuth no aplicativo completo."
+        "Aplicativo original disponível com login Google e fluxo de agendamento.",
+        "Interface original preservada, com tema escuro e detalhes roxos.",
+        "Painel de gestão e recursos comerciais em desenvolvimento; não apresentados como já disponíveis em produção."
     ]
 },
   "lazuli-arcade": {
