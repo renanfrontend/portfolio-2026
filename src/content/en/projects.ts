@@ -1,6 +1,20 @@
 import type { ProjectCopy } from "@/features/projects/types";
 
 export const projectsCopy: Record<string, ProjectCopy> = {
+  "barbershop": {
+    "title": "Barber Shop",
+    "summary": "Barbershop discovery and booking experience with search, service filters and an interactive browser-based booking demo.",
+    "coverAlt": "Barber Shop in green and cream, with a barbershop illustration and service catalog.",
+    "galleryAlt": [],
+    "challenge": "Let portfolio visitors explore a booking flow without needing an account or database.",
+    "solution": "Responsive standalone demo with name and neighborhood search, service filters and simulated bookings stored in localStorage. The full project uses Next.js, Prisma, PostgreSQL and Google authentication.",
+    "contribution": "Evolution of a Full Stack Week educational project: a new visual demo, portfolio integration, responsive improvements and server-side session and booking ownership checks.",
+    "outcomes": [
+        "No-signup demo with fictional data and explicitly simulated bookings.",
+        "Service, date and time selection, local persistence and cancellation.",
+        "Real bookings require PostgreSQL and Google OAuth configuration in the full application."
+    ]
+},
   "lazuli-arcade": {
     title: "Lazuli Arcade",
     summary:
