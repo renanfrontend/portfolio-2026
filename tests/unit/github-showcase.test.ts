@@ -51,6 +51,12 @@ describe("importação de projetos do GitHub", () => {
       fromGithub: true,
       technologies: ["TypeScript", "React"],
     });
+    expect(result.cover).toMatchObject({ width: 1440, height: 900 });
+    expect(result.cover?.src).toBe("https://image.thum.io/get/width/1440/crop/900/noanimate/https://flowboard.example.com/");
+  });
+
+  it("sem site publicado, a capa é o cartão do repositório no GitHub", () => {
+    const result = repoToProject(repo({ homepage: null }));
     expect(result.cover?.src).toContain("opengraph.githubassets.com");
   });
 

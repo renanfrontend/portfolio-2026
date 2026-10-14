@@ -95,7 +95,12 @@ function validHomepage(url: string | null): string | undefined {
   }
 }
 
-/** Converte um repositório em projeto. A capa é o cartão gerado pelo próprio GitHub. */
+/** Captura do site publicado (1440×900, mesmo padrão das capas curadas). */
+export function siteScreenshotUrl(liveUrl: string): string {
+  return `https://image.thum.io/get/width/1440/crop/900/noanimate/${liveUrl}`;
+}
+
+/** Converte um repositório em projeto. A capa é a captura do site no ar; sem site, o cartão gerado pelo GitHub. */
 export function repoToProject(repo: GithubRepo): Project {
   const topics = repo.topics.map((topic) => topic.toLowerCase());
   const category = categoryByTopic.find(([topic]) => topics.includes(topic))?.[1] ?? "web";
@@ -114,12 +119,14 @@ export function repoToProject(repo: GithubRepo): Project {
     kind: "personal",
     status: liveUrl ? "live" : undefined,
     featured: topics.includes(HIGHLIGHT_TOPIC),
-    cover: {
-      src: `https://opengraph.githubassets.com/portfolio/${GITHUB_USER}/${repo.name}`,
-      alt: `Cartão do repositório ${repo.name} no GitHub.`,
-      width: 1200,
-      height: 600,
-    },
+    cover: liveUrl
+      ? { src: siteScreenshotUrl(liveUrl), alt: `Captura do site ${titleFromRepo(repo.name)}.`, width: 1440, height: 900 }
+      : {
+          src: `https://opengraph.githubassets.com/portfolio/${GITHUB_USER}/${repo.name}`,
+          alt: `Cartão do repositório ${repo.name} no GitHub.`,
+          width: 1200,
+          height: 600,
+        },
     gallery: [],
     outcomes: [],
     repositoryUrl: repo.html_url,
