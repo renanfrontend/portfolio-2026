@@ -3,16 +3,16 @@ import type { ProjectCopy } from "@/features/projects/types";
 export const projectsCopy: Record<string, ProjectCopy> = {
   "barbershop": {
     "title": "Barber Shop",
-    "summary": "Barbershop discovery and booking experience with search, service filters and an interactive browser-based booking demo.",
-    "coverAlt": "Barber Shop in green and cream, with a barbershop illustration and service catalog.",
+    "summary": "Barbershop booking application with its original dark and purple visual identity, Google login and PostgreSQL-backed reservations.",
+    "coverAlt": "Original RENANHARD Barber homepage with dark theme, purple accents and barbershop catalog.",
     "galleryAlt": [],
-    "challenge": "Let portfolio visitors explore a booking flow without needing an account or database.",
-    "solution": "Responsive standalone demo with name and neighborhood search, service filters and simulated bookings stored in localStorage. The full project uses Next.js, Prisma, PostgreSQL and Google authentication.",
-    "contribution": "Evolution of a Full Stack Week educational project: a new visual demo, portfolio integration, responsive improvements and server-side session and booking ownership checks.",
+    "challenge": "Connect customers and barbershops while preserving the original visual identity and authentication experience.",
+    "solution": "Next.js application with React and Tailwind CSS, Google authentication through NextAuth, and Prisma/PostgreSQL persistence.",
+    "contribution": "Evolution of a Full Stack Week educational project. The original application remains the product foundation; commercial management features are under development and validation.",
     "outcomes": [
-        "No-signup demo with fictional data and explicitly simulated bookings.",
-        "Service, date and time selection, local persistence and cancellation.",
-        "Real bookings require PostgreSQL and Google OAuth configuration in the full application."
+        "Original application available with Google login and a booking flow.",
+        "Original dark and purple visual identity preserved.",
+        "Management and commercial features are under development and are not represented as already deployed."
     ]
 },
   "lazuli-arcade": {

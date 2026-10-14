@@ -10,10 +10,10 @@ export const projectsBase: ProjectBase[] = [
   {
     id: "barbershop", slug: "barbershop", category: "web",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL", "NextAuth"],
-    kind: "demo", status: "live", featured: true,
+    kind: "personal", status: "live", featured: true,
     cover: { src: "/images/projects/barbershop.png", width: 1440, height: 1000 },
     gallery: [], repositoryUrl: github("barbershop"),
-    liveUrl: "https://renanaugusto.com.br/demos/barbershop/index.html",
+    liveUrl: "https://barbershop-seven-pi.vercel.app",
     updatedAt: "2026-10-14",
   },
   {
