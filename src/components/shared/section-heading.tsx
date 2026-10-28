@@ -9,10 +9,12 @@ type SectionHeadingProps = {
   description?: ReactNode;
   as?: "h1" | "h2";
   align?: "left" | "center";
+  /** Título em degradê (ciano → violeta), para as seções de destaque. */
+  gradient?: boolean;
   className?: string;
 };
 
-export function SectionHeading({ id, index, eyebrow, title, description, as: Tag = "h2", align = "left", className }: SectionHeadingProps) {
+export function SectionHeading({ id, index, eyebrow, title, description, as: Tag = "h2", align = "left", gradient, className }: SectionHeadingProps) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)}>
       <p className={cn("flex items-center gap-2 font-mono text-sm text-accent-strong", align === "center" && "justify-center")}>
@@ -27,7 +29,7 @@ export function SectionHeading({ id, index, eyebrow, title, description, as: Tag
         )}
       </p>
       <Tag id={id} className={cn("mt-4 font-bold text-fg", Tag === "h1" ? "text-4xl sm:text-5xl lg:text-6xl" : "text-3xl sm:text-4xl lg:text-5xl")}>
-        {title}
+        {gradient ? <span className="text-gradient">{title}</span> : title}
       </Tag>
       {description && <div className="mt-5 text-lg text-fg-muted">{description}</div>}
     </div>

@@ -5,7 +5,8 @@ import { getProfile } from "@/features/about/profile";
 import { AiSection } from "@/features/home/components/ai-section";
 import { CompaniesStrip } from "@/features/home/components/companies-strip";
 import { ContactCtaSection } from "@/features/home/components/contact-cta-section";
-import { ExpertiseSection } from "@/features/home/components/expertise-section";
+import { Section } from "@/components/layout/section";
+import { SkillsShowcase } from "@/features/home/components/skills-showcase";
 import { FactsStrip } from "@/features/home/components/facts-strip";
 import { FeaturedProjectsSection } from "@/features/home/components/featured-projects-section";
 import { HeroSection } from "@/features/home/components/hero-section";
@@ -44,7 +45,12 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <HeroSection locale={locale} dict={dict} />
       <FactsStrip dict={dict} />
       <CompaniesStrip locale={locale} label={dict.home.companies} experience={profile.experience} />
-      <ExpertiseSection dict={dict} areas={profile.expertise} />
+      <Section aria-labelledby="expertise-title">
+        <SkillsShowcase
+          groups={profile.skills}
+          heading={{ id: "expertise-title", eyebrow: dict.home.expertise.eyebrow, title: dict.home.expertise.title, description: dict.home.expertise.description }}
+        />
+      </Section>
       <FeaturedProjectsSection locale={locale} dict={dict} projects={await getFeaturedProjects(locale)} />
       <AiSection locale={locale} dict={dict} />
       <ServicesOverviewSection locale={locale} dict={dict} services={getServices(locale)} />
