@@ -141,7 +141,7 @@ export const projectsBase: ProjectBase[] = [
     kind: "personal",
     status: "in-progress",
     featured: false,
-    cover: { src: "https://opengraph.githubassets.com/portfolio/renanfrontend/helios-lab", width: 1200, height: 600 },
+    cover: { src: "/images/projects/helios-lab.png", width: 1024, height: 576 },
     gallery: [],
     repositoryUrl: github("helios-lab"),
   },

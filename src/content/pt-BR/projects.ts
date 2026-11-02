@@ -165,7 +165,7 @@ export const projectsCopy: Record<string, ProjectCopy> = {
     title: "HELIOS Lab",
     summary:
       "Protótipo jogável de suspense e terror em câmera fixa, em que os puzzles são sistemas físicos reais simulados no navegador.",
-    coverAlt: "Cartão do repositório HELIOS Lab no GitHub.",
+    coverAlt: "Console do pêndulo duplo no HELIOS Lab, com a trajetória caótica em tela verde, a telemetria de energia e frequência e três mostradores.",
     galleryAlt: [],
     challenge:
       "Criar puzzles que dependem de física de verdade, como um pêndulo duplo caótico e convecção de fluidos, sem engine de jogo e rodando bem no navegador.",
