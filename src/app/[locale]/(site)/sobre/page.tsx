@@ -1,3 +1,4 @@
+import { SkillsShowcase } from "@/features/home/components/skills-showcase";
 import { JsonLd } from "@/components/shared/json-ld";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -65,23 +66,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/sobre">
       </Section>
 
       <Section aria-labelledby="skills-title" className="border-t border-border bg-bg-elevated/50">
-        <h2 id="skills-title" className="text-3xl font-bold text-fg sm:text-4xl">
-          {t.skillsTitle}
-        </h2>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {profile.skills.map((group) => (
-            <div key={group.title} className="rounded-2xl card-neon p-6">
-              <h3 className="text-lg font-bold text-fg">{group.title}</h3>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <li key={item} className="rounded-full border border-border bg-surface-strong px-3 py-1 text-sm text-fg-muted">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        <SkillsShowcase groups={profile.skills} heading={{ id: "skills-title", title: t.skillsTitle }} variant="compact" />
       </Section>
 
       <Section aria-labelledby="education-title">

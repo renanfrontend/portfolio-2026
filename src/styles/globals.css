@@ -170,6 +170,33 @@
         opacity 0.6s ease,
         transform 0.6s ease;
     }
+
+    /* Grupos com entrada escalonada: o bloco fica visível e os itens surgem um a um (--i = ordem). */
+    .js .reveal.reveal-stagger:not([data-visible="true"]) {
+      opacity: 1;
+      transform: none;
+    }
+
+    .js .reveal-stagger:not([data-visible="true"]) .skill-logo {
+      opacity: 0;
+      transform: translateY(14px) scale(0.85);
+    }
+
+    .js .reveal-stagger .skill-logo {
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition-delay: calc(min(var(--i, 0), 30) * 45ms);
+    }
+  }
+
+  /* Brilho na cor da marca ao passar o mouse sobre o logo. */
+  .skill-logo-icon {
+    transition: filter 0.3s ease;
+  }
+
+  .skill-logo:hover .skill-logo-icon {
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand) 70%, transparent));
   }
 }
 

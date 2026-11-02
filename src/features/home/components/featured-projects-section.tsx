@@ -17,13 +17,7 @@ export function FeaturedProjectsSection({ locale, dict, projects }: Props) {
 
   return (
     <Section aria-labelledby="featured-title" className="border-t border-border bg-bg-elevated/50">
-      <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <SectionHeading id="featured-title" index={t.index} eyebrow={t.eyebrow} title={t.title} description={t.description} />
-        <ButtonLink href={localePath(locale, "/projetos")} variant="secondary" className="shrink-0 self-start md:self-auto">
-          {t.cta}
-          <ArrowRightIcon width={16} height={16} />
-        </ButtonLink>
-      </div>
+      <SectionHeading id="featured-title" index={t.index} eyebrow={t.eyebrow} title={t.title} description={t.description} align="center" gradient />
       <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
           <li key={project.slug}>
@@ -31,6 +25,12 @@ export function FeaturedProjectsSection({ locale, dict, projects }: Props) {
           </li>
         ))}
       </ul>
+      <div className="mt-12 flex justify-center">
+        <ButtonLink href={localePath(locale, "/projetos")} variant="secondary">
+          {t.cta}
+          <ArrowRightIcon width={16} height={16} />
+        </ButtonLink>
+      </div>
     </Section>
   );
 }

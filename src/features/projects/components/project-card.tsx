@@ -26,7 +26,7 @@ export function ProjectCard({ project, href, labels, headingLevel: Heading = "h3
   const live = project.status === "live" && project.liveUrl;
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl card-neon transition-colors">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl card-neon transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_18px_50px_-22px_color-mix(in_srgb,var(--accent)_70%,transparent)] focus-within:shadow-[0_18px_50px_-22px_color-mix(in_srgb,var(--accent)_70%,transparent)] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
       <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-surface-strong">
         {project.cover ? (
           <Image
@@ -36,7 +36,7 @@ export function ProjectCard({ project, href, labels, headingLevel: Heading = "h3
             height={project.cover.height}
             priority={priority}
             sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
-            className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
         ) : (
           <div className="bg-grid flex size-full items-end p-6" aria-hidden>
