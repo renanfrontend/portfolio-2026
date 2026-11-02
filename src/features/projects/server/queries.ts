@@ -3,6 +3,7 @@ import { cacheLife } from "next/cache";
 import { contentByLocale } from "@/content";
 import { highlightOrder, projectsBase } from "@/content/projects-base";
 import type { Locale } from "@/i18n/config";
+import { gameCovers } from "@/content/game-covers";
 import { githubCovers } from "@/content/github-covers";
 import { fetchShowcaseReposOrNull, repoToProject } from "@/lib/github-showcase";
 import { mergeProjects, pickHighlights } from "../ordering";
@@ -46,7 +47,12 @@ async function getGithubProjects(): Promise<Project[]> {
 
 /** Todos os projetos: curados + GitHub, com os que estão no ar primeiro. */
 export async function getProjects(locale: Locale): Promise<Project[]> {
-  return mergeProjects(getCuratedProjects(locale), await getGithubProjects(), highlightOrder);
+  // Jogos sem site publicado: captura do próprio jogo, com o texto alternativo no idioma da página.
+  const github = (await getGithubProjects()).map((project) => {
+    const cover = gameCovers[project.slug];
+    return cover ? { ...project, cover: { src: cover.src, width: cover.width, height: cover.height, alt: cover.alt[locale] } } : project;
+  });
+  return mergeProjects(getCuratedProjects(locale), github, highlightOrder);
 }
 
 export async function getProjectBySlug(locale: Locale, slug: string): Promise<Project | undefined> {

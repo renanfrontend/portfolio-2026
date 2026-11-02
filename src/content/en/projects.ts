@@ -160,7 +160,7 @@ export const projectsCopy: Record<string, ProjectCopy> = {
   "helios-lab": {
     title: "HELIOS Lab",
     summary: "Playable fixed-camera suspense and horror prototype where the puzzles are real physical systems simulated in the browser.",
-    coverAlt: "HELIOS Lab repository card on GitHub.",
+    coverAlt: "Double pendulum console in HELIOS Lab, with the chaotic trajectory on a green screen, energy and frequency telemetry and three gauges.",
     galleryAlt: [],
     challenge:
       "Build puzzles that depend on real physics, such as a chaotic double pendulum and fluid convection, with no game engine and running smoothly in the browser.",
