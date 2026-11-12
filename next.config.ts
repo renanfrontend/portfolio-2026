@@ -11,8 +11,12 @@ const nextConfig: NextConfig = {
     return [{ source: "/favicon.ico", destination: "/icon.svg", permanent: true }];
   },
   images: {
-    // Capas dos projetos importados do GitHub (cartão gerado pelo próprio GitHub).
-    remotePatterns: [{ protocol: "https", hostname: "opengraph.githubassets.com" }],
+    // Capas dos projetos importados do GitHub: captura do site ou, sem site, o cartão do repositório.
+    remotePatterns: [
+      { protocol: "https", hostname: "opengraph.githubassets.com" },
+      // Capas de projetos com site no ar: captura da página publicada.
+      { protocol: "https", hostname: "image.thum.io" },
+    ],
   },
   experimental: {
     // O layout raiz fica em app/[locale]; URLs sem rota usam app/global-not-found.tsx.
