@@ -12,6 +12,12 @@ const INSTAGRAM_BIO_CAMPAIGN = new URLSearchParams({
   utm_campaign: "bio",
 }).toString();
 
+/**
+ * Destino do atalho /violao. Hoje é a versão web do Violão Quest; quando o app
+ * chegar às lojas, basta trocar aqui pela página de download.
+ */
+export const VIOLAO_QUEST_URL = "https://violao-quest-xi.vercel.app";
+
 const shortLinks = {
   /** Link 1 da bio: página inicial com a campanha do Instagram. */
   "/ig": () => `${localePath(defaultLocale)}?${INSTAGRAM_BIO_CAMPAIGN}`,
@@ -22,6 +28,8 @@ const shortLinks = {
       ? whatsappHref(number, INSTAGRAM_WHATSAPP_MESSAGE)
       : `${localePath(defaultLocale, "/contato")}?${INSTAGRAM_BIO_CAMPAIGN}`;
   },
+  /** Bio do perfil de produtos: abre o Violão Quest. */
+  "/violao": () => VIOLAO_QUEST_URL,
 } satisfies Record<`/${string}`, () => string>;
 
 export type ShortLinkPath = keyof typeof shortLinks;
