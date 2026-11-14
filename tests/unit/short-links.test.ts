@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { acquisitionFromUrl } from "@/lib/acquisition";
-import { INSTAGRAM_WHATSAPP_MESSAGE, resolveShortLink } from "@/lib/short-links";
+import { INSTAGRAM_WHATSAPP_MESSAGE, VIOLAO_QUEST_URL, resolveShortLink } from "@/lib/short-links";
 
 const INSTAGRAM_CAMPAIGN = "utm_source=instagram&utm_medium=social&utm_campaign=bio";
 
@@ -29,6 +29,11 @@ describe("atalhos de bio", () => {
   it("sem número válido, /whatsapp cai no formulário de contato com a mesma campanha", () => {
     vi.stubEnv("NEXT_PUBLIC_WHATSAPP_NUMBER", "1234");
     expect(resolveShortLink("/whatsapp")).toBe(`/pt-BR/contato?${INSTAGRAM_CAMPAIGN}`);
+  });
+
+  it("/violao abre o Violão Quest", () => {
+    expect(resolveShortLink("/violao")).toBe(VIOLAO_QUEST_URL);
+    expect(new URL(VIOLAO_QUEST_URL).protocol).toBe("https:");
   });
 
   it("aceita barra final e maiúsculas", () => {
